@@ -1,0 +1,9 @@
+- [DONE] loop on all mRNA channels
+- [DONE] use list generators
+- [DONE] fix pyCharm python highlighting
+- [DONE] check that it still works from the command line
+- [DONE] make notebooks?
+- oneliner to open vsi picture + DIC layer (layer order, scale, color, blending)
+- fix Git situation (git-lfs + Zenodo)
+- pytest
+- optimise Omnipose segmentations
