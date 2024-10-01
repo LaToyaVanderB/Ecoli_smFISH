@@ -3,7 +3,17 @@
 - [DONE] fix pyCharm python highlighting
 - [DONE] check that it still works from the command line
 - [DONE] make notebooks?
-- oneliner to open vsi picture + DIC layer (layer order, scale, color, blending)
-- fix Git situation (git-lfs + Zenodo)
-- pytest
+- [DONE] oneliner to open vsi picture + DIC layer (layer order, scale, color, blending)
+- [DONE] fix Git situation
+- [DONE] deduplicate images 240927
+- automatically set slice to in-focus slice (with value from spot detection)
+- fix Git situation for real (git-lfs + Zenodo)
+- pytest tests
 - optimise Omnipose segmentations
+- nucleoid segmentation
+  - was this trip really necessary? Segmentating a 2D projection adds a lot of arbitrariness
+  - can we not compute distance between putative transcription site and nucleoid in 3D?
+- plot what we actually want to analyse
+- deskew MG1655_LB images
+- use duplicate images to test analysis pipeline (do I get the same results with two duplicates?)
+- manually add a "valid" mask to exclude parts of the picture where DIC is screwed up (e.g. MG16555_MAN_OD_0.3_left_10)

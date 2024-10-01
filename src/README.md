@@ -10,4 +10,6 @@
    `~/PycharmProjects/Ecoli_smFISH % python src/05-assign-spots.py tests/output/config.json`
 6. Result analysis
    `06-plot-results.ipynb`
-
+7. Bonus
+`~/PycharmProjects/Ecoli_smFISH % python -m json.tool tests/output/MG1655_LB_01/img.json`
+``

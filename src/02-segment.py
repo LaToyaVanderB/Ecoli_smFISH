@@ -4,7 +4,6 @@ import json
 import numpy as np
 from pathlib import Path
 import time
-import shutil
 import re
 
 # from cellpose_omni.core import use_gpu
@@ -56,7 +55,7 @@ for f in files:
     mask, flow, style = model.eval(io.imread(f), **params)
     maskfile = f.replace('DIC.', f'DIC_masks_minsize={params["min_size"]}.')
     io.imwrite(maskfile, mask)
-    shutil.copy(maskfile, re.sub(r"_minsize=\d+", "", maskfile))
+    Path(re.sub(r"_minsize=\d+", "", maskfile)).symlink_to(maskfile)
     logging.info(f"writing mask to {maskfile}")
 net_time = time.time() - tic
 logging.info(f"total DIC segmentation time: {net_time:.2f}s")
@@ -73,7 +72,7 @@ for f in files:
     mask, flow, style = model.eval(io.imread(f), **params)
     maskfile = f.replace('DAPI_max_proj.', f'DAPI_masks_minsize={params["min_size"]}.')
     io.imwrite(maskfile, mask)
-    shutil.copy(maskfile, re.sub(r"_minsize=\d+", "", maskfile))
+    Path(re.sub(r"_minsize=\d+", "", maskfile)).symlink_to(maskfile)
     logging.info(f"writing mask to {maskfile}")
 net_time = time.time() - tic
 logging.info(f"total DAPI segmentation time: {net_time:.2f}s")

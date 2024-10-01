@@ -1,7 +1,7 @@
 import json
 import sys
 import os.path
-import shutil
+from pathlib import Path
 import logging
 from skimage import io
 import numpy as np
@@ -112,7 +112,11 @@ for exp in list(config['experiments']):
                 ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed, adjustment_bottom=5, adjustment_top=10)
                 ifx_1 = max(ifx_1, 0)
                 ifx_2 = min(ifx_2, mrna_data.shape[0])
-                logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}]')
+                img["z_max_focus"] = int(np.argmax(projected_focus_smoothed))
+                img["ifx_1"] = int(ifx_1)
+                img["ifx_2"] = int(ifx_2)
+
+                logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img["z_max_focus"]})')
 
                 # need to save this if we compute it
                 mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
@@ -135,12 +139,18 @@ for exp in list(config['experiments']):
                 # adjustable out-of focus filtering
                 spots = spots[spots[:, 0] > ifx_1 + 2]
 
-                img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots_thr{threshold}.npy')
-                np.save(img[mrna]['spotsfile'], spots)
-                logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]['spotsfile']}')
+                img[mrna]['spotsfile_latest'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots_thr{threshold}.npy')
+                np.save(img[mrna]['spotsfile_latest'], spots)
+                img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots.npy')
+                Path(img[mrna]['spotsfile']).unlink(missing_ok=True)
+                Path(img[mrna]['spotsfile']).symlink_to(img[mrna]['spotsfile_latest'])
+                logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile"]}')
+
+    logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
+    with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
+        json.dump(img, f)
 
 logging.info(f'output config file: {configfile}')
 with open(configfile, "w") as f:
     json.dump(config, f)
-
 logging.info("done.")
