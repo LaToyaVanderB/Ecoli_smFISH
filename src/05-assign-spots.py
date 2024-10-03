@@ -89,9 +89,17 @@ def spot_assignment(mask, nuclear_mask, spot_data, dense_data):
     return df
 
 
+# how many images do we have
+nr_images = sum([len(exp['images']) for exp in config['experiments']])
+
+n = 0
 for exp in list(config['experiments']):
     for img in list(exp['images']):
-        logging.info(f'processing image: {img['basename']}.{img['format']}')
+        n = n + 1
+        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{nr_images}]')
+        img['resultfile'] = os.path.join(config['outputdir'], img['stem'], 'results.csv')
+        alldfs = []
+
         for ch in config['channels']:
             mrna = ch['mrna']
             if mrna != "DAPI":
@@ -106,10 +114,13 @@ for exp in list(config['experiments']):
                 dense_data = np.load(img[mrna]['ddregionsfile'])
 
                 df = spot_assignment(cell_mask_data, nuclear_mask_data, spot_data, dense_data)
-                df['strain'], df['condition'], df['seqnr'], df['mRNA'] = exp['strain'], exp['condition'], img['seqnr'], mrna
-                img['resultfile'] = os.path.join(config['outputdir'], img['stem'], f'{exp['strain']}_{exp['condition']}_{img['seqnr']}_{mrna}_results.csv')
-                logging.info(f'saving data to {img['resultfile']}')
-                df.to_csv(img['resultfile'])
+                columns = df.columns
+                df['strain'], df['condition'], df['seqnr'], df['mRNA'] = exp['strain'].replace('Ecoli', 'MG1655'), exp['condition'], img['seqnr'], mrna
+                df = df[list(df.columns[-4:]) + list(df.columns[:-4])]
+                alldfs.append(df)
+
+        logging.info(f'saving data to {img['resultfile']}')
+        pd.concat(alldfs).to_csv(img['resultfile'])
 
 logging.info(f'output config file: {configfile}')
 with open(configfile, "w") as f:

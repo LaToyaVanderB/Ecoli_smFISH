@@ -6,14 +6,23 @@
 - [DONE] oneliner to open vsi picture + DIC layer (layer order, scale, color, blending)
 - [DONE] fix Git situation
 - [DONE] deduplicate images 240927
-- automatically set slice to in-focus slice (with value from spot detection)
-- fix Git situation for real (git-lfs + Zenodo)
-- pytest tests
-- optimise Omnipose segmentations
-- nucleoid segmentation
-  - was this trip really necessary? Segmentating a 2D projection adds a lot of arbitrariness
-  - can we not compute distance between putative transcription site and nucleoid in 3D?
-- plot what we actually want to analyse
-- deskew MG1655_LB images
-- use duplicate images to test analysis pipeline (do I get the same results with two duplicates?)
-- manually add a "valid" mask to exclude parts of the picture where DIC is screwed up (e.g. MG16555_MAN_OD_0.3_left_10)
+- [DONE] automatically set slice to in-focus slice (with value from spot detection)
+- [LATER] fix Git situation for real (git-lfs + Zenodo)
+- [LATER] pytest tests
+- fix envs mess
+- histograms in napari or matplotlib; automatic contrast adapted to mRNA channels and DIC
+- [NEXT] plot what we actually want to analyse: per condition/growth rate,
+  - number of cells
+  - number of spots
+  - number of spots/Txs per cell
+  - number of RNA per Tx
+  - distance between spots/Txs and nucleoid
+  - spots vs. cell size
+  - spots vs. eccentricity
+- [NEXT] optimise Omnipose segmentations
+  - nucleoid segmentation
+    - was this trip really necessary? Segmenting a 2D projection adds a lot of arbitrariness
+    - can we not compute distance between putative transcription site and nucleoid in 3D?
+- [MAYBE] deskew MG1655_LB images
+- [MAYBE] use duplicate images to test analysis pipeline (do I get the same results with two duplicates?)
+- [MAYBE] manually add a "valid" mask to exclude parts of the picture where DIC is screwed up (e.g. MG16555_MAN_OD_0.3_left_10)
