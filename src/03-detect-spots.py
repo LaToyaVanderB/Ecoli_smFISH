@@ -85,10 +85,14 @@ detection_threshold = None  # set to None for automatic determination by bigFISH
 # debug
 # detection_threshold = 37
 
+# how many images do we have
+nr_images = sum([len(exp['images']) for exp in config['experiments']])
 
+n = 0
 for exp in list(config['experiments']):
     for img in list(exp['images']):
-        logging.info(f'processing image: {img['basename']}.{img['format']}')
+        n = n + 1
+        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{nr_images}]')
         for ch in config['channels']:
             mrna = ch['mrna']
             if mrna != "DAPI":
