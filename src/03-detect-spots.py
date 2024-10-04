@@ -1,6 +1,7 @@
 import json
 import sys
 import os.path
+import time
 from pathlib import Path
 import logging
 from skimage import io
@@ -85,14 +86,12 @@ detection_threshold = None  # set to None for automatic determination by bigFISH
 # debug
 # detection_threshold = 37
 
-# how many images do we have
-nr_images = sum([len(exp['images']) for exp in config['experiments']])
-
 n = 0
-for exp in list(config['experiments']):
-    for img in list(exp['images']):
+for exp in config['experiments']:
+    for img in exp['images']:
         n = n + 1
-        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{nr_images}]')
+        tic = time.time()
+        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
         for ch in config['channels']:
             mrna = ch['mrna']
             if mrna != "DAPI":
@@ -150,11 +149,13 @@ for exp in list(config['experiments']):
                 Path(img[mrna]['spotsfile']).symlink_to(img[mrna]['spotsfile_latest'])
                 logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile"]}')
 
-    logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
-    with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
-        json.dump(img, f)
+        img['time']['03-detect-spots'] = time.time() - tic
 
-logging.info(f'output config file: {configfile}')
+        logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
+        with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
+            json.dump(img, f)
+
+logging.info(f'writing to config file: {configfile}')
 with open(configfile, "w") as f:
     json.dump(config, f)
 logging.info("done.")

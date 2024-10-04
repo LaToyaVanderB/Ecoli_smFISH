@@ -3,8 +3,9 @@ import os.path
 import sys
 import re
 import shutil
-from pprint import pprint, pp
+from pathlib import Path
 import json
+import time
 import numpy as np
 from bioio import BioImage
 import bioio_bioformats
@@ -29,23 +30,25 @@ filter2mRNA = {c['filter']: c['mrna'] for c in config['channels']}
 mRNA2filter = {c['mrna']: c['filter'] for c in config['channels']}
 
 # find source images for each experiment:
-for exp in list(config['experiments']):
+for exp in config['experiments']:
     exp['images'] = [{'sourcefile': f} for f in glob(f"{config['inputdir']}/{exp['strain']}_{exp['condition']}*") if f.find(r'_DIC') == -1]
 
 # how many images do we have
-nr_images = sum([len(exp['images']) for exp in config['experiments']])
+config['nr_images'] = sum([len(exp['images']) for exp in config['experiments']])
 
 # parse source file name
 n = 0
-for exp in list(config['experiments']):
+for exp in config['experiments']:
     pattern = re.compile(rf'({exp["strain"]}_{exp["condition"]})' + '_' + r'(\d+)')
     for img in exp['images']:
         n = n + 1
-        logging.info(f"parsing filename: {img['sourcefile']} [{n}/{nr_images}]")
+        logging.info(f"parsing filename: {img['sourcefile']} [{n}/{config['nr_images']}]")
         img['rootdir'], img['basename'] = os.path.split(img['sourcefile'])
         img['basename'], img['format'] = os.path.splitext(img['basename'])
         img['format'] = img['format'][1:]
         logging.info(f"basename: {img['basename']}, format: {img['format']}")
+
+        img['time'] = {}
 
         img['stem'] = re.sub(r'_CY[A-Z0-9\s,.]+DAPI', '', img['basename'])
         _, img['seqnr'] = re.match(pattern, img['stem']).groups()
@@ -72,20 +75,24 @@ for exp in list(config['experiments']):
         img['cellmaskfile'] = os.path.join(config['outputdir'], img['stem'], 'DIC_masks.tif')
         img['nuclearmaskfile'] = os.path.join(config['outputdir'], img['stem'], 'DAPI_masks.tif')
 
+        logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
+        with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
+            json.dump(img, f)
 
 
 # read images, convert to tiff,
 # split into DAPI and mRNA folders
 n = 0
 process = True
-for exp in list(config['experiments']):
-    for img in list(exp['images']):
+for exp in config['experiments']:
+    for img in exp['images']:
         n = n + 1
-
+        tic = time.time()
         if process is True:
+
             # check source image
             image = BioImage(img['sourcefile'])
-            logging.info(f'opening {img["sourcefile"]} [{n}/{nr_images}]')
+            logging.info(f'opening {img["sourcefile"]} [{n}/{config['nr_images']}]')
             logging.info(f'..found scenes: {image.scenes}')
             for s in image.scenes:
                 if s == 'macro image':
@@ -122,9 +129,8 @@ for exp in list(config['experiments']):
                         else:
                             logging.warning(f"......ignoring unknown channel {filter}")
 
+        img['time']['01-configure'] = time.time() - tic
 
-
-# logging.info(f'output config file: {os.path.join(config['outputdir'], os.path.basename(configfile).replace(".", "-01."))}')
 logging.info(f"output config file: {os.path.join(config['outputdir'], os.path.basename(configfile))}")
 with open(os.path.join(config['outputdir'], os.path.basename(configfile)), "w") as f:
     json.dump(config, f)

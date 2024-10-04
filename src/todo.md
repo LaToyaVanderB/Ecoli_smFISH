@@ -7,6 +7,7 @@
 - [DONE] fix Git situation
 - [DONE] deduplicate images 240927
 - [DONE] automatically set slice to in-focus slice (with value from spot detection)
+- [DONE] add timings to output config
 - [LATER] fix Git situation for real (git-lfs + Zenodo)
 - [LATER] pytest tests
 - fix envs mess
@@ -23,6 +24,7 @@
   - nucleoid segmentation
     - was this trip really necessary? Segmenting a 2D projection adds a lot of arbitrariness
     - can we not compute distance between putative transcription site and nucleoid in 3D?
+    - NB: there is an issue with the DIC / DAPI alignment: the alignment is not good for the whole picture
 - [MAYBE] deskew MG1655_LB images
 - [MAYBE] use duplicate images to test analysis pipeline (do I get the same results with two duplicates?)
 - [MAYBE] manually add a "valid" mask to exclude parts of the picture where DIC is screwed up (e.g. MG16555_MAN_OD_0.3_left_10)

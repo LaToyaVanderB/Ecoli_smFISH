@@ -45,34 +45,52 @@ params = {'channels': chans, # always define this with the model
 
 # DIC images
 model = models.CellposeModel(gpu=use_GPU, model_type="cyto2")
-params['min_size'] = 500
-files = [str(p) for p in Path(config['outputdir']).rglob("DIC.tif")]
-logging.info(f"found {len(files)} DIC images to segment")
+params['min_size'] = 200
 
-tic = time.time()
-for f in files:
-    logging.info(f"segmenting {f}")
-    mask, flow, style = model.eval(io.imread(f), **params)
-    maskfile = f.replace('DIC.', f'DIC_masks_minsize={params["min_size"]}.')
-    io.imwrite(maskfile, mask)
-    Path(re.sub(r"_minsize=\d+", "", maskfile)).symlink_to(maskfile)
-    logging.info(f"writing mask to {maskfile}")
-net_time = time.time() - tic
+ticall = time.time()
+# for f in files:
+n = 0
+for exp in config['experiments']:
+    for img in exp['images']:
+        n = n + 1
+        f = img['dicfile']
+        logging.info(f"segmenting {f} [{n}/{config['nr_images']}]")
+        tic = time.time()
+        mask, flow, style = model.eval(io.imread(f), **params)
+        maskfile = f.replace('DIC.', f'DIC_masks.')
+        maskfile_latest = f.replace('DIC.', f'DIC_masks_minsize={params["min_size"]}_maskth={params["mask_threshold"]}.')
+        io.imwrite(maskfile_latest, mask)
+        Path(maskfile).unlink(missing_ok=True)
+        Path(maskfile).symlink_to(maskfile_latest)
+        img['time']['02-segment-DIC'] = time.time() - tic
+        logging.info(f"writing mask to {maskfile_latest}")
+net_time = time.time() - ticall
 logging.info(f"total DIC segmentation time: {net_time:.2f}s")
 
 # DAPI images
 model = models.CellposeModel(gpu=use_GPU, model_type="nuclei")
 params['min_size'] = 10
-files = [str(p) for p in Path(config['outputdir']).rglob("DAPI_max_proj.tif")]
-logging.info(f"found {len(files)} DAPI images to segment")
 
-tic = time.time()
-for f in files:
-    logging.info(f"segmenting {f}")
-    mask, flow, style = model.eval(io.imread(f), **params)
-    maskfile = f.replace('DAPI_max_proj.', f'DAPI_masks_minsize={params["min_size"]}.')
-    io.imwrite(maskfile, mask)
-    Path(re.sub(r"_minsize=\d+", "", maskfile)).symlink_to(maskfile)
-    logging.info(f"writing mask to {maskfile}")
-net_time = time.time() - tic
+ticall = time.time()
+# for f in files:
+n = 0
+for exp in config['experiments']:
+    for img in exp['images']:
+        n = n + 1
+        f = img['DAPI']['maxprojfile']
+        logging.info(f"segmenting {f} [{n}/{config['nr_images']}]")
+        tic = time.time()
+        mask, flow, style = model.eval(io.imread(f), **params)
+        maskfile = f.replace('DAPI_max_proj.', f'DAPI_masks.')
+        maskfile_latest = f.replace('DAPI_max_proj.', f'DAPI_masks_minsize={params["min_size"]}_maskth={params["mask_threshold"]}.')
+        io.imwrite(maskfile_latest, mask)
+        Path(maskfile).unlink(missing_ok=True)
+        Path(maskfile).symlink_to(maskfile_latest)
+        img['time']['02-segment-DAPI'] = time.time() - tic
+        logging.info(f"writing mask to {maskfile_latest}")
+net_time = time.time() - ticall
 logging.info(f"total DAPI segmentation time: {net_time:.2f}s")
+
+logging.info(f"writing to config file: {configfile}")
+with open(configfile, "w") as f:
+    json.dump(config, f)
