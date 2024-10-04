@@ -1,0 +1,32 @@
+{
+  "inputdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003",
+  "outputdir": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003",
+  "experiments": [
+    {
+      "strain": "MG1655",
+      "condition": "GAL-lowOD-2nd"
+    },
+    {
+      "strain": "MG1655",
+      "condition": "GLY-lowOD-2nd"
+    }
+  ],
+  "channels": [
+    {
+      "filter": "CY5",
+      "mrna": "hipBA"
+    },
+    {
+      "filter": "CY3.5 NAR",
+      "mrna": "rnlAB"
+    },
+    {
+      "filter": "CY3",
+      "mrna": "rpoD"
+    },
+    {
+      "filter": "DAPI",
+      "mrna": "DAPI"
+    }
+  ]
+}
