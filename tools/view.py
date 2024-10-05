@@ -12,6 +12,13 @@ import json
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%m/%d/%Y %I:%M:%S%p', level=logging.INFO)
 
+modes = {
+    'all': 'layers_ordered',
+    'light': 'layers_light',
+    'seg': 'layers_segmentation',
+    'cells': 'layers_cells',
+}
+
 layers_ordered = [
     { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
     { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
@@ -29,18 +36,38 @@ layers_ordered = [
     { 'name': 'hipBA_spots', 'type': 'spots', 'properties': { 'name': 'hipBA_spots', 'blending': 'additive', 'visible': False} }
 ]
 
-layers_ordered_light = [
+layers_light = [
     { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'translucent_no_depth', 'translate':  [-10, 10] } },
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
 ]
 
-def import_layers(imagedir, light=False, viewer=None):
+layers_seg = [
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'name': 'DAPI_masks', 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI_max_proj', 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+]
+
+layers_cells = [
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'name': 'DAPI_masks', 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI_max_proj', 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+]
+
+def import_layers(imagedir, mode=all, viewer=None):
     files = Path(imagedir).glob('*')
     stems = { Path(f).stem: f for f in files }
     logging.info(stems)
 
-    if light is True:
-        layers = layers_ordered_light
+    if mode == 'light':
+        layers = layers_light
+    elif mode == 'seg':
+        layers = layers_segmentation
+    elif mode == 'cells':
+        layers = layers_cells
     else:
         layers = layers_ordered
 
@@ -67,4 +94,4 @@ def import_layers(imagedir, light=False, viewer=None):
             viewer.dims.set_point(0, json.load(f)['z_max_focus'])
 
 if __name__ == '__main__':
-    import_layers(imagedir=sys.argv[1], viewer=None)
+    import_layers(imagedir=sys.argv[1], mode=sys.argv[2], viewer=None)

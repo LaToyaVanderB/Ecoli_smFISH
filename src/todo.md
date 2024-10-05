@@ -14,12 +14,13 @@
 - histograms in napari or matplotlib; automatic contrast adapted to mRNA channels and DIC
 - [NEXT] plot what we actually want to analyse: per condition/growth rate,
   - number of cells
-  - number of spots
+  - number of spots/Txs
   - number of spots/Txs per cell
   - number of RNA per Tx
   - distance between spots/Txs and nucleoid
-  - spots vs. cell size
-  - spots vs. eccentricity
+  - spots/Txs vs. cell size
+  - spots/Txs vs. eccentricity
+  - spots/Txs vs. growth rate
 - [NEXT] optimise Omnipose segmentations
   - nucleoid segmentation
     - was this trip really necessary? Segmenting a 2D projection adds a lot of arbitrariness

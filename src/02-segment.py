@@ -30,8 +30,10 @@ use_GPU = use_gpu()
 chans = [0,0] #this means segment based on first channel, no second channel
 params = {'channels': chans, # always define this with the model
           'rescale': None, # upscale or downscale your images, None = no rescaling
-          'mask_threshold': -2, # erode or dilate masks with higher or lower values between -5 and 5
-          'flow_threshold': 0, # default is .4, but only needed if there are spurious masks to clean up; slows down output
+          'mask_threshold': 0.0, # erode or dilate masks with higher or lower values between -5 and 5
+          'flow_threshold': 0.0,
+          'diameter': 0.0,
+          'invert': False,
           'transparency': True, # transparency in flow output
           'omni': True, # we can turn off Omnipose mask reconstruction, not advised
           'cluster': True, # use DBSCAN clustering
@@ -45,7 +47,7 @@ params = {'channels': chans, # always define this with the model
 
 # DIC images
 model = models.CellposeModel(gpu=use_GPU, model_type="cyto2")
-params['min_size'] = 200
+params['min_size'] = 0
 
 ticall = time.time()
 # for f in files:
