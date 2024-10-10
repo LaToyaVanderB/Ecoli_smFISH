@@ -92,22 +92,22 @@ for exp in config['experiments']:
         n = n + 1
         tic = time.time()
         logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
-        for ch in config['channels']:
+
+        # find high density region
+        cell_mask_data = io.imread(img['cellmaskfile'])
+        selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
+        logging.info(f'..selected patch: {selected_patch}')
+
+        for ch in list(config['channels']):
             mrna = ch['mrna']
             if mrna != "DAPI":
                 logging.info(f'..mrna: {mrna}')
-                mrna_data = io.imread(img[mrna]['rnafile'])
-                cell_mask_data = io.imread(img['cellmaskfile'])
 
-                # find high density region
-                selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
-                # debug
-                # selected_patch = (1877, 1569)
-                logging.info(f'....selected patch: {selected_patch}')
+                mrna_data = io.imread(img[mrna]['rnafile'])
                 img_patch = mrna_data[:,
-                    selected_patch[0]:selected_patch[0] + patch_size[0],
-                    selected_patch[1]:selected_patch[1] + patch_size[1]
-                ]
+                            selected_patch[0]:selected_patch[0] + patch_size[0],
+                            selected_patch[1]:selected_patch[1] + patch_size[1]
+                            ]
 
                 focus = compute_focus(img_patch)
                 projected_focus = np.max(focus, axis=(1, 2))

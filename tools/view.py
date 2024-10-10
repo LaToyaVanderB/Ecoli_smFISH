@@ -5,6 +5,7 @@ from pathlib import Path
 from skimage import io
 import numpy as np
 import json
+import napari
 
 # need to do this in napari console otherwise the import does not work
 # because life is hard and then you die
@@ -41,7 +42,7 @@ layers_light = [
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
 ]
 
-layers_seg = [
+layers_segmentation = [
     { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
     { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
     { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'name': 'DAPI_masks', 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
@@ -60,7 +61,7 @@ layers_cells = [
 def import_layers(imagedir, mode=all, viewer=None):
     files = Path(imagedir).glob('*')
     stems = { Path(f).stem: f for f in files }
-    logging.info(stems)
+    logging.debug(stems)
 
     if mode == 'light':
         layers = layers_light
@@ -72,9 +73,9 @@ def import_layers(imagedir, mode=all, viewer=None):
         layers = layers_ordered
 
     for layer in layers:
-        logging.info(f'layer: {layer}')
+        logging.debug(f'layer: {layer}')
         if layer['name'] in stems.keys():
-            logging.info(f"stem: {stems[layer['name']]}")
+            logging.debug(f"stem: {stems[layer['name']]}")
 
             if viewer is not None:
                 if layer['type'] == 'image':
@@ -94,4 +95,4 @@ def import_layers(imagedir, mode=all, viewer=None):
             viewer.dims.set_point(0, json.load(f)['z_max_focus'])
 
 if __name__ == '__main__':
-    import_layers(imagedir=sys.argv[1], mode=sys.argv[2], viewer=None)
+    import_layers(imagedir=sys.argv[1], mode=sys.argv[2], viewer=napari.Viewer())

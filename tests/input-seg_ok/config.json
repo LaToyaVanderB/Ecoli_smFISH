@@ -1,10 +1,10 @@
 {
-  "inputdir": "/Users/adele/PycharmProjects/Ecoli_smFISH/tests/input-5conditions",
-  "outputdir": "/Users/adele/PycharmProjects/Ecoli_smFISH/tests/output-5conditions",
+  "inputdir": "/Users/adele/PycharmProjects/Ecoli_smFISH/tests/input-seg_ok",
+  "outputdir": "/Users/adele/PycharmProjects/Ecoli_smFISH/tests/output-seg_ok",
   "experiments": [
     {
       "strain": "MG1655",
-      "condition": "LB"
+      "condition": "LB_fixed2806_hybed1906_left"
     },
     {
       "strain": "MG1655",
