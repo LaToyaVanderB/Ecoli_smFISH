@@ -1,25 +1,18 @@
 import sys
 import logging
 import json
-import numpy as np
 from pathlib import Path
 import time
-import re
 
-# from cellpose_omni.core import use_gpu
 from omnipose.gpu import use_gpu
 from cellpose_omni import io, transforms
-import cellpose_omni
 from cellpose_omni import models
-from cellpose_omni.models import MODEL_NAMES
+# from cellpose_omni.models import MODEL_NAMES
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%m/%d/%Y %I:%M:%S%p', level=logging.INFO)
 
-configfile = sys.argv[1]
-logging.info(f'reading config file {configfile}.')
-
-with open(configfile, 'r') as f:
-    config = json.load(f)
+inputdir = sys.argv[1]
+logging.info(f'input dir: {inputdir}')
 
 # This checks to see if you have set up your GPU properly.
 # CPU performance is a lot slower, but not a problem if you
@@ -52,47 +45,19 @@ params['min_size'] = 0
 ticall = time.time()
 # for f in files:
 n = 0
-for exp in config['experiments']:
-    for img in exp['images']:
+files = list(Path(inputdir).glob('*.tif'))
+for f in files:
         n = n + 1
-        f = img['dicfile']
-        logging.info(f"segmenting {f} [{n}/{config['nr_images']}]")
+        logging.info(f"segmenting {f} [{n}/{len(files)}]")
         tic = time.time()
         mask, flow, style = model.eval(io.imread(f), **params)
-        maskfile = f.replace('DIC.', f'DIC_masks.')
-        maskfile_latest = f.replace('DIC.', f'DIC_masks_minsize={params["min_size"]}_maskth={params["mask_threshold"]}.')
+        maskfile = f.parent / (f.stem + '_masks' + f.suffix)
+        maskfile_latest = f.parent / ( f.stem + f'_masks_minsize={params["min_size"]}_maskth={params["mask_threshold"]}' + f.suffix )
         io.imwrite(maskfile_latest, mask)
-        Path(maskfile).unlink(missing_ok=True)
-        Path(maskfile).symlink_to(maskfile_latest)
-        img['time']['02-segment-DIC'] = time.time() - tic
+        maskfile.unlink(missing_ok=True)
+        maskfile.symlink_to(maskfile_latest)
+        logging.info(f"time: {time.time() - tic}")
         logging.info(f"writing mask to {maskfile_latest}")
 net_time = time.time() - ticall
 logging.info(f"total DIC segmentation time: {net_time:.2f}s")
 
-# DAPI images
-model = models.CellposeModel(gpu=use_GPU, model_type="nuclei")
-params['min_size'] = 10
-
-ticall = time.time()
-# for f in files:
-n = 0
-for exp in config['experiments']:
-    for img in exp['images']:
-        n = n + 1
-        f = img['DAPI']['maxprojfile']
-        logging.info(f"segmenting {f} [{n}/{config['nr_images']}]")
-        tic = time.time()
-        mask, flow, style = model.eval(io.imread(f), **params)
-        maskfile = f.replace('DAPI_max_proj.', f'DAPI_masks.')
-        maskfile_latest = f.replace('DAPI_max_proj.', f'DAPI_masks_minsize={params["min_size"]}_maskth={params["mask_threshold"]}.')
-        io.imwrite(maskfile_latest, mask)
-        Path(maskfile).unlink(missing_ok=True)
-        Path(maskfile).symlink_to(maskfile_latest)
-        img['time']['02-segment-DAPI'] = time.time() - tic
-        logging.info(f"writing mask to {maskfile_latest}")
-net_time = time.time() - ticall
-logging.info(f"total DAPI segmentation time: {net_time:.2f}s")
-
-logging.info(f"writing to config file: {configfile}")
-with open(configfile, "w") as f:
-    json.dump(config, f)

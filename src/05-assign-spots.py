@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import time
 import logging
 from skimage import io
 import numpy as np
@@ -89,14 +90,12 @@ def spot_assignment(mask, nuclear_mask, spot_data, dense_data):
     return df
 
 
-# how many images do we have
-nr_images = sum([len(exp['images']) for exp in config['experiments']])
-
 n = 0
-for exp in list(config['experiments']):
-    for img in list(exp['images']):
+for exp in config['experiments']:
+    for img in exp['images']:
         n = n + 1
-        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{nr_images}]')
+        tic = time.time()
+        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
         img['resultfile'] = os.path.join(config['outputdir'], img['stem'], 'results.csv')
         alldfs = []
 
@@ -119,10 +118,12 @@ for exp in list(config['experiments']):
                 df = df[list(df.columns[-4:]) + list(df.columns[:-4])]
                 alldfs.append(df)
 
+        img['time']['05-assign-spots'] = time.time() - tic
+
         logging.info(f'saving data to {img['resultfile']}')
         pd.concat(alldfs).to_csv(img['resultfile'])
 
-logging.info(f'output config file: {configfile}')
+logging.info(f'writing to config file: {configfile}')
 with open(configfile, "w") as f:
     json.dump(config, f)
 

@@ -1,6 +1,7 @@
 import json
 import sys
 import os.path
+import time
 from pathlib import Path
 import logging
 from skimage import io
@@ -85,30 +86,28 @@ detection_threshold = None  # set to None for automatic determination by bigFISH
 # debug
 # detection_threshold = 37
 
-# how many images do we have
-nr_images = sum([len(exp['images']) for exp in config['experiments']])
-
 n = 0
-for exp in list(config['experiments']):
-    for img in list(exp['images']):
+for exp in config['experiments']:
+    for img in exp['images']:
         n = n + 1
-        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{nr_images}]')
-        for ch in config['channels']:
+        tic = time.time()
+        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
+
+        # find high density region
+        cell_mask_data = io.imread(img['cellmaskfile'])
+        selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
+        logging.info(f'..selected patch: {selected_patch}')
+
+        for ch in list(config['channels']):
             mrna = ch['mrna']
             if mrna != "DAPI":
                 logging.info(f'..mrna: {mrna}')
-                mrna_data = io.imread(img[mrna]['rnafile'])
-                cell_mask_data = io.imread(img['cellmaskfile'])
 
-                # find high density region
-                selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
-                # debug
-                # selected_patch = (1877, 1569)
-                logging.info(f'....selected patch: {selected_patch}')
+                mrna_data = io.imread(img[mrna]['rnafile'])
                 img_patch = mrna_data[:,
-                    selected_patch[0]:selected_patch[0] + patch_size[0],
-                    selected_patch[1]:selected_patch[1] + patch_size[1]
-                ]
+                            selected_patch[0]:selected_patch[0] + patch_size[0],
+                            selected_patch[1]:selected_patch[1] + patch_size[1]
+                            ]
 
                 focus = compute_focus(img_patch)
                 projected_focus = np.max(focus, axis=(1, 2))
@@ -150,11 +149,13 @@ for exp in list(config['experiments']):
                 Path(img[mrna]['spotsfile']).symlink_to(img[mrna]['spotsfile_latest'])
                 logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile"]}')
 
-    logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
-    with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
-        json.dump(img, f)
+        img['time']['03-detect-spots'] = time.time() - tic
 
-logging.info(f'output config file: {configfile}')
+        logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
+        with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
+            json.dump(img, f)
+
+logging.info(f'writing to config file: {configfile}')
 with open(configfile, "w") as f:
     json.dump(config, f)
 logging.info("done.")
