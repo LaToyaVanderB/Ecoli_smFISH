@@ -16,6 +16,7 @@ logging.info(f'reading config file {configfile}')
 with open(configfile, 'r') as config_file:
     config = json.load(config_file)
 
+
 def preprocess_spot_data(spot_data, dense_data):
     # spot_data has the form:
     # z, y, x
@@ -64,12 +65,12 @@ def spot_assignment(mask, nuclear_mask, spot_data, dense_data):
 
     for cell_id in np.unique(mask):
         cells[cell_id] = {
+            'nuclei': 0,
             'spots_per_cell': 0,
             'dense_regions_per_cell': 0,
             'decomposed_RNAs': 0,
             'tx_per_cell': 0,
             'nascent_RNAs': 0,
-            'nuclei': 0
         }
 
     spot_data_combined = preprocess_spot_data(spot_data, dense_data)
@@ -97,7 +98,7 @@ for exp in config['experiments']:
         tic = time.time()
         logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
         img['resultfile'] = os.path.join(config['outputdir'], img['stem'], 'results.csv')
-        alldfs = []
+        alldfs = pd.DataFrame()
 
         for ch in config['channels']:
             mrna = ch['mrna']
@@ -113,15 +114,31 @@ for exp in config['experiments']:
                 dense_data = np.load(img[mrna]['ddregionsfile'])
 
                 df = spot_assignment(cell_mask_data, nuclear_mask_data, spot_data, dense_data)
-                columns = df.columns
-                df['strain'], df['condition'], df['seqnr'], df['mRNA'] = exp['strain'].replace('Ecoli', 'MG1655'), exp['condition'], img['seqnr'], mrna
-                df = df[list(df.columns[-4:]) + list(df.columns[:-4])]
-                alldfs.append(df)
+                df.rename(columns={'label': 'image_cell_id'}, inplace=True)
+                cell_columns = ['image_cell_id', 'bbox-0', 'bbox-1', 'bbox-2', 'bbox-3', 'area', 'eccentricity', 'nuclei']
+                df_cells = df[cell_columns]
+                rna_columns = ['image_cell_id', 'spots_per_cell', 'dense_regions_per_cell', 'decomposed_RNAs', 'tx_per_cell', 'nascent_RNAs', 'total_RNAs_per_cell']
+                df_rnas = df.loc[:, rna_columns]
+                df_rnas.to_csv(f'{img["resultfile"]}.{mrna}', index=False)
+                df_rnas.rename(columns={
+                    'spots_per_cell': 'spots' + f'_{mrna}',
+                    'dense_regions_per_cell': 'dense_regions' + f'_{mrna}',
+                    'decomposed_RNAs': 'decomposed_RNAs' + f'_{mrna}',
+                    'tx_per_cell': 'tx' + f'_{mrna}',
+                    'nascent_RNAs': 'nascent_RNAs' + f'_{mrna}',
+                    'total_RNAs_per_cell': 'total_RNAs' + f'_{mrna}',
+                }, inplace=True)
+                if alldfs.empty:
+                    df_cells.to_csv(f'{img["resultfile"]}.cells', index=False)
+                    alldfs = df_cells
+                alldfs = alldfs.merge(df_rnas, on=['image_cell_id'], how='left')
 
-        img['time']['05-assign-spots'] = time.time() - tic
+        alldfs['strain'], alldfs['condition'], alldfs['seqnr'] = exp['strain'].replace('Ecoli', 'MG1655'), exp['condition'], img['seqnr']
 
         logging.info(f'saving data to {img['resultfile']}')
-        pd.concat(alldfs).to_csv(img['resultfile'])
+        alldfs.to_csv(img['resultfile'], index=False)
+
+        img['time']['05-assign-spots'] = time.time() - tic
 
 logging.info(f'writing to config file: {configfile}')
 with open(configfile, "w") as f:

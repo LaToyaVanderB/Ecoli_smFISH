@@ -35,12 +35,14 @@ for exp in config["experiments"]:
 
                 dic_data = io.imread(img['dicfile'])
                 mrna_data = io.imread(img[mrna]['rnafile'])
-                dapi_data = io.imread(img['DAPI']['rnafile'])
-                cell_mask_data = io.imread(img['cellmaskfile'])
-                nuclear_mask_data = io.imread(img['nuclearmaskfile'])
+                # dapi_data = io.imread(img['DAPI']['rnafile'])
+                # cell_mask_data = io.imread(img['cellmaskfile'])
+                # nuclear_mask_data = io.imread(img['nuclearmaskfile'])
                 spot_data = np.load(img[mrna]['spotsfile'])
 
+                # was already computed in 03-detect-spots, reuse
                 mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
+                # mrna_filtered = io.imread(img[mrna]['filteredmrnafile'])
 
                 spots, dense_regions, reference_spot = decompose_dense(
                     mrna_filtered,

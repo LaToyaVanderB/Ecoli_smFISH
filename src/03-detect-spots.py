@@ -124,7 +124,7 @@ for exp in config['experiments']:
                 # need to save this if we compute it
                 mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
                 img[mrna]['filteredmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered.npy')
-                np.save(img[mrna]['filteredmrnafile'], mrna_filtered)
+                io.imsave(img[mrna]['filteredmrnafile'], mrna_filtered)
                 logging.info(f'....saving filtered mRNA image to file {img[mrna]['filteredmrnafile']}')
 
 
