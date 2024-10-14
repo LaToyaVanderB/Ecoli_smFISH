@@ -1,17 +1,17 @@
 1. Config step
-   `~/PycharmProjects/Ecoli_smFISH % python src/01-configure.py tests/input/config.json`
+   `python src/01-configure.py tests/input/config.json`
 2. Segmentation (for now, need to switch to omnipose environment)
-   `~/PycharmProjects/Ecoli_smFISH % python src/02-segment.py tests/output/config.json`
+   `python src/02-segment.py tests/output/config.json`
 3. Spot detection
-   `~/PycharmProjects/Ecoli_smFISH % python src/03-detect-spots.py tests/output/config.json`
+   `python src/03-detect-spots.py tests/output/config.json`
 4. Spot decomposition
-   `~/PycharmProjects/Ecoli_smFISH % python src/04-decompose-spots.py tests/output/config.json`
+   `python src/04-decompose-spots.py tests/output/config.json`
 5. Spot assignment
-   `~/PycharmProjects/Ecoli_smFISH % python src/05-assign-spots.py tests/output/config.json`
+   `python src/05-assign-spots.py tests/output/config.json`
 6. Result analysis
    `06-plot-results.ipynb`
 7. Bonus
-`~/PycharmProjects/Ecoli_smFISH % python -m json.tool tests/output/MG1655_LB_01/img.json`
+`python -m json.tool tests/output/MG1655_LB_01/img.json`
 ```
 import sys; sys.path.insert(0, ''); import tools.view
 tools.view.import_layers('tests/output-seg_ok/MG1655_LB_fixed2806_hybed1906_left_01', mode='all', viewer=viewer)
@@ -24,3 +24,5 @@ DAPI/DIC alignment:
 ```
 dx, dy = dic.translate; dx, dy = int(dx), int(dy); io.imsave('dicdapi.tif', np.stack([dic.data[dy:, :dx], dapi.data[:-dy, -dx:]]))
 ```
+Most recently modified files on macos:
+`find . -type f -exec stat -f "%m %N" "{}" \; | sort -nr | head`

@@ -15,13 +15,14 @@
 - [LATER] parallelize (dask)
 - [LATER] fix envs mess
 - [LATER] when using symlinks, check that they work after a round trip to OneDrive
-- [DONE] per condition/growth rate, plot:
+- [DONE] analysis: per condition/growth rate, plot:
   - number of cells
   - cell area
   - cell eccentricity
   - number of spots/Txs
   - number of spots/Txs per cell
-- [NEXT] Process more MAN images to get to ~10k cells as well
+- [DONE] analysis: normalize all counts by number of cells
+- [DONE] process just one picture
 - [NEXT] figure out if/where pipeline fails: check:
   1. spot detection
      1. Filter out points that are totally out of focus (e.g. GLU01 hipBA blotches)
