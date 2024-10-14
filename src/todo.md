@@ -14,21 +14,27 @@
 - [LATER] pytest tests
 - [LATER] parallelize (dask)
 - [LATER] fix envs mess
-- if using symlinks, check that they work after a round trip to OneDrive
-- [DONE] per condition/growth rate, plot:
+- [LATER] when using symlinks, check that they work after a round trip to OneDrive
+- [DONE] analysis: per condition/growth rate, plot:
   - number of cells
   - cell area
   - cell eccentricity
   - number of spots/Txs
   - number of spots/Txs per cell
-- [NEXT] figure out where pipeline fails: check
+- [DONE] analysis: normalize all counts by number of cells
+- [DONE] process just one picture
+- [NEXT] figure out if/where pipeline fails: check:
   1. spot detection
+     1. Filter out points that are totally out of focus (e.g. GLU01 hipBA blotches)
+     2. Blotches screw up processing? (GLU01 hipBA)
   2. spot decomposition
-  3. DIC segmentation
-  4. DAPI segmentation
-  5. DAPI/DIC registration
-  5. other
+  3. spot counting/assignment 
+  4. DIC segmentation
+  5. DAPI segmentation
+  6. DAPI/DIC registration 
+  7. other
 - [NEXT] optimise Omnipose segmentations
+  - (Philipp) If you have enough cells, don't waste time on optimizing segmentation. Just select enough adequate cells besed on area/eccentricity. YESSSS!
   - check ModelZoo for bacteria DIC model
   - Omnnipose notes https://omnipose.readthedocs.io/training.html
     - cyto2_omni uses nuclei as chan2 -> do as well
