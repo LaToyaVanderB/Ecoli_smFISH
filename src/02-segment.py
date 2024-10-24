@@ -47,7 +47,7 @@ params = {'channels': chans, # always define this with the model
 
 # DIC images
 model = models.CellposeModel(gpu=use_GPU, model_type="cyto2")
-params['min_size'] = 0
+params['min_size'] = 200
 
 ticall = time.time()
 # for f in files:

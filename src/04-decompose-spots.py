@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
                         # was already computed in 03-detect-spots, reuse
                         mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
-                        # mrna_filtered = io.imread(img[mrna]['filteredmrnafile'])
+                        # mrna_filtered = np.load(img[mrna]['filteredmrnafile'])
 
                         spots, dense_regions, reference_spot = decompose_dense(
                             mrna_filtered,
