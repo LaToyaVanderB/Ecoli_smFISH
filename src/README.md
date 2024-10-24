@@ -14,7 +14,7 @@
 `python -m json.tool tests/output/MG1655_LB_01/img.json`
 ```
 import sys; sys.path.insert(0, ''); import tools.view
-tools.view.import_layers('tests/output-seg_ok/MG1655_LB_fixed2806_hybed1906_left_01', mode='all', viewer=viewer)
+tools.view.import_layers('tests/output-seg_ok/MG1655_GLU_OD_0.3_left_01', mode='all', viewer=viewer)
 ```
 alors qu'on voudrait:
 `python tools/view.py tests/output-seg_ok/MG1655_GLU_OD_0.3_left_02 all`
@@ -26,3 +26,7 @@ dx, dy = dic.translate; dx, dy = int(dx), int(dy); io.imsave('dicdapi.tif', np.s
 ```
 Most recently modified files on macos:
 `find . -type f -exec stat -f "%m %N" "{}" \; | sort -nr | head`
+
+Max project spots:
+`np.delete(spots, 0, 1)`
+or use 'out_of_slice_display': True in napari viewer add_points command

@@ -21,41 +21,104 @@ modes = {
 }
 
 layers_ordered = [
-    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
-    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'name': 'DAPI_masks', 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DAPI', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI_max_proj', 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
-    { 'name': 'rpoD', 'type': 'image', 'properties': { 'name': 'rpoD', 'colormap': 'magenta', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'rpoD_filtered', 'type': 'rna_filtered', 'properties': { 'name': 'rpoD_filtered', 'blending': 'additive', 'visible': False } },
-    { 'name': 'rpoD_spots', 'type': 'spots', 'properties': { 'name': 'rpoD_spots', 'blending': 'additive', 'visible': False } },
-    { 'name': 'rnlAB', 'type': 'image', 'properties': { 'name': 'rnlAB', 'colormap': 'cyan', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'rnlAB_filtered', 'type': 'rna_filtered', 'properties': { 'name': 'rnlAB_filtered', 'blending': 'additive', 'visible': False } },
-    { 'name': 'rnlAB_spots', 'type': 'spots', 'properties': { 'name': 'rnlAB_spots', 'blending': 'additive', 'visible': False } },
-    { 'name': 'hipBA', 'type': 'image', 'properties': { 'name': 'hipBA', 'colormap': 'yellow', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'hipBA_filtered', 'type': 'rna_filtered', 'properties': { 'name': 'hipBA_filtered', 'blending': 'additive', 'visible': False} },
-    { 'name': 'hipBA_spots', 'type': 'spots', 'properties': { 'name': 'hipBA_spots', 'blending': 'additive', 'visible': False} }
+    { 'name': 'DIC_masks', 'type': 'labels',
+      'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image',
+      'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels',
+      'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image',
+      'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image',
+      'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+
+    { 'name': 'rpoD', 'type': 'image',
+      'properties': { 'colormap': 'magenta', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'rpoD_filtered', 'type': 'rna_filtered',
+      'properties': { 'colormap': 'magenta', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
+    { 'name': 'rpoD_spots', 'type': 'spots',
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 20, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
+
+    { 'name': 'rnlAB', 'type': 'image',
+      'properties': { 'colormap': 'cyan', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'rnlAB_filtered', 'type': 'rna_filtered',
+      'properties': { 'colormap': 'cyan', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
+    { 'name': 'rnlAB_spots', 'type': 'spots',
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 20, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
+
+    { 'name': 'hipBA', 'type': 'image',
+      'properties': { 'colormap': 'yellow', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'hipBA_filtered', 'type': 'rna_filtered',
+      'properties': { 'colormap': 'yellow', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
+    { 'name': 'hipBA_spots', 'type': 'spots',
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 20, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
+]
+
+layers_spots = [
+    { 'name': 'DIC_masks', 'type': 'labels',
+      'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image',
+      'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels',
+      'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image',
+      'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image',
+      'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+
+    { 'name': 'rpoD', 'type': 'image',
+      'properties': { 'colormap': 'magenta', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'rpoD_filtered', 'type': 'rna_filtered',
+      'properties': { 'colormap': 'magenta', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
+    { 'name': 'rpoD_spots', 'type': 'spots',
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 20, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
+
+    { 'name': 'rnlAB', 'type': 'image',
+      'properties': { 'colormap': 'cyan', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'rnlAB_filtered', 'type': 'rna_filtered',
+      'properties': { 'colormap': 'cyan', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
+    { 'name': 'rnlAB_spots', 'type': 'spots',
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 20, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
+
+    { 'name': 'hipBA', 'type': 'image',
+      'properties': { 'colormap': 'yellow', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'hipBA_filtered', 'type': 'rna_filtered',
+      'properties': { 'colormap': 'yellow', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
+    { 'name': 'hipBA_spots', 'type': 'spots',
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 20, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
+]
+
+
+layers_input = [
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'rpoD', 'type': 'image', 'properties': { 'colormap': 'magenta', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'rnlAB', 'type': 'image', 'properties': { 'colormap': 'cyan', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'hipBA', 'type': 'image', 'properties': { 'colormap': 'yellow', 'visible': True, 'blending': 'additive' } },
 ]
 
 layers_light = [
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'translucent_no_depth', 'translate':  [-10, 10] } },
-    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'translucent_no_depth', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
 ]
 
 layers_segmentation = [
-    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
-    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'name': 'DAPI_masks', 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DAPI', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI_max_proj', 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
 ]
 
 layers_cells = [
-    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'name': 'DIC_masks', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'name': 'DIC', 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
-    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'name': 'DAPI_masks', 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DAPI', 'type': 'image', 'properties': { 'name': 'DAPI', 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'name': 'DAPI_max_proj', 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
 ]
 
 def import_layers(imagedir, mode=all, viewer=None):
@@ -69,6 +132,10 @@ def import_layers(imagedir, mode=all, viewer=None):
         layers = layers_segmentation
     elif mode == 'cells':
         layers = layers_cells
+    elif mode == 'input':
+        layers = layers_input
+    elif mode == 'spots':
+        layers = layers_spots
     else:
         layers = layers_ordered
 
@@ -79,13 +146,26 @@ def import_layers(imagedir, mode=all, viewer=None):
 
             if viewer is not None:
                 if layer['type'] == 'image':
-                    viewer.add_image(io.imread(stems[layer['name']]), **layer['properties'])
+                    l = viewer.add_image(io.imread(stems[layer['name']]), **layer['properties'])
+                    l.name = layer['name']
+
                 elif layer['type'] == 'labels':
-                    viewer.add_labels(io.imread(stems[layer['name']]), **layer['properties'])
+                    l = viewer.add_labels(io.imread(stems[layer['name']]), **layer['properties'])
+                    l.name = layer['name']
+
                 elif layer['type'] == 'rna_filtered':
-                    viewer.add_image(np.load(stems[layer['name']]), **layer['properties'])
+                    rna_filtered = np.load(stems[layer['name']])
+                    l = viewer.add_image(rna_filtered, **layer['properties'])
+                    l.name = layer['name']
+                    l_mp = viewer.add_image(np.max(rna_filtered, axis=0), **layer['properties'])
+                    l_mp.name = l.name + '_max_proj'
+
                 elif layer['type'] == 'spots':
-                    viewer.add_points(np.load(Path(stems[layer['name']]).resolve()), **layer['properties'])
+                    spots = np.load(Path(stems[layer['name']]).resolve())
+                    l = viewer.add_points(spots, **layer['properties'])
+                    l.name = layer['name']
+                    l_mp = viewer.add_points(np.delete(spots, 0, 1), **layer['properties'])
+                    l_mp.name = l.name + "_max_proj"
 
     if viewer is not None:
         viewer.title = Path(imagedir).parts[-1]
@@ -94,5 +174,7 @@ def import_layers(imagedir, mode=all, viewer=None):
         with open(Path(imagedir) / "img.json") as f:
             viewer.dims.set_point(0, json.load(f)['z_max_focus'])
 
+
 if __name__ == '__main__':
     import_layers(imagedir=sys.argv[1], mode=sys.argv[2], viewer=napari.Viewer())
+

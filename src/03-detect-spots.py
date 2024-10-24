@@ -7,11 +7,11 @@ from skimage import io
 import numpy as np
 from bigfish.detection import detect_spots
 from bigfish.stack import remove_background_gaussian
-from bigfish.stack import get_in_focus_indices
 from bigfish.stack import compute_focus
 from scipy.signal import savgol_filter
 from typing import Tuple
 import argparse
+
 
 def find_high_density_patch(mask: np.ndarray, patch_size: Tuple = (200, 200), attempts: int = 20):
     """
@@ -71,6 +71,7 @@ def find_in_focus_indices(focus: np.ndarray, adjustment_bottom: int = 5, adjustm
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%m/%d/%Y %I:%M:%S%p', level=logging.INFO)
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("config", help="config file (process multiple images).")
@@ -92,78 +93,93 @@ if __name__ == '__main__':
     patch_size = (200, 200)
     detection_threshold = None  # set to None for automatic determination by bigFISH
     # detection threshold is usually optimised manually and might need to be set differently per channel
-    # debug
+    # debug:
     # detection_threshold = 37
 
     n = 0
+    found = False
     for exp in config['experiments']:
-        for img in exp['images']:
-            if (only is None) or (img['sourcefile'] == only):
-                n = n + 1
-                tic = time.time()
-                logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
+        if found is False:
+            for img in exp['images']:
+                    if (only is None) or (img['basename'] == only):
+                        n = n + 1
+                        tic = time.time()
+                        logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
 
-                # find high density region
-                cell_mask_data = io.imread(img['cellmaskfile'])
-                selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
-                logging.info(f'..selected patch: {selected_patch}')
+                        # find high density region
+                        cell_mask_data = io.imread(img['cellmaskfile'])
+                        selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
+                        logging.info(f'..selected patch: {selected_patch}')
 
-                for ch in list(config['channels']):
-                    mrna = ch['mrna']
-                    if mrna != "DAPI":
-                        logging.info(f'..mrna: {mrna}')
+                        for ch in list(config['channels']):
+                            mrna = ch['mrna']
+                            if mrna != "DAPI":
+                                logging.info(f'..mrna: {mrna}')
 
-                        mrna_data = io.imread(img[mrna]['rnafile'])
-                        img_patch = mrna_data[:,
-                                    selected_patch[0]:selected_patch[0] + patch_size[0],
-                                    selected_patch[1]:selected_patch[1] + patch_size[1]
-                                    ]
+                                mrna_data = io.imread(img[mrna]['rnafile'])
+                                img_patch = mrna_data[:,
+                                            selected_patch[0]:selected_patch[0] + patch_size[0],
+                                            selected_patch[1]:selected_patch[1] + patch_size[1]
+                                            ]
 
-                        focus = compute_focus(img_patch)
-                        projected_focus = np.max(focus, axis=(1, 2))
-                        projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
-                        ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed, adjustment_bottom=5, adjustment_top=10)
-                        ifx_1 = max(ifx_1, 0)
-                        ifx_2 = min(ifx_2, mrna_data.shape[0])
-                        img["z_max_focus"] = int(np.argmax(projected_focus_smoothed))
-                        img["ifx_1"] = int(ifx_1)
-                        img["ifx_2"] = int(ifx_2)
+                                focus = compute_focus(img_patch)
+                                projected_focus = np.max(focus, axis=(1, 2))
+                                projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
+                                ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed, adjustment_bottom=2, adjustment_top=3)
 
-                        logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img["z_max_focus"]})')
+                                if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
+                                    logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
+                                ifx_1 = max(ifx_1, 0)
+                                ifx_2 = min(ifx_2, mrna_data.shape[0])
 
-                        # need to save this if we compute it
-                        mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
-                        img[mrna]['filteredmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered.npy')
-                        io.imsave(img[mrna]['filteredmrnafile'], mrna_filtered)
-                        logging.info(f'....saving filtered mRNA image to file {img[mrna]['filteredmrnafile']}')
+                                img[mrna]["z_max_focus"] = int(np.argmax(projected_focus_smoothed))
+                                img[mrna]["ifx_1"] = int(ifx_1)
+                                img[mrna]["ifx_2"] = int(ifx_2)
+
+                                logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img["z_max_focus"]})')
+
+                                # need to save this if we compute it
+                                mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
+                                img[mrna]['filteredmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered.npy')
+                                np.save(img[mrna]['filteredmrnafile'], mrna_filtered)
+                                logging.info(f'....saving filtered mRNA image to file {img[mrna]['filteredmrnafile']}')
+
+                                spots, threshold = detect_spots(
+                                    mrna_filtered[ifx_1:ifx_2, ...],
+                                    threshold=detection_threshold,
+                                    voxel_size=scale,
+                                    spot_radius=spot_radius,
+                                    return_threshold=True
+                                )
+
+                                # restore z-level
+                                spots[:, 0] = spots[:, 0] + ifx_1
+
+                                # adjustable out-of focus filtering
+                                spots = spots[spots[:, 0] > ifx_1 + 2]
+
+                                img[mrna]['spot_detection threshold'] = threshold
+                                img[mrna]['number_of_spots'] = len(spots)
+                                logging.info(f'....spot detection threshold: {threshold}')
+                                logginf.info(f'....searched slices: [{ifx_1}, {ifx_2}]')
+                                logging.info(f'....number of spots found: {len(spots)}')
+                                img[mrna]['spotsfile_latest'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots_thr={threshold}_ifx1={ifx_1}_ifx2={ifx_2}.npy')
+                                np.save(img[mrna]['spotsfile_latest'], spots)
+                                img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots.npy')
+                                Path(img[mrna]['spotsfile']).unlink(missing_ok=True)
+                                Path(img[mrna]['spotsfile']).symlink_to(Path(img[mrna]['spotsfile_latest']).parts[-1])
+                                logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile"]}')
 
 
-                        spots, threshold = detect_spots(
-                            mrna_filtered[ifx_1:ifx_2, ...],
-                            threshold=detection_threshold,
-                            voxel_size=scale,
-                            spot_radius=spot_radius,
-                            return_threshold=True
-                        )
+                        img['time']['03-detect-spots'] = time.time() - tic
 
-                        # restore z-level
-                        spots[:, 0] = spots[:, 0] + ifx_1
+                        logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
+                        with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
+                            json.dump(img, f)
 
-                        # adjustable out-of focus filtering
-                        spots = spots[spots[:, 0] > ifx_1 + 2]
-
-                        img[mrna]['spotsfile_latest'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots_thr{threshold}.npy')
-                        np.save(img[mrna]['spotsfile_latest'], spots)
-                        img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots.npy')
-                        Path(img[mrna]['spotsfile']).unlink(missing_ok=True)
-                        Path(img[mrna]['spotsfile']).symlink_to(img[mrna]['spotsfile_latest'])
-                        logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile"]}')
-
-                img['time']['03-detect-spots'] = time.time() - tic
-
-                logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
-                with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
-                    json.dump(img, f)
+                        if only and (img['basename'] == only):
+                            found = True
+                            break
 
     logging.info(f'writing to config file: {configfile}')
     with open(configfile, "w") as f:
