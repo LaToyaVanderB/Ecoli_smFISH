@@ -14,7 +14,7 @@
 `python -m json.tool tests/output/MG1655_LB_01/img.json`
 ```
 import sys; sys.path.insert(0, ''); import tools.view
-tools.view.import_layers('tests/output-seg_ok/MG1655_GLU_OD_0.3_left_01', mode='all', viewer=viewer)
+tools.view.import_layers('tests/output-seg_ok/MG1655_GLU_OD_0.3_left_02', mode='all', viewer=viewer)
 ```
 alors qu'on voudrait:
 `python tools/view.py tests/output-seg_ok/MG1655_GLU_OD_0.3_left_02 all`

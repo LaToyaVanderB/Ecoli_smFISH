@@ -42,12 +42,12 @@ if __name__ == '__main__':
 
                         logging.info(f'..mrna: {mrna}')
 
-                        dic_data = io.imread(img['dicfile'])
+                        # dic_data = io.imread(img['dicfile'])
                         mrna_data = io.imread(img[mrna]['rnafile'])
                         # dapi_data = io.imread(img['DAPI']['rnafile'])
                         # cell_mask_data = io.imread(img['cellmaskfile'])
                         # nuclear_mask_data = io.imread(img['nuclearmaskfile'])
-                        spot_data = np.load(img[mrna]['spotsfile'])
+                        spot_data = np.load(img[mrna]['spotsfile'][:, 0:3])
 
                         # was already computed in 03-detect-spots, reuse
                         mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)

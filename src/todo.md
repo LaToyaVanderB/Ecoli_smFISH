@@ -27,15 +27,18 @@
 - [NEXT] split all pictures in 4
 - [NEXT] tune pipeline:
   1. spot detection
-     1. [WONTDO] Remove slices that are further than +- n slices from focus
-     2. [DO] Intensity histogram for selected spots: ideally, we expect a bimodal distribution (individual spots and Tx's)
+     1. [DONE] Remove slices that are further than +- n slices from focus
+     2. [DONE] Intensity histogram for selected spots: ideally, we expect a bimodal distribution (individual spots and Tx's)
      3. [WONTDO] Remove large blotches: replace noisy rectangle with mean value of picture excluding all noisy rectangles / exclude them from spot assignment
      4. [DO] Check how many out-of-cells spots we detect
      5. [DO] Estimate background in the different channels, using patches that show background fluoresence (inside cells)
      6. Automatic threshold detection: 
-        1. [DO] Check if elbow is visible in number of selected spots versus threshold plot(Bigfish example notebook)
+        1. [DONE] Check if elbow is visible in number of selected spots versus threshold plot(Bigfish example notebook)
         2. [DO] Check whether threshold from different pictures from the same channel are consistent
         3. [DONE] Difference between LoG and remove_background_gausian?
+        4. Automatic threshold looks too low for rpoD
+           1. [DONE] Why does BigFish detect low-intensity spots?
+        5. Automatic threshold looks too high for hipBA
   2. spot decomposition
      3. [DO] Tune distance between spots for Tx's
      4. [DO] Intensity histogram for selected, individual spots: they should be similar (within the same channel)
