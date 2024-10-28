@@ -11,7 +11,6 @@
 - [WONTDO] move (DIC, DAPI, all?) output files to their own channel folder (to accomodate Omnipose)
 - [WONTDO] histograms in napari or matplotlib; automatic contrast adapted to mRNA channels and DIC
 - [LATER] fix Git situation for real (git-lfs + Zenodo)
-- [LATER] pytest tests
 - [LATER] parallelize (dask)
 - [LATER] fix envs mess
 - [LATER] when using symlinks, check that they work after a round trip to OneDrive
@@ -24,6 +23,13 @@
 - [DONE] analysis: normalize all counts by number of cells
 - [DONE] process just one picture
 - [DONE] change size and color of spots 
+- [NEXT] image ispection notebook:
+  - create viewer
+  - open layers with view.py
+  - display intensity histograms
+  - any other useful statistic
+- [NEXT] put all parameters in config
+- [LATER] pytest tests
 - [NEXT] split all pictures in 4
 - [NEXT] tune pipeline:
   1. spot detection
@@ -40,8 +46,8 @@
            1. [DONE] Why does BigFish detect low-intensity spots?
         5. Automatic threshold looks too high for hipBA
   2. spot decomposition
-     3. [DO] Tune distance between spots for Tx's
-     4. [DO] Intensity histogram for selected, individual spots: they should be similar (within the same channel)
+     1. [DO] Tune distance between spots for Tx's
+     2. [DO] Intensity histogram for selected, individual spots: they should be similar (within the same channel)
   3. spot counting/assignment 
      1. [DO] exclude cells on the border
      2. [DO] exclude spots from noisy regions
@@ -89,9 +95,9 @@
   - cell masks
     - dimensions: "You should aim to make training images of roughly size (512,512)"
     - object density: "As a general rule, you want to train on images with densely packed objects"
-  - Split input image in 4:
-    - 00-read-vsi.py: .vsi + DIC.tif -> {DIC, DAPI, rpoD, rnlAB, hipBA.tif}
-      - take quadrants and store as .pt{1,2,3,4} (separate pictures in separate directories)
-    - 01-configure.py: 
-      - remove .vsi and DIC.tif reading in part
-      - process as usual
+- Split input image in 4:
+  - 00-read-vsi.py: .vsi + DIC.tif -> {DIC, DAPI, rpoD, rnlAB, hipBA.tif}
+    - take quadrants and store as .pt{1,2,3,4} (separate pictures in separate directories)
+  - 01-configure.py: 
+    - remove .vsi and DIC.tif reading in part
+    - process as usual
