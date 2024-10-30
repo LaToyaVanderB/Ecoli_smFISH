@@ -50,7 +50,7 @@ if __name__ == '__main__':
     # look for DIC image
     n = 0
     for exp in config['experiments']:
-        pattern = re.compile(rf'({exp["strain"]}_{exp["condition"]})' + '_' + r'(\d+)')
+        pattern = re.compile(rf'({exp["strain"]}_{exp["condition"]}.*)' + '_' + r'(\d+)')
         for img in exp['images']:
             n = n + 1
             logging.info(f"parsing filename: {img['sourcefile']} [{n}/{config['nr_images']}]")
@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
             img['time'] = {}
 
-            img['stem'] = re.sub(r'_CY[A-Z0-9\s,.]+DAPI', '', img['basename'])
+            img['stem'] = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', img['basename'])
             _, img['seqnr'] = re.match(pattern, img['stem']).groups()
             logging.info(f"stem: {img['stem']}, seqnr: {img['seqnr']}")
             os.makedirs(os.path.join(config['outputdir'], img['stem']), exist_ok=True)

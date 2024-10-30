@@ -29,6 +29,7 @@
   - display intensity histograms
   - any other useful statistic
 - [NEXT] put all parameters in config
+- [NEXT] change all filenames to relative paths
 - [LATER] pytest tests
 - [NEXT] split all pictures in 4
 - [NEXT] tune pipeline:
@@ -101,3 +102,9 @@
   - 01-configure.py: 
     - remove .vsi and DIC.tif reading in part
     - process as usual
+
+
+- spot size
+- check missed spots are not in excluded slices
+- colocalisation with nucleoid if possible
+- 

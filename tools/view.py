@@ -6,6 +6,7 @@ from skimage import io
 import numpy as np
 import json
 import napari
+import re
 
 # need to do this in napari console otherwise the import does not work
 # because life is hard and then you die
@@ -121,6 +122,9 @@ layers_cells = [
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
 ]
 
+spot_filename_pattern = re.compile(rf'_spots_thr=(?P<threshold>[0-9.]+)_ifx1=(?P<ifx1>[0-9]+)_ifx2=(?P<ifx2>[0-9]+).npy')
+
+
 def import_layers(imagedir, mode=all, viewer=None):
     files = Path(imagedir).glob('*')
     stems = { Path(f).stem: f for f in files }
@@ -162,8 +166,10 @@ def import_layers(imagedir, mode=all, viewer=None):
 
                 elif layer['type'] == 'spots':
                     spots = np.load(Path(stems[layer['name']]).resolve())[:, 0:3]
+                    match = spot_filename_pattern.search(str(stems[layer['name']].resolve()))
+                    d = match.groupdict()
                     l = viewer.add_points(spots, **layer['properties'])
-                    l.name = layer['name']
+                    l.name = f'{layer["name"]} thr={float(d["threshold"]):.2f} [{d["ifx1"]}, {d["ifx2"]}]'
                     l_mp = viewer.add_points(np.delete(spots, 0, 1), **layer['properties'])
                     l_mp.name = l.name + "_max_proj"
                     l_mp.border_color = 'blue'
@@ -173,7 +179,7 @@ def import_layers(imagedir, mode=all, viewer=None):
         for l in viewer.layers:
             l.scale = np.ones(len(l.scale))
         with open(Path(imagedir) / "img.json") as f:
-            viewer.dims.set_point(0, json.load(f)['z_max_focus'])
+            viewer.dims.set_point(0, json.load(f)['rpoD']['z_max_focus'])
 
 
 if __name__ == '__main__':

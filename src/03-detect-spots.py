@@ -13,6 +13,8 @@ from typing import Tuple
 import argparse
 
 
+DEBUG=False
+
 def find_high_density_patch(mask: np.ndarray, patch_size: Tuple = (200, 200), attempts: int = 20):
     """
 
@@ -88,14 +90,22 @@ if __name__ == '__main__':
 
     # parameters - adjust if necessary
     scale = (200, 65, 65)
-    spot_radius = (1250, 170, 170)
+    # spot_radius = (1250, 170, 170)
+    # a smaller spot radius works better for bacteria
+    # (with the original value we can miss smaller spots)
+    spot_radius = (880, 120, 120)
+
     sigma = (0.75, 2.3, 2.3)
     patch_size = (200, 200)
     # detection_threshold = None  # set to None for automatic determination by bigFISH
     # detection threshold is usually optimised manually and might need to be set differently per channel
     detection_thresholds = {'rpoD': None, 'rnlAB': None, 'hipBA': None}
-    # debug:
-    # detection_thresholds = { 'rpoD': 10, 'rnlAB': 10, 'hipBA': 10 }
+    if DEBUG:
+        detection_thresholds = { 'rpoD': 100, 'rnlAB': 10, 'hipBA': 10 }
+    # rpoD: thr 100 works well on GLU 02
+    # rnlAB:
+    # hipBA:
+    detection_thresholds = {'rpoD': 100, 'rnlAB': 30, 'hipBA': None}
 
     n = 0
     found = False
@@ -110,8 +120,9 @@ if __name__ == '__main__':
                         # find high density region
                         cell_mask_data = io.imread(img['cellmaskfile'])
                         selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
-                        # debug
-                        # selected_patch = (1046, 1791)
+                        if DEBUG:
+                            selected_patch = (1046, 1791)
+                        img['selected_patch'] = selected_patch
 
                         logging.info(f'..selected patch: {selected_patch}')
 
@@ -129,21 +140,22 @@ if __name__ == '__main__':
                                 focus = compute_focus(img_patch)
                                 projected_focus = np.max(focus, axis=(1, 2))
                                 projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
-                                ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed, adjustment_bottom=0, adjustment_top=0)
+                                # ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed, adjustment_bottom=0, adjustment_top=0)
+                                ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
 
                                 if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
                                     logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
                                 ifx_1 = max(ifx_1, 0)
                                 ifx_2 = min(ifx_2, mrna_data.shape[0])
 
-                                # debug
-                                # ifx_1, ifx_2 = 6, 31
+                                if DEBUG:
+                                    ifx_1, ifx_2 = 6, 31
 
                                 img[mrna]["z_max_focus"] = int(np.argmax(projected_focus_smoothed))
                                 img[mrna]["ifx_1"] = int(ifx_1)
                                 img[mrna]["ifx_2"] = int(ifx_2)
 
-                                logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img["z_max_focus"]})')
+                                logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img[mrna]["z_max_focus"]})')
 
                                 mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
                                 img[mrna]['filteredmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered.npy')
@@ -191,7 +203,7 @@ if __name__ == '__main__':
                                 img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots.npy')
                                 Path(img[mrna]['spotsfile']).unlink(missing_ok=True)
                                 Path(img[mrna]['spotsfile']).symlink_to(Path(img[mrna]['spotsfile_latest']).parts[-1])
-                                logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile"]}')
+                                logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile_latest"]}')
 
 
                         img['time']['03-detect-spots'] = time.time() - tic

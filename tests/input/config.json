@@ -11,6 +11,10 @@
       "condition": "GLU"
     },
     {
+      "strain": "MG1655",
+      "condition": "GLU"
+    },
+    {
       "strain": "Ecoli",
       "condition": "GLY"
     }
