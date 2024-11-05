@@ -6,6 +6,7 @@ from skimage import io
 import numpy as np
 import json
 import napari
+import re
 
 # need to do this in napari console otherwise the import does not work
 # because life is hard and then you die
@@ -13,18 +14,13 @@ import napari
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%m/%d/%Y %I:%M:%S%p', level=logging.INFO)
 
-modes = {
-    'all': 'layers_ordered',
-    'light': 'layers_light',
-    'seg': 'layers_segmentation',
-    'cells': 'layers_cells',
-}
+
 
 layers_ordered = [
     { 'name': 'DIC_masks', 'type': 'labels',
-      'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+      'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DIC', 'type': 'image',
-      'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+      'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive' } },
     { 'name': 'DAPI_masks', 'type': 'labels',
       'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DAPI', 'type': 'image',
@@ -56,9 +52,9 @@ layers_ordered = [
 
 layers_spots = [
     { 'name': 'DIC_masks', 'type': 'labels',
-      'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
+      'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DIC', 'type': 'image',
-      'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10] } },
+      'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive' } },
     { 'name': 'DAPI_masks', 'type': 'labels',
       'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DAPI', 'type': 'image',
@@ -88,10 +84,10 @@ layers_spots = [
       'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'red', 'face_color': 'transparent', 'opacity': 0.5 } },
 ]
 
-
 layers_input = [
-    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DIC_untranslated', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive', 'translate':  [-10, 10] } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive' } },
     { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DAPI', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
@@ -101,25 +97,28 @@ layers_input = [
 ]
 
 layers_light = [
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'translucent_no_depth', 'translate':  [-10, 10] } },
+    { 'name': 'DIC_untranslated', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'translucent_no_depth', 'translate':  [-10, 10] } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive' } },
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
 ]
 
-layers_segmentation = [
-    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
+layers_cells = [
+    { 'name': 'DIC_untranslated', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive' } },
+    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive'} },
+    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': True, 'blending': 'additive', 'opacity': 0.2 } },
+    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
     { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DAPI', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
 ]
 
-layers_cells = [
-    { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'translate':  [-10, 10], 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive', 'translate':  [-10, 10] } },
-    { 'name': 'DAPI_masks', 'type': 'labels', 'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DAPI', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
-    { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
-]
+spot_filename_pattern = re.compile(rf'_spots_thr=(?P<threshold>[0-9.]+)_ifx1=(?P<ifx1>[0-9]+)_ifx2=(?P<ifx2>[0-9]+).npy')
+
+mode_layers = {
+    'all': 'layers_ordered',
+    'light': 'layers_light',
+    'cells': 'layers_cells',
+    'input': 'layers_input',
+    'spots': 'layers_spots'
+}
 
 def import_layers(imagedir, mode=all, viewer=None):
     files = Path(imagedir).glob('*')
@@ -128,8 +127,6 @@ def import_layers(imagedir, mode=all, viewer=None):
 
     if mode == 'light':
         layers = layers_light
-    elif mode == 'seg':
-        layers = layers_segmentation
     elif mode == 'cells':
         layers = layers_cells
     elif mode == 'input':
@@ -138,6 +135,12 @@ def import_layers(imagedir, mode=all, viewer=None):
         layers = layers_spots
     else:
         layers = layers_ordered
+
+    # layers = mode_layers[mode]
+
+    if viewer is not None:
+        for l in viewer.layers:
+            l.visible = False
 
     for layer in layers:
         logging.debug(f'layer: {layer}')
@@ -162,8 +165,10 @@ def import_layers(imagedir, mode=all, viewer=None):
 
                 elif layer['type'] == 'spots':
                     spots = np.load(Path(stems[layer['name']]).resolve())[:, 0:3]
+                    match = spot_filename_pattern.search(str(stems[layer['name']].resolve()))
+                    d = match.groupdict()
                     l = viewer.add_points(spots, **layer['properties'])
-                    l.name = layer['name']
+                    l.name = f'{layer["name"]} thr={float(d["threshold"]):.2f} [{d["ifx1"]}, {d["ifx2"]}]'
                     l_mp = viewer.add_points(np.delete(spots, 0, 1), **layer['properties'])
                     l_mp.name = l.name + "_max_proj"
                     l_mp.border_color = 'blue'
@@ -173,7 +178,11 @@ def import_layers(imagedir, mode=all, viewer=None):
         for l in viewer.layers:
             l.scale = np.ones(len(l.scale))
         with open(Path(imagedir) / "img.json") as f:
-            viewer.dims.set_point(0, json.load(f)['z_max_focus'])
+            img_json = json.load(f)
+            focus = 20
+            if 'rpoD' in img_json and 'z_max_focus' in img_json['rpoD']:
+                focus = img_json['rpoD']['z_max_focus']
+            viewer.dims.set_point(0, focus)
 
 
 if __name__ == '__main__':

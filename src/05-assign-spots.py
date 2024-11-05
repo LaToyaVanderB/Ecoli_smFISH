@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from skimage.measure import regionprops_table, regionprops
 import argparse
+from pathlib import Path
 
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%m/%d/%Y %I:%M:%S%p', level=logging.INFO)
 
@@ -123,8 +124,8 @@ if __name__ == '__main__':
                         dic_data = io.imread(img['dicfile'])
                         mrna_data = io.imread(img[mrna]['rnafile'])
                         dapi_data = io.imread(img['DAPI']['rnafile'])
-                        cell_mask_data = io.imread(img['cellmaskfile'])
-                        nuclear_mask_data = io.imread(img['nuclearmaskfile'])
+                        cell_mask_data = io.imread(Path(img['cellmaskfile']).resolve())
+                        nuclear_mask_data = io.imread(Path(img['nuclearmaskfile']).resolve())
                         spot_data = np.load(img[mrna]['decompspotsfile'])
                         dense_data = np.load(img[mrna]['ddregionsfile'])
 

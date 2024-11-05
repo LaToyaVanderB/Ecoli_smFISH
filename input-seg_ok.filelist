@@ -1,0 +1,50 @@
+total 339448
+-rwx------  1 adele  staff    211263 Oct  3 11:33 MG1655_GAL-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI.vsi
+-rwx------@ 1 adele  staff  10657551 Oct  3 11:44 MG1655_GAL-lowOD-2nd_01_DIC.tif
+-rwx------  1 adele  staff    118743 Oct  3 12:02 MG1655_GAL-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI.vsi
+-rwx------  1 adele  staff  10657551 Oct  3 12:03 MG1655_GAL-lowOD-2nd_05_DIC.tif
+-rwx------  1 adele  staff    152151 Oct  3 12:08 MG1655_GAL-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI.vsi
+-rwx------  1 adele  staff  10657551 Oct  3 12:09 MG1655_GAL-lowOD-2nd_06_DIC.tif
+-rwx------  1 adele  staff    201515 Sep 27 10:10 MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_01.vsi
+-rwx------  1 adele  staff    262265 Sep 27 10:17 MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi
+-rwx------  1 adele  staff    290959 Sep 27 10:22 MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_03.vsi
+-rwx------  1 adele  staff  10657559 Sep 27 10:11 MG1655_GLU_OD_0.3_left_DIC_01.tif
+-rwx------  1 adele  staff  10657559 Sep 27 10:17 MG1655_GLU_OD_0.3_left_DIC_02.tif
+-rwx------  1 adele  staff  10657559 Sep 27 10:22 MG1655_GLU_OD_0.3_left_DIC_03.tif
+-rwx------  1 adele  staff    197241 Oct  3 13:29 MG1655_GLY-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI.vsi
+-rwx------  1 adele  staff  10657550 Oct  3 13:30 MG1655_GLY-lowOD-2nd_08_DIC.tif
+-rwx------  1 adele  staff    137039 Oct  3 14:16 MG1655_GLY-lowOD-2nd_16_CY5, CY3.5 NAR, CY3, DAPI.vsi
+-rwx------  1 adele  staff  10657549 Oct  3 14:17 MG1655_GLY-lowOD-2nd_16_DIC.tif
+-rwx------  1 adele  staff    202727 Oct  3 14:22 MG1655_GLY-lowOD-2nd_17_CY5, CY3.5 NAR, CY3, DAPI.vsi
+-rwx------  1 adele  staff  10657549 Oct  3 14:24 MG1655_GLY-lowOD-2nd_17_DIC.tif
+-rwx------  1 adele  staff    196035 Sep 27 15:52 MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_01.vsi
+-rwx------  1 adele  staff    223975 Sep 27 16:18 MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_03.vsi
+-rwx------  1 adele  staff    273875 Sep 27 16:32 MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_05.vsi
+-rwx------  1 adele  staff  10657607 Sep 27 15:59 MG1655_LB_fixed2806_hybed1906_left_DIC_01.tif
+-rwx------  1 adele  staff  10657606 Sep 27 16:20 MG1655_LB_fixed2806_hybed1906_left_DIC_03.tif
+-rwx------  1 adele  staff  10657607 Sep 27 16:32 MG1655_LB_fixed2806_hybed1906_left_DIC_05.tif
+-rwx------  1 adele  staff    115025 Sep 27 14:19 MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_03.vsi
+-rwx------  1 adele  staff    246291 Sep 27 14:44 MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_07.vsi
+-rwx------  1 adele  staff    196545 Sep 27 14:50 MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_08.vsi
+-rwx------  1 adele  staff    204889 Sep 27 15:14 MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_12.vsi
+-rwx------  1 adele  staff  10657558 Sep 27 14:20 MG1655_MAN_OD_0.3_left_DIC_03.tif
+-rwx------  1 adele  staff  10657559 Sep 27 14:45 MG1655_MAN_OD_0.3_left_DIC_07.tif
+-rwx------  1 adele  staff  10657559 Sep 27 14:51 MG1655_MAN_OD_0.3_left_DIC_08.tif
+-rwx------  1 adele  staff  10657559 Sep 27 15:15 MG1655_MAN_OD_0.3_left_DIC_12.tif
+drwx------  3 adele  staff        96 Oct  3 11:33 _MG1655_GAL-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI_
+drwx------  3 adele  staff        96 Oct  3 12:02 _MG1655_GAL-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI_
+drwx------  3 adele  staff        96 Oct  3 12:08 _MG1655_GAL-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI_
+drwx------  3 adele  staff        96 Sep 27 10:10 _MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_01_
+drwx------  3 adele  staff        96 Sep 27 10:17 _MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02_
+drwx------  3 adele  staff        96 Sep 27 10:22 _MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_03_
+drwx------  3 adele  staff        96 Oct  3 13:29 _MG1655_GLY-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI_
+drwx------  3 adele  staff        96 Oct  3 14:16 _MG1655_GLY-lowOD-2nd_16_CY5, CY3.5 NAR, CY3, DAPI_
+drwx------  3 adele  staff        96 Oct  3 14:22 _MG1655_GLY-lowOD-2nd_17_CY5, CY3.5 NAR, CY3, DAPI_
+drwx------  3 adele  staff        96 Sep 27 15:52 _MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_01_
+drwx------  3 adele  staff        96 Sep 27 16:18 _MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_03_
+drwx------  3 adele  staff        96 Sep 27 16:32 _MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_05_
+drwx------  3 adele  staff        96 Sep 27 14:19 _MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_03_
+drwx------  3 adele  staff        96 Sep 27 14:44 _MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_07_
+drwx------  3 adele  staff        96 Sep 27 14:50 _MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_08_
+drwx------  3 adele  staff        96 Sep 27 15:14 _MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_12_
+-rw-r--r--@ 1 adele  staff       836 Oct 28 07:45 config.json
