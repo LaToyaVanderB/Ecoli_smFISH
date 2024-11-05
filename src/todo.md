@@ -13,55 +13,63 @@
 - [LATER] fix Git situation for real (git-lfs + Zenodo)
 - [LATER] parallelize (dask)
 - [LATER] fix envs mess
+- [LATER] pytest tests
 - [LATER] when using symlinks, check that they work after a round trip to OneDrive
+- [LATER] change all filenames to relative paths
+- [LATER] split all pictures in 4
+- [LATER] image inspection notebook:
+  - create viewer
+  - open layers with view.py
+  - display intensity histograms
+  - any other useful statistic
 - [DONE] analysis: per condition/growth rate, plot:
   - number of cells
   - cell area
   - cell eccentricity
   - number of spots/Txs
   - number of spots/Txs per cell
+  - [DO] correlation between #spots/cell for the different mRNA pairs
 - [DONE] analysis: normalize all counts by number of cells
 - [DONE] process just one picture
 - [DONE] change size and color of spots 
-- [NEXT] image ispection notebook:
-  - create viewer
-  - open layers with view.py
-  - display intensity histograms
-  - any other useful statistic
-- [NEXT] put all parameters in config
-- [NEXT] change all filenames to relative paths
-- [LATER] pytest tests
-- [NEXT] split all pictures in 4
+- [DONE] put all parameters in config
+- [WIP] save images on OneDrive and disk
+    - [DONE] move _ dirs_ from 20241029 to 20241029a (check creation day on Olympus PC)
+- [DO] save and process translated DIC tifs
 - [NEXT] tune pipeline:
   1. spot detection
      1. [DONE] Remove slices that are further than +- n slices from focus
      2. [DONE] Intensity histogram for selected spots: ideally, we expect a bimodal distribution (individual spots and Tx's)
      3. [WONTDO] Remove large blotches: replace noisy rectangle with mean value of picture excluding all noisy rectangles / exclude them from spot assignment
-     4. [DO] Check how many out-of-cells spots we detect
-     5. [DO] Estimate background in the different channels, using patches that show background fluoresence (inside cells)
-     6. Automatic threshold detection: 
+     4. [DO] Improve filtering: estimate background in the different channels, using patches that show background fluorescence (inside cells)
+     5. [DONE] Automatic threshold detection
         1. [DONE] Check if elbow is visible in number of selected spots versus threshold plot(Bigfish example notebook)
-        2. [DO] Check whether threshold from different pictures from the same channel are consistent
-        3. [DONE] Difference between LoG and remove_background_gausian?
-        4. Automatic threshold looks too low for rpoD
-           1. [DONE] Why does BigFish detect low-intensity spots?
-        5. Automatic threshold looks too high for hipBA
+        2. [DONE] Check whether threshold from different pictures from the same channel are consistent
+     6. [WIP] Manually set good thresholds
+        1. [DONE] Smaller spot radius
+        2. [DONE] Automatic threshold looks too low for rpoD
+        3. [DONE] Automatic threshold looks too high for rnlAB
+        4. [DO] hipBA. Possibly needs better filtering
   2. spot decomposition
-     1. [DO] Tune distance between spots for Tx's
-     2. [DO] Intensity histogram for selected, individual spots: they should be similar (within the same channel)
+     1. [DONE] Tune params
+     2. [DO] Intensity histogram for decomposed spots (reference spot): they should be similar (within the same channel)
   3. spot counting/assignment 
-     1. [DO] exclude cells on the border
-     2. [DO] exclude spots from noisy regions
+     4. [DO] Exclude cells with no DAPI
+     5. [DO] Inspect out-of-cells spots: how many and their intensities
+     1. [LATER] Exclude cells on the border
+     2. [LATER] Exclude spots from noisy regions
   4. DIC segmentation
-  5. DAPI segmentation
-  6. DAPI/DIC registration 
-     1. [DO] check out skimage.registration
-     2. [DO] split images in quadrants and align separately
-  7. other
+     1. [DO] DIC cum DAPI segmentation using Omnipose
+        1. Use weird 4 channel format
+     2. remove cell masks with no DAPI
+  5. [DONE] DAPI segmentation
+  6. [WONTDO] DAPI/DIC registration 
+     1. check out skimage.registration
+     2. split images in quadrants and align separately
 - [BIO] Are cells with 1 or 2 TA expressed different? Aspect, area, eccentricity...?
-- [NEXT] optimise Omnipose segmentations
+- [WONTDO] optimise Omnipose segmentations
   - [DO] select "segmentable" images
-  - [DO] if enough cells, don't waste time on optimizing segmentation. Just select enough adequate cells based on area/eccentricity. YESSSS!
+  - [DO] if enough cells, don't waste time on optimizing segmentation. Just select enough adequate cells based on area/eccentricity. 
     - "adequate" cells mean:
       - area and eccentricity are within "normal" range
       - there a nuclear mask within the cell mask (=discard cells that have no DAPI)

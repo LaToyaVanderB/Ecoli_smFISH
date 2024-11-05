@@ -88,24 +88,25 @@ if __name__ == '__main__':
     with open(configfile, 'r') as f:
         config = json.load(f)
 
-    # parameters - adjust if necessary
-    scale = (200, 65, 65)
-    # spot_radius = (1250, 170, 170)
-    # a smaller spot radius works better for bacteria
-    # (with the original value we can miss smaller spots)
-    spot_radius = (880, 120, 120)
+    # parameters - should be recorded in input/config.json for reproduceability
+    # use detect-spots.ipynb to explore values
+    patch_size = tuple(config['patch_size'])
+    scale = tuple(config['scale'])
+    spot_radius = tuple(config['spot_radius'])
+    sigma = tuple(config['sigma'])
 
-    sigma = (0.75, 2.3, 2.3)
-    patch_size = (200, 200)
     # detection_threshold = None  # set to None for automatic determination by bigFISH
     # detection threshold is usually optimised manually and might need to be set differently per channel
-    detection_thresholds = {'rpoD': None, 'rnlAB': None, 'hipBA': None}
-    if DEBUG:
-        detection_thresholds = { 'rpoD': 100, 'rnlAB': 10, 'hipBA': 10 }
-    # rpoD: thr 100 works well on GLU 02
-    # rnlAB:
-    # hipBA:
-    detection_thresholds = {'rpoD': 100, 'rnlAB': 30, 'hipBA': None}
+    # detection_threshold = {'rpoD': None, 'rnlAB': None, 'hipBA': None}
+    # these values are the best found so far and should be copied to input/config.json to reproduce analysis:
+    # detection_threshold = {'rpoD': 100, 'rnlAB': 30, 'hipBA': None}
+    def get_threshold(s):
+        if s == "None":
+            return None
+        else:
+            return int(s)
+
+    detection_threshold = {c['mrna']: get_threshold(c['threshold']) for c in config['channels'] if c['mrna'] != 'DAPI'}
 
     n = 0
     found = False
@@ -140,7 +141,6 @@ if __name__ == '__main__':
                                 focus = compute_focus(img_patch)
                                 projected_focus = np.max(focus, axis=(1, 2))
                                 projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
-                                # ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed, adjustment_bottom=0, adjustment_top=0)
                                 ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
 
                                 if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
@@ -171,14 +171,14 @@ if __name__ == '__main__':
 
                                 spots, threshold = detect_spots(
                                     mrna_filtered_selected,
-                                    threshold=detection_thresholds[mrna],
+                                    threshold=detection_threshold[mrna],
                                     voxel_size=scale,
                                     spot_radius=spot_radius,
                                     return_threshold=True
                                 )
 
                                 # always elegant:
-                                filtered_padded_intensities = np.concatenate((np.zeros([ifx_1, mrna_data.shape[1], mrna_data.shape[2]]), mrna_filtered_selected, np.zeros([mrna_data.shape[0]- ifx_2, mrna_data.shape[1], mrna_data.shape[2]])), axis=0)
+                                filtered_padded_intensities = np.concatenate((np.zeros([ifx_1, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16'), mrna_filtered_selected, np.zeros([mrna_data.shape[0]- ifx_2, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16')), axis=0)
                                 img[mrna]['filteredpaddedmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered_padded.npy')
                                 np.save(img[mrna]['filteredpaddedmrnafile'], filtered_padded_intensities)
                                 logging.info(f'....saving filtered padded mRNA image to file {img[mrna]['filteredpaddedmrnafile']}')
