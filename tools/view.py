@@ -103,7 +103,6 @@ layers_light = [
 ]
 
 layers_cells = [
-    { 'name': 'DIC_untranslated', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive' } },
     { 'name': 'DIC', 'type': 'image', 'properties': { 'colormap': 'grey', 'visible': True, 'blending': 'additive'} },
     { 'name': 'DIC_masks', 'type': 'labels', 'properties': { 'visible': True, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },

@@ -106,7 +106,8 @@ if __name__ == '__main__':
     n = 0
     for exp in config['experiments']:
         for img in exp['images']:
-            if (only is None) or (img['sourcefile'] == only):
+            if ('detect_spots' not in img) or (img['detect_spots'] is True):
+                if (only is None) or (img['sourcefile'] == only):
 
                 n = n + 1
                 tic = time.time()

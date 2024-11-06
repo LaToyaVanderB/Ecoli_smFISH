@@ -14,6 +14,7 @@
 `python -m json.tool tests/output/MG1655_LB_01/img.json`
 ```
 import sys; sys.path.insert(0, ''); import tools.view
+tools.view.import_layers('/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01', mode='cells', viewer=viewer)
 tools.view.import_layers('tests/exp16/output/MG1655_GLU_OD_0.3_left_02', mode='cells', viewer=viewer)
 tools.view.import_layers('tests/output-seg_ok/MG1655_GLU_OD_0.3_left_02', mode='all', viewer=viewer)
 tools.view.import_layers('/Volumes/Flodrive/Florence/smFISH/Ecoli_smFISH/tests/output-seg_ok/MG1655_GLU_OD_0.3_left_02', mode='spots', viewer=viewer)

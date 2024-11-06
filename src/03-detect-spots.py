@@ -113,6 +113,7 @@ if __name__ == '__main__':
     for exp in config['experiments']:
         if found is False:
             for img in exp['images']:
+                if ('detect_spots' not in img) or (img['detect_spots'] is True):
                     if (only is None) or (img['basename'] == only):
                         n = n + 1
                         tic = time.time()
