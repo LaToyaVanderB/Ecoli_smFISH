@@ -8,7 +8,6 @@ import time
 import numpy as np
 from bioio import BioImage
 from skimage import io
-import bioio_bioformats
 from bioio.writers import OmeTiffWriter
 import argparse
 from tools.utils import translate_image
