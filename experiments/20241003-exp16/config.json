@@ -1,0 +1,40 @@
+{
+  "inputdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+  "outputdir": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16",
+  "scale": [200, 65, 65],
+  "spot_radius": [880, 120, 120],
+  "sigma": [0.75, 2.3, 2.3],
+  "patch_size": [200, 200],
+  "translate_dic_by": [-10, 10],
+  "experiments": [
+    {
+      "strain": "MG1655",
+      "condition": "GAL-lowOD-2nd"
+    },
+    {
+      "strain": "MG1655",
+      "condition": "GLY-lowOD-2nd"
+    }
+  ],
+  "channels": [
+    {
+      "filter": "CY5",
+      "mrna": "hipBA",
+      "threshold": "None"
+    },
+    {
+      "filter": "CY3.5 NAR",
+      "mrna": "rnlAB",
+      "threshold": "30"
+    },
+    {
+      "filter": "CY3",
+      "mrna": "rpoD",
+      "threshold": "100"
+    },
+    {
+      "filter": "DAPI",
+      "mrna": "DAPI"
+    }
+  ]
+}
