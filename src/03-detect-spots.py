@@ -88,6 +88,7 @@ if __name__ == '__main__':
     with open(configfile, 'r') as f:
         config = json.load(f)
 
+
     # parameters - should be recorded in input/config.json for reproduceability
     # use detect-spots.ipynb to explore values
     patch_size = tuple(config['patch_size'])
@@ -110,112 +111,127 @@ if __name__ == '__main__':
 
     n = 0
     found = False
+    process = True
     for exp in config['experiments']:
         if found is False:
             for img in exp['images']:
                 if ('detect_spots' not in img) or (img['detect_spots'] is True):
-                    if (only is None) or (img['basename'] == only):
+                    if (only is None) or (img['stem'] == only):
                         n = n + 1
                         tic = time.time()
                         logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
 
-                        # find high density region
-                        cell_mask_data = io.imread(img['cellmaskfile'])
-                        selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
-                        if DEBUG:
-                            selected_patch = (1046, 1791)
-                        img['selected_patch'] = selected_patch
+                        if process is True:
+                            crop = False
+                            if 'crop' in img and img['crop'] is True:
+                                crop = True
+                                ymin, xmin, ymax, xmax = img['crop']
+                                logging.info(f'cropping: top-left corner ({ymin}, {xmin}), bottom-right corner ({ymax}, {xmax}))')
+                                # we need to crop the DIC and DAPI pictures as well
 
-                        logging.info(f'..selected patch: {selected_patch}')
+                            # find high density region
+                            cell_mask_data = io.imread(img['cellmaskfile']) # CROP HERE
+                            if crop is True:
+                                cell_mask_data = cell_mask_data[ymin:ymax, xmin:xmax]
 
-                        for ch in list(config['channels']):
-                            mrna = ch['mrna']
-                            if mrna != "DAPI":
-                                logging.info(f'..mrna: {mrna}')
+                            selected_patch = find_high_density_patch(cell_mask_data, patch_size=patch_size)
+                            if DEBUG:
+                                selected_patch = (1046, 1791)
+                            img['selected_patch'] = selected_patch
 
-                                mrna_data = io.imread(img[mrna]['rnafile'])
-                                img_patch = mrna_data[:,
-                                            selected_patch[0]:selected_patch[0] + patch_size[0],
-                                            selected_patch[1]:selected_patch[1] + patch_size[1]
-                                            ]
+                            logging.info(f'..selected patch: {selected_patch}')
 
-                                focus = compute_focus(img_patch)
-                                projected_focus = np.max(focus, axis=(1, 2))
-                                projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
-                                ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
+                            for ch in list(config['channels']):
+                                mrna = ch['mrna']
+                                if mrna != "DAPI":
+                                    logging.info(f'..mrna: {mrna}')
 
-                                if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
-                                    logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
-                                ifx_1 = max(ifx_1, 0)
-                                ifx_2 = min(ifx_2, mrna_data.shape[0])
+                                    mrna_data = io.imread(img[mrna]['rnafile']) # CROP HERE
+                                    if crop is True:
+                                        mrna_data = mrna_data[:, ymin:ymax, xmin:xmax]
+                                    img_patch = mrna_data[:,
+                                                selected_patch[0]:selected_patch[0] + patch_size[0],
+                                                selected_patch[1]:selected_patch[1] + patch_size[1]
+                                                ]
 
-                                if DEBUG:
-                                    ifx_1, ifx_2 = 6, 31
+                                    focus = compute_focus(img_patch)
+                                    projected_focus = np.max(focus, axis=(1, 2))
+                                    projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
+                                    ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
 
-                                img[mrna]["z_max_focus"] = int(np.argmax(projected_focus_smoothed))
-                                img[mrna]["ifx_1"] = int(ifx_1)
-                                img[mrna]["ifx_2"] = int(ifx_2)
+                                    if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
+                                        logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
+                                    ifx_1 = max(ifx_1, 0)
+                                    ifx_2 = min(ifx_2, mrna_data.shape[0])
 
-                                logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img[mrna]["z_max_focus"]})')
+                                    if DEBUG:
+                                        ifx_1, ifx_2 = 6, 31
 
-                                mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
-                                img[mrna]['filteredmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered.npy')
-                                np.save(img[mrna]['filteredmrnafile'], mrna_filtered)
-                                logging.info(f'....saving filtered mRNA image to file {img[mrna]['filteredmrnafile']}')
+                                    img[mrna]["z_max_focus"] = int(np.argmax(projected_focus_smoothed))
+                                    img[mrna]["ifx_1"] = int(ifx_1)
+                                    img[mrna]["ifx_2"] = int(ifx_2)
 
-                                zproject =  np.max(mrna_data[ifx_1:ifx_2, ...], axis=0)
-                                img[mrna]['zprojectmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_zproject.npy')
-                                np.save(img[mrna]['zprojectmrnafile'], zproject)
-                                logging.info(f'....saving in-focus, projected mRNA image to file {img[mrna]['zprojectmrnafile']}')
+                                    logging.info(f'....in focus indices: [{ifx_1}, {ifx_2}] (max focus at slice {img[mrna]["z_max_focus"]})')
 
-                                mrna_filtered_selected = mrna_filtered[ifx_1:ifx_2, ...]
+                                    mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
+                                    img[mrna]['filteredmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered.npy')
+                                    np.save(img[mrna]['filteredmrnafile'], mrna_filtered)
+                                    logging.info(f'....saving filtered mRNA image to file {img[mrna]['filteredmrnafile']}')
 
-                                spots, threshold = detect_spots(
-                                    mrna_filtered_selected,
-                                    threshold=detection_threshold[mrna],
-                                    voxel_size=scale,
-                                    spot_radius=spot_radius,
-                                    return_threshold=True
-                                )
+                                    zproject =  np.max(mrna_data[ifx_1:ifx_2, ...], axis=0)
+                                    img[mrna]['zprojectmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_zproject.npy')
+                                    np.save(img[mrna]['zprojectmrnafile'], zproject)
+                                    logging.info(f'....saving in-focus, projected mRNA image to file {img[mrna]['zprojectmrnafile']}')
 
-                                # always elegant:
-                                filtered_padded_intensities = np.concatenate((np.zeros([ifx_1, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16'), mrna_filtered_selected, np.zeros([mrna_data.shape[0]- ifx_2, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16')), axis=0)
-                                img[mrna]['filteredpaddedmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered_padded.npy')
-                                np.save(img[mrna]['filteredpaddedmrnafile'], filtered_padded_intensities)
-                                logging.info(f'....saving filtered padded mRNA image to file {img[mrna]['filteredpaddedmrnafile']}')
+                                    mrna_filtered_selected = mrna_filtered[ifx_1:ifx_2, ...]
 
-                                # restore z-level
-                                spots[:, 0] = spots[:, 0] + ifx_1
+                                    spots, threshold = detect_spots(
+                                        mrna_filtered_selected,
+                                        threshold=detection_threshold[mrna],
+                                        voxel_size=scale,
+                                        spot_radius=spot_radius,
+                                        return_threshold=True
+                                    )
 
-                                # adjustable out-of focus filtering
-                                #  we remove the bottom two slices because their detected spots look like noise:
-                                spots = spots[spots[:, 0] > ifx_1 + 2]
-                                spot_intensities = np.resize(np.array([mrna_data[s[0], s[1], s[2]] for s in spots]), (len(spots), 1))
-                                filtered_spot_intensities = np.resize(np.array([filtered_padded_intensities[s[0], s[1], s[2]] for s in spots]), (len(spots), 1))
-                                spots_with_intensities = np.concatenate((spots, spot_intensities, filtered_spot_intensities), axis=1)
+                                    # always elegant:
+                                    filtered_padded_intensities = np.concatenate((np.zeros([ifx_1, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16'), mrna_filtered_selected, np.zeros([mrna_data.shape[0]- ifx_2, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16')), axis=0)
+                                    img[mrna]['filteredpaddedmrnafile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_filtered_padded.npy')
+                                    np.save(img[mrna]['filteredpaddedmrnafile'], filtered_padded_intensities)
+                                    logging.info(f'....saving filtered padded mRNA image to file {img[mrna]['filteredpaddedmrnafile']}')
 
-                                img[mrna]['spot_detection threshold'] = threshold
-                                img[mrna]['number_of_spots'] = len(spots)
-                                logging.info(f'....spot detection threshold: {threshold}')
-                                logging.info(f'....searched slices: [{ifx_1}, {ifx_2}]')
-                                logging.info(f'....number of spots found: {len(spots)}')
-                                img[mrna]['spotsfile_latest'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots_thr={threshold}_ifx1={ifx_1}_ifx2={ifx_2}.npy')
-                                np.save(img[mrna]['spotsfile_latest'], spots_with_intensities)
-                                img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots.npy')
-                                Path(img[mrna]['spotsfile']).unlink(missing_ok=True)
-                                Path(img[mrna]['spotsfile']).symlink_to(Path(img[mrna]['spotsfile_latest']).parts[-1])
-                                logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile_latest"]}')
+                                    # restore z-level
+                                    spots[:, 0] = spots[:, 0] + ifx_1
+
+                                    # adjustable out-of focus filtering
+                                    #  we remove the bottom two slices because their detected spots look like noise:
+                                    spots = spots[spots[:, 0] > ifx_1 + 2]
+                                    spot_intensities = np.resize(np.array([mrna_data[s[0], s[1], s[2]] for s in spots]), (len(spots), 1))
+                                    filtered_spot_intensities = np.resize(np.array([filtered_padded_intensities[s[0], s[1], s[2]] for s in spots]), (len(spots), 1))
+                                    labels = [cell_mask_data[y, x] for (y, x) in spots[:, 1:3]]
+                                    spots_with_intensities = np.concatenate((spots, spot_intensities, filtered_spot_intensities, np.array(labels).reshape((len(labels), 1))), axis=1)
+
+                                    img[mrna]['spot_detection_threshold'] = threshold
+                                    img[mrna]['number_of_spots'] = len(spots)
+                                    logging.info(f'....spot detection threshold: {threshold}')
+                                    logging.info(f'....searched slices: [{ifx_1}, {ifx_2}]')
+                                    logging.info(f'....number of spots found: {len(spots)}')
+                                    img[mrna]['spotsfile_latest'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots_thr={threshold}_ifx1={ifx_1}_ifx2={ifx_2}.npy')
+                                    np.save(img[mrna]['spotsfile_latest'], spots_with_intensities)
+                                    img[mrna]['spotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_spots.npy')
+                                    Path(img[mrna]['spotsfile']).unlink(missing_ok=True)
+                                    Path(img[mrna]['spotsfile']).symlink_to(Path(img[mrna]['spotsfile_latest']).parts[-1])
+                                    logging.info(f'....saving {spots.shape[0]} spots to spots file {img[mrna]["spotsfile_latest"]}')
 
 
-                        img['time']['03-detect-spots'] = time.time() - tic
+                            img['time']['03-detect-spots'] = time.time() - tic
 
-                        logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
-                        with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
-                            json.dump(img, f)
+                            logging.info(f"....writing image parameters to {Path(config['outputdir']) / img['stem'] / 'img.json'}")
+                            with open(Path(config['outputdir']) / img['stem'] / 'img.json', 'w') as f:
+                                json.dump(img, f)
 
-                        if only and (img['basename'] == only):
-                            found = True
-                            break
+                            if only and (img['basename'] == only):
+                                found = True
+                                break
 
     logging.info(f'writing to config file: {configfile}')
     with open(configfile, "w") as f:
