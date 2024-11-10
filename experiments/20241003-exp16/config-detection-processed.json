@@ -1,1 +1,1338 @@
-{"inputdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "outputdir": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16", "scale": [200, 65, 65], "spot_radius": [880, 120, 120], "sigma": [0.75, 2.3, 2.3], "patch_size": [200, 200], "translate_dic_by": [-10, 10], "experiments": [{"strain": "MG1655", "condition": "GAL-lowOD-2nd", "images": [{"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 39.678727865219116, "02-segment-DIC": 9.720626831054688, "02-segment-DAPI": 3.8801207542419434}, "stem": "MG1655_GAL-lowOD-2nd_01", "seqnr": "01", "dicbasename": "MG1655_GAL-lowOD-2nd_01_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_01_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": -1.0, "flow": 0.4}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 39.290258169174194, "02-segment-DIC": 7.336796045303345, "02-segment-DAPI": 3.845531702041626}, "stem": "MG1655_GAL-lowOD-2nd_02", "seqnr": "02", "dicbasename": "MG1655_GAL-lowOD-2nd_02_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_02_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 47.567121267318726, "02-segment-DIC": 8.128864049911499, "02-segment-DAPI": 3.778221845626831}, "stem": "MG1655_GAL-lowOD-2nd_03", "seqnr": "03", "dicbasename": "MG1655_GAL-lowOD-2nd_03_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_03_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 50.332735776901245, "02-segment-DIC": 6.751378297805786, "02-segment-DAPI": 3.5892980098724365}, "stem": "MG1655_GAL-lowOD-2nd_04", "seqnr": "04", "dicbasename": "MG1655_GAL-lowOD-2nd_04_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_04_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 55.00866770744324, "02-segment-DIC": 7.7005109786987305, "02-segment-DAPI": 3.6664059162139893}, "stem": "MG1655_GAL-lowOD-2nd_05", "seqnr": "05", "dicbasename": "MG1655_GAL-lowOD-2nd_05_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_05_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 52.337729692459106, "02-segment-DIC": 17.78066897392273, "02-segment-DAPI": 3.832998752593994}, "stem": "MG1655_GAL-lowOD-2nd_06", "seqnr": "06", "dicbasename": "MG1655_GAL-lowOD-2nd_06_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_06_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": -1.0, "flow": 0.2}, "detect_spots": true, "segment": true}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 50.00274991989136, "02-segment-DIC": 6.9828879833221436, "02-segment-DAPI": 3.6456007957458496}, "stem": "MG1655_GAL-lowOD-2nd_07", "seqnr": "07", "dicbasename": "MG1655_GAL-lowOD-2nd_07_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_07_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 55.28912091255188, "02-segment-DIC": 7.03695011138916, "02-segment-DAPI": 3.816380262374878}, "stem": "MG1655_GAL-lowOD-2nd_08", "seqnr": "08", "dicbasename": "MG1655_GAL-lowOD-2nd_08_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_08_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 48.50404596328735, "02-segment-DIC": 7.149070739746094, "02-segment-DAPI": 3.5960819721221924}, "stem": "MG1655_GAL-lowOD-2nd_09", "seqnr": "09", "dicbasename": "MG1655_GAL-lowOD-2nd_09_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_09_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": -2.0, "flow": 0.4}, "detect_spots": true, "segment": true}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GAL-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 47.2927610874176, "02-segment-DIC": 6.118515968322754, "02-segment-DAPI": 3.5869319438934326}, "stem": "MG1655_GAL-lowOD-2nd_10", "seqnr": "10", "dicbasename": "MG1655_GAL-lowOD-2nd_10_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_10_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}]}, {"strain": "MG1655", "condition": "GLY-lowOD-2nd", "images": [{"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 50.77424097061157, "02-segment-DIC": 6.157691955566406, "02-segment-DAPI": 3.511444091796875}, "stem": "MG1655_GLY-lowOD-2nd_01", "seqnr": "01", "dicbasename": "MG1655_GLY-lowOD-2nd_01_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_01_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 1.0, "flow": 0.2}, "detect_spots": true, "segment": true}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 51.34542107582092, "02-segment-DIC": 5.369611978530884, "02-segment-DAPI": 3.689099073410034}, "stem": "MG1655_GLY-lowOD-2nd_02", "seqnr": "02", "dicbasename": "MG1655_GLY-lowOD-2nd_02_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_02_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": true, "segment": true}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 48.35754108428955, "02-segment-DIC": 6.195708274841309, "02-segment-DAPI": 3.5837600231170654}, "stem": "MG1655_GLY-lowOD-2nd_03", "seqnr": "03", "dicbasename": "MG1655_GLY-lowOD-2nd_03_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_03_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 50.548161029815674, "02-segment-DIC": 6.108002185821533, "02-segment-DAPI": 3.461836099624634}, "stem": "MG1655_GLY-lowOD-2nd_04", "seqnr": "04", "dicbasename": "MG1655_GLY-lowOD-2nd_04_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_04_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 50.70454716682434, "02-segment-DIC": 6.756098747253418, "02-segment-DAPI": 3.5960209369659424}, "stem": "MG1655_GLY-lowOD-2nd_05", "seqnr": "05", "dicbasename": "MG1655_GLY-lowOD-2nd_05_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_05_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 52.373393058776855, "02-segment-DIC": 7.916877031326294, "02-segment-DAPI": 3.5344412326812744}, "stem": "MG1655_GLY-lowOD-2nd_06", "seqnr": "06", "dicbasename": "MG1655_GLY-lowOD-2nd_06_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_06_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 51.58985114097595, "02-segment-DIC": 6.512134313583374, "02-segment-DAPI": 3.6767568588256836}, "stem": "MG1655_GLY-lowOD-2nd_07", "seqnr": "07", "dicbasename": "MG1655_GLY-lowOD-2nd_07_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_07_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 52.05584263801575, "02-segment-DIC": 8.395764112472534, "02-segment-DAPI": 3.9193899631500244}, "stem": "MG1655_GLY-lowOD-2nd_08", "seqnr": "08", "dicbasename": "MG1655_GLY-lowOD-2nd_08_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_08_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 56.274319887161255, "02-segment-DIC": 18.42759084701538, "02-segment-DAPI": 4.370903968811035}, "stem": "MG1655_GLY-lowOD-2nd_09", "seqnr": "09", "dicbasename": "MG1655_GLY-lowOD-2nd_09_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_09_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 4.0, "flow": 0.2}, "detect_spots": true, "segment": true}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 55.21109485626221, "02-segment-DIC": 12.30136489868164, "02-segment-DAPI": 4.0550689697265625}, "stem": "MG1655_GLY-lowOD-2nd_10", "seqnr": "10", "dicbasename": "MG1655_GLY-lowOD-2nd_10_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_10_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_11_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_11_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 65.34475302696228, "02-segment-DIC": 8.725016117095947, "02-segment-DAPI": 3.7345569133758545}, "stem": "MG1655_GLY-lowOD-2nd_11", "seqnr": "11", "dicbasename": "MG1655_GLY-lowOD-2nd_11_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_11_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_12_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_12_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 57.85561275482178, "02-segment-DIC": 7.524988174438477, "02-segment-DAPI": 3.6255030632019043}, "stem": "MG1655_GLY-lowOD-2nd_12", "seqnr": "12", "dicbasename": "MG1655_GLY-lowOD-2nd_12_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_12_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_13_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_13_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 64.41516709327698, "02-segment-DIC": 5.656502962112427, "02-segment-DAPI": 3.6403868198394775}, "stem": "MG1655_GLY-lowOD-2nd_13", "seqnr": "13", "dicbasename": "MG1655_GLY-lowOD-2nd_13_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_13_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": true, "segment": true}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_14_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_14_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 68.22070598602295, "02-segment-DIC": 6.443313837051392, "02-segment-DAPI": 3.598541021347046}, "stem": "MG1655_GLY-lowOD-2nd_14", "seqnr": "14", "dicbasename": "MG1655_GLY-lowOD-2nd_14_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_14_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_15_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_15_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 66.20871114730835, "02-segment-DIC": 7.250777244567871, "02-segment-DAPI": 3.93628191947937}, "stem": "MG1655_GLY-lowOD-2nd_15", "seqnr": "15", "dicbasename": "MG1655_GLY-lowOD-2nd_15_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_15_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_16_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_16_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 80.17490196228027, "02-segment-DIC": 7.390110969543457, "02-segment-DAPI": 3.599123954772949}, "stem": "MG1655_GLY-lowOD-2nd_16", "seqnr": "16", "dicbasename": "MG1655_GLY-lowOD-2nd_16_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_16_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}, {"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_17_CY5, CY3.5 NAR, CY3, DAPI.vsi", "rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16", "basename": "MG1655_GLY-lowOD-2nd_17_CY5, CY3.5 NAR, CY3, DAPI", "format": "vsi", "time": {"01-configure": 69.70077705383301, "02-segment-DIC": 19.6997389793396, "02-segment-DAPI": 4.396323204040527}, "stem": "MG1655_GLY-lowOD-2nd_17", "seqnr": "17", "dicbasename": "MG1655_GLY-lowOD-2nd_17_DIC.tif", "dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DIC.tif", "dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DIC_untranslated.tif", "inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_17_DIC.tif", "cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DIC_masks.tif", "nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DAPI_masks.tif", "hipBA": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/hipBA.tif"}, "rnlAB": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/rnlAB.tif"}, "rpoD": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/rpoD.tif"}, "DAPI": {"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DAPI.tif", "maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DAPI_max_proj.tif"}, "grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/grgb.npy", "segmentation": {"model_type": "cyto2_omni", "channels": [1, 2], "diameter": 0, "mask": 0.0, "flow": 0.0}, "detect_spots": false, "segment": false}]}], "channels": [{"filter": "CY5", "mrna": "hipBA", "threshold": "None"}, {"filter": "CY3.5 NAR", "mrna": "rnlAB", "threshold": "30"}, {"filter": "CY3", "mrna": "rpoD", "threshold": "100"}, {"filter": "DAPI", "mrna": "DAPI"}], "nr_images": 27}
+{
+	"inputdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+	"outputdir": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16",
+	"scale": [200, 65, 65],
+	"spot_radius": [880, 120, 120],
+	"sigma": [0.75, 2.3, 2.3],
+	"patch_size": [200, 200],
+	"translate_dic_by": [-10, 10],
+	"experiments": [{
+		"strain": "MG1655",
+		"condition": "GAL-lowOD-2nd",
+		"images": [{
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 39.678727865219116,
+				"02-segment-DIC": 9.720626831054688,
+				"02-segment-DAPI": 3.8801207542419434
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_01",
+			"seqnr": "01",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_01_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_01_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_01/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": -1.0,
+				"flow": 0.4
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 39.290258169174194,
+				"02-segment-DIC": 7.336796045303345,
+				"02-segment-DAPI": 3.845531702041626
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_02",
+			"seqnr": "02",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_02_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_02_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_02/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 47.567121267318726,
+				"02-segment-DIC": 8.128864049911499,
+				"02-segment-DAPI": 3.778221845626831
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_03",
+			"seqnr": "03",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_03_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_03_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_03/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 50.332735776901245,
+				"02-segment-DIC": 6.751378297805786,
+				"02-segment-DAPI": 3.5892980098724365
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_04",
+			"seqnr": "04",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_04_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_04_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_04/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 55.00866770744324,
+				"02-segment-DIC": 7.7005109786987305,
+				"02-segment-DAPI": 3.6664059162139893
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_05",
+			"seqnr": "05",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_05_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_05_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_05/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 52.337729692459106,
+				"02-segment-DIC": 17.78066897392273,
+				"02-segment-DAPI": 3.832998752593994,
+				"03-detect-spots": 171.9880669116974
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_06",
+			"seqnr": "06",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_06_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_06_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA.tif",
+				"z_max_focus": 21,
+				"ifx_1": 11,
+				"ifx_2": 36,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 315,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA_spots_thr=60_ifx1=11_ifx2=36.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/hipBA_spots.npy"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB.tif",
+				"z_max_focus": 22,
+				"ifx_1": 12,
+				"ifx_2": 36,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 196,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB_spots_thr=60_ifx1=12_ifx2=36.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rnlAB_spots.npy"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD.tif",
+				"z_max_focus": 23,
+				"ifx_1": 13,
+				"ifx_2": 37,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD_filtered_padded.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 847,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD_spots_thr=50_ifx1=13_ifx2=37.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/rpoD_spots.npy"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_06/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": -1.0,
+				"flow": 0.2
+			},
+			"detect_spots": true,
+			"segment": true,
+			"crop": [1200, 0, 2294, 2294],
+			"selected_patch": [923, 1403]
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 50.00274991989136,
+				"02-segment-DIC": 6.9828879833221436,
+				"02-segment-DAPI": 3.6456007957458496
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_07",
+			"seqnr": "07",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_07_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_07_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_07/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 55.28912091255188,
+				"02-segment-DIC": 7.03695011138916,
+				"02-segment-DAPI": 3.816380262374878
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_08",
+			"seqnr": "08",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_08_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_08_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_08/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 48.50404596328735,
+				"02-segment-DIC": 7.149070739746094,
+				"02-segment-DAPI": 3.5960819721221924,
+				"03-detect-spots": 155.33139085769653
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_09",
+			"seqnr": "09",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_09_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_09_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA.tif",
+				"z_max_focus": 23,
+				"ifx_1": 13,
+				"ifx_2": 38,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 234,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA_spots_thr=60_ifx1=13_ifx2=38.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/hipBA_spots.npy"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB.tif",
+				"z_max_focus": 25,
+				"ifx_1": 15,
+				"ifx_2": 38,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 86,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB_spots_thr=60_ifx1=15_ifx2=38.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rnlAB_spots.npy"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD.tif",
+				"z_max_focus": 26,
+				"ifx_1": 16,
+				"ifx_2": 40,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD_filtered_padded.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 210,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD_spots_thr=50_ifx1=16_ifx2=40.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/rpoD_spots.npy"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_09/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": -2.0,
+				"flow": 0.4
+			},
+			"detect_spots": true,
+			"segment": true,
+			"crop": false,
+			"selected_patch": [242, 1718]
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GAL-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 47.2927610874176,
+				"02-segment-DIC": 6.118515968322754,
+				"02-segment-DAPI": 3.5869319438934326
+			},
+			"stem": "MG1655_GAL-lowOD-2nd_10",
+			"seqnr": "10",
+			"dicbasename": "MG1655_GAL-lowOD-2nd_10_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_10_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GAL-lowOD-2nd_10/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}]
+	}, {
+		"strain": "MG1655",
+		"condition": "GLY-lowOD-2nd",
+		"images": [{
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_01_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 50.77424097061157,
+				"02-segment-DIC": 6.157691955566406,
+				"02-segment-DAPI": 3.511444091796875,
+				"03-detect-spots": 143.15277791023254
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_01",
+			"seqnr": "01",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_01_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_01_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA.tif",
+				"z_max_focus": 17,
+				"ifx_1": 7,
+				"ifx_2": 32,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 29,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA_spots_thr=60_ifx1=7_ifx2=32.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/hipBA_spots.npy"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB.tif",
+				"z_max_focus": 18,
+				"ifx_1": 9,
+				"ifx_2": 33,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 50,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB_spots_thr=60_ifx1=9_ifx2=33.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rnlAB_spots.npy"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD.tif",
+				"z_max_focus": 19,
+				"ifx_1": 9,
+				"ifx_2": 34,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD_filtered_padded.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 126,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD_spots_thr=50_ifx1=9_ifx2=34.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/rpoD_spots.npy"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_01/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 1.0,
+				"flow": 0.2
+			},
+			"detect_spots": true,
+			"segment": true,
+			"crop": false,
+			"selected_patch": [1016, 1463]
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 51.34542107582092,
+				"02-segment-DIC": 5.369611978530884,
+				"02-segment-DAPI": 3.689099073410034,
+				"03-detect-spots": 149.18213295936584
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_02",
+			"seqnr": "02",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_02_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_02_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA.tif",
+				"z_max_focus": 17,
+				"ifx_1": 6,
+				"ifx_2": 31,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 14,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA_spots_thr=60_ifx1=6_ifx2=31.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/hipBA_spots.npy"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB.tif",
+				"z_max_focus": 19,
+				"ifx_1": 9,
+				"ifx_2": 32,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 38,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB_spots_thr=60_ifx1=9_ifx2=32.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rnlAB_spots.npy"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD.tif",
+				"z_max_focus": 19,
+				"ifx_1": 8,
+				"ifx_2": 33,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD_filtered_padded.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 186,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD_spots_thr=50_ifx1=8_ifx2=33.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/rpoD_spots.npy"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_02/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": true,
+			"segment": true,
+			"selected_patch": [1134, 590]
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_03_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 48.35754108428955,
+				"02-segment-DIC": 6.195708274841309,
+				"02-segment-DAPI": 3.5837600231170654
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_03",
+			"seqnr": "03",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_03_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_03_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_03/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_04_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 50.548161029815674,
+				"02-segment-DIC": 6.108002185821533,
+				"02-segment-DAPI": 3.461836099624634
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_04",
+			"seqnr": "04",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_04_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_04_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_04/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_05_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 50.70454716682434,
+				"02-segment-DIC": 6.756098747253418,
+				"02-segment-DAPI": 3.5960209369659424
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_05",
+			"seqnr": "05",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_05_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_05_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_05/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_06_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 52.373393058776855,
+				"02-segment-DIC": 7.916877031326294,
+				"02-segment-DAPI": 3.5344412326812744
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_06",
+			"seqnr": "06",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_06_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_06_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_06/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_07_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 51.58985114097595,
+				"02-segment-DIC": 6.512134313583374,
+				"02-segment-DAPI": 3.6767568588256836
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_07",
+			"seqnr": "07",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_07_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_07_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_07/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_08_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 52.05584263801575,
+				"02-segment-DIC": 8.395764112472534,
+				"02-segment-DAPI": 3.9193899631500244
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_08",
+			"seqnr": "08",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_08_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_08_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_08/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_09_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 56.274319887161255,
+				"02-segment-DIC": 18.42759084701538,
+				"02-segment-DAPI": 4.370903968811035,
+				"03-detect-spots": 127.45489001274109
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_09",
+			"seqnr": "09",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_09_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_09_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA.tif",
+				"z_max_focus": 17,
+				"ifx_1": 7,
+				"ifx_2": 32,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 900,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA_spots_thr=60_ifx1=7_ifx2=32.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/hipBA_spots.npy"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB.tif",
+				"z_max_focus": 17,
+				"ifx_1": 8,
+				"ifx_2": 32,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 455,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB_spots_thr=60_ifx1=8_ifx2=32.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rnlAB_spots.npy"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD.tif",
+				"z_max_focus": 18,
+				"ifx_1": 8,
+				"ifx_2": 32,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD_filtered_padded.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 4355,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD_spots_thr=50_ifx1=8_ifx2=32.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/rpoD_spots.npy"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_09/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 4.0,
+				"flow": 0.2
+			},
+			"detect_spots": false,
+			"segment": true,
+			"selected_patch": [1033, 1984]
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 55.21109485626221,
+				"02-segment-DIC": 12.30136489868164,
+				"02-segment-DAPI": 4.0550689697265625
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_10",
+			"seqnr": "10",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_10_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_10_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_10/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_11_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_11_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 65.34475302696228,
+				"02-segment-DIC": 8.725016117095947,
+				"02-segment-DAPI": 3.7345569133758545
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_11",
+			"seqnr": "11",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_11_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_11_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_11/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_12_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_12_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 57.85561275482178,
+				"02-segment-DIC": 7.524988174438477,
+				"02-segment-DAPI": 3.6255030632019043
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_12",
+			"seqnr": "12",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_12_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_12_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_12/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_13_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_13_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 64.41516709327698,
+				"02-segment-DIC": 5.656502962112427,
+				"02-segment-DAPI": 3.6403868198394775,
+				"03-detect-spots": 146.18190503120422
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_13",
+			"seqnr": "13",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_13_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_13_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA.tif",
+				"z_max_focus": 15,
+				"ifx_1": 4,
+				"ifx_2": 29,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 335,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA_spots_thr=60_ifx1=4_ifx2=29.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/hipBA_spots.npy"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB.tif",
+				"z_max_focus": 40,
+				"ifx_1": 26,
+				"ifx_2": 41,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB_filtered_padded.npy",
+				"spot_detection_threshold": 60,
+				"number_of_spots": 0,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB_spots_thr=60_ifx1=26_ifx2=41.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rnlAB_spots.npy"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD.tif",
+				"z_max_focus": 17,
+				"ifx_1": 7,
+				"ifx_2": 32,
+				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD_filtered.npy",
+				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD_zproject.npy",
+				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD_filtered_padded.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 486,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD_spots_thr=50_ifx1=7_ifx2=32.npy",
+				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/rpoD_spots.npy"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_13/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": true,
+			"segment": true,
+			"selected_patch": [1515, 366]
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_14_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_14_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 68.22070598602295,
+				"02-segment-DIC": 6.443313837051392,
+				"02-segment-DAPI": 3.598541021347046
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_14",
+			"seqnr": "14",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_14_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_14_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_14/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_15_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_15_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 66.20871114730835,
+				"02-segment-DIC": 7.250777244567871,
+				"02-segment-DAPI": 3.93628191947937
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_15",
+			"seqnr": "15",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_15_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_15_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_15/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_16_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_16_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 80.17490196228027,
+				"02-segment-DIC": 7.390110969543457,
+				"02-segment-DAPI": 3.599123954772949
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_16",
+			"seqnr": "16",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_16_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_16_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_16/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}, {
+			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_17_CY5, CY3.5 NAR, CY3, DAPI.vsi",
+			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16",
+			"basename": "MG1655_GLY-lowOD-2nd_17_CY5, CY3.5 NAR, CY3, DAPI",
+			"format": "vsi",
+			"time": {
+				"01-configure": 69.70077705383301,
+				"02-segment-DIC": 19.6997389793396,
+				"02-segment-DAPI": 4.396323204040527
+			},
+			"stem": "MG1655_GLY-lowOD-2nd_17",
+			"seqnr": "17",
+			"dicbasename": "MG1655_GLY-lowOD-2nd_17_DIC.tif",
+			"dicfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DIC.tif",
+			"dicfile_untranslated": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DIC_untranslated.tif",
+			"inputdicfile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_17_DIC.tif",
+			"cellmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DIC_masks.tif",
+			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DAPI_masks.tif",
+			"hipBA": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/hipBA.tif"
+			},
+			"rnlAB": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/rnlAB.tif"
+			},
+			"rpoD": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/rpoD.tif"
+			},
+			"DAPI": {
+				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DAPI.tif",
+				"maxprojfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/DAPI_max_proj.tif"
+			},
+			"grgbfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20241003-exp16/MG1655_GLY-lowOD-2nd_17/grgb.npy",
+			"segmentation": {
+				"model_type": "cyto2_omni",
+				"channels": [1, 2],
+				"diameter": 0,
+				"mask": 0.0,
+				"flow": 0.0
+			},
+			"detect_spots": false,
+			"segment": false
+		}]
+	}],
+	"channels": [{
+		"filter": "CY5",
+		"mrna": "hipBA",
+		"threshold": "60"
+	}, {
+		"filter": "CY3.5 NAR",
+		"mrna": "rnlAB",
+		"threshold": "60"
+	}, {
+		"filter": "CY3",
+		"mrna": "rpoD",
+		"threshold": "50"
+	}, {
+		"filter": "DAPI",
+		"mrna": "DAPI"
+	}],
+	"nr_images": 27,
+	"nr_images_selected": 27
+}
