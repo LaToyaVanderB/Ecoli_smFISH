@@ -442,7 +442,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [242, 1718]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GAL-lowOD-2nd_10_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -561,7 +560,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1016, 1463]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241003-exp16/MG1655_GLY-lowOD-2nd_02_CY5, CY3.5 NAR, CY3, DAPI.vsi",

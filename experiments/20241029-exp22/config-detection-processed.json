@@ -81,7 +81,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1031, 452]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLU_02_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -155,7 +154,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1616, 1981]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLU_03_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -227,9 +225,8 @@
 				"mask": -1.0,
 				"flow": 0.4
 			},
-			"detect_spots": true,
+			"detect_spots": false,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1301, 975]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLU_04_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -303,7 +300,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [961, 948]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLU_05_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -377,7 +373,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [297, 1524]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLU_06_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -451,7 +446,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1586, 564]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLU_07_CY5, CY3.5 NAR, CY3, DAPI.vsi",
@@ -747,7 +741,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1271, 1380]
 		}]
 	}, {
@@ -1313,7 +1306,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1002, 607]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20241029-exp22/exp22-GLY_10_CY5, CY3.5 NAR, CY3, DAPI.vsi",

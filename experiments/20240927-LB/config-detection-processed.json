@@ -18,7 +18,7 @@
 				"01-configure": 52.57754302024841,
 				"02-segment-DIC": 8.20818281173706,
 				"02-segment-DAPI": 4.416477203369141,
-				"03-detect-spots": 120.73812198638916
+				"03-detect-spots": 62.712584257125854
 			},
 			"stem": "MG1655_LB_fixed2806_hybed1906_left_01",
 			"seqnr": "01",
@@ -30,41 +30,41 @@
 			"nuclearmaskfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/DAPI_masks.tif",
 			"hipBA": {
 				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA.tif",
-				"z_max_focus": 18,
-				"ifx_1": 8,
-				"ifx_2": 32,
+				"z_max_focus": 16,
+				"ifx_1": 4,
+				"ifx_2": 30,
 				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA_filtered.npy",
 				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA_zproject.npy",
 				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA_filtered_padded.npy",
-				"spot_detection_threshold": 40,
-				"number_of_spots": 1349,
-				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA_spots_thr=40_ifx1=8_ifx2=32.npy",
+				"spot_detection_threshold": 30,
+				"number_of_spots": 752,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA_spots_thr=30_ifx1=4_ifx2=30.npy",
 				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/hipBA_spots.npy"
 			},
 			"rnlAB": {
 				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB.tif",
-				"z_max_focus": 17,
-				"ifx_1": 7,
-				"ifx_2": 31,
+				"z_max_focus": 15,
+				"ifx_1": 2,
+				"ifx_2": 32,
 				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB_filtered.npy",
 				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB_zproject.npy",
 				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB_filtered_padded.npy",
-				"spot_detection_threshold": 50,
-				"number_of_spots": 2773,
-				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB_spots_thr=50_ifx1=7_ifx2=31.npy",
+				"spot_detection_threshold": 40,
+				"number_of_spots": 1246,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB_spots_thr=40_ifx1=2_ifx2=32.npy",
 				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rnlAB_spots.npy"
 			},
 			"rpoD": {
 				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD.tif",
-				"z_max_focus": 16,
+				"z_max_focus": 15,
 				"ifx_1": 6,
 				"ifx_2": 30,
 				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD_filtered.npy",
 				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD_zproject.npy",
 				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD_filtered_padded.npy",
-				"spot_detection_threshold": 60,
-				"number_of_spots": 6965,
-				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD_spots_thr=60_ifx1=6_ifx2=30.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 2802,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD_spots_thr=50_ifx1=6_ifx2=30.npy",
 				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_01/rpoD_spots.npy"
 			},
 			"DAPI": {
@@ -82,7 +82,7 @@
 			"detect_spots": true,
 			"segment": true,
 			"crop": [900, 0, 2294, 1400],
-			"selected_patch": [888, 74]
+			"selected_patch": [21, 395]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi",
 			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20240927-LB",
@@ -321,7 +321,7 @@
 				"01-configure": 50.9364218711853,
 				"02-segment-DIC": 7.465599060058594,
 				"02-segment-DAPI": 4.843740940093994,
-				"03-detect-spots": 119.02427697181702
+				"03-detect-spots": 68.78926706314087
 			},
 			"stem": "MG1655_LB_fixed2806_hybed1906_left_07",
 			"seqnr": "07",
@@ -335,39 +335,39 @@
 				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA.tif",
 				"z_max_focus": 20,
 				"ifx_1": 11,
-				"ifx_2": 34,
+				"ifx_2": 37,
 				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA_filtered.npy",
 				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA_zproject.npy",
 				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA_filtered_padded.npy",
-				"spot_detection_threshold": 40,
-				"number_of_spots": 929,
-				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA_spots_thr=40_ifx1=11_ifx2=34.npy",
+				"spot_detection_threshold": 30,
+				"number_of_spots": 657,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA_spots_thr=30_ifx1=11_ifx2=37.npy",
 				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/hipBA_spots.npy"
 			},
 			"rnlAB": {
 				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB.tif",
-				"z_max_focus": 22,
-				"ifx_1": 13,
-				"ifx_2": 36,
+				"z_max_focus": 20,
+				"ifx_1": 11,
+				"ifx_2": 34,
 				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB_filtered.npy",
 				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB_zproject.npy",
 				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB_filtered_padded.npy",
-				"spot_detection_threshold": 50,
-				"number_of_spots": 2466,
-				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB_spots_thr=50_ifx1=13_ifx2=36.npy",
+				"spot_detection_threshold": 40,
+				"number_of_spots": 1189,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB_spots_thr=40_ifx1=11_ifx2=34.npy",
 				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rnlAB_spots.npy"
 			},
 			"rpoD": {
 				"rnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD.tif",
 				"z_max_focus": 21,
-				"ifx_1": 12,
+				"ifx_1": 11,
 				"ifx_2": 36,
 				"filteredmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD_filtered.npy",
 				"zprojectmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD_zproject.npy",
 				"filteredpaddedmrnafile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD_filtered_padded.npy",
-				"spot_detection_threshold": 60,
-				"number_of_spots": 6431,
-				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD_spots_thr=60_ifx1=12_ifx2=36.npy",
+				"spot_detection_threshold": 50,
+				"number_of_spots": 3068,
+				"spotsfile_latest": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD_spots_thr=50_ifx1=11_ifx2=36.npy",
 				"spotsfile": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_07/rpoD_spots.npy"
 			},
 			"DAPI": {
@@ -385,7 +385,7 @@
 			"detect_spots": true,
 			"segment": true,
 			"crop": [0, 0, 1000, 2294],
-			"selected_patch": [99, 402]
+			"selected_patch": [11, 740]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-LB/MG1655_LB_fixed2806_hybed1906_left_CY5, CY3.5 NAR, CY3, DAPI_08.vsi",
 			"rootdir": "/Volumes/Flodrive/Florence/smFISH/data/20240927-LB",

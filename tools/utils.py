@@ -1,5 +1,5 @@
 import numpy as np
-
+from copy import copy
 
 # with eternal thanks to the interwebs:
 def translate_image(img, tx, ty):

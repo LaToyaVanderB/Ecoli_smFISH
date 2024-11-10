@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
                         if process is True:
                             crop = False
-                            if 'crop' in img and img['crop'] is True:
+                            if 'crop' in img:
                                 crop = True
                                 ymin, xmin, ymax, xmax = img['crop']
                                 logging.info(f'cropping: top-left corner ({ymin}, {xmin}), bottom-right corner ({ymax}, {xmax}))')

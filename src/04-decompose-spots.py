@@ -41,7 +41,7 @@ if __name__ == '__main__':
                         logging.info(f'processing image: {img["basename"]}.{img["format"]} [{n}/{config['nr_images']}]')
 
                         crop = False
-                        if 'crop' in img and img['crop'] is True:
+                        if 'crop' in img:
                             crop = True
                             ymin, xmin, ymax, xmax = img['crop']
                             logging.info(f'cropping: top-left corner ({ymin}, {xmin}), bottom-right corner ({ymax}, {xmax}))')

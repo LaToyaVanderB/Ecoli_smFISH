@@ -476,7 +476,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [827, 2054]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-exp16/MG1655_GLY_OD_0.3_right_CY5, CY3.5 NAR, CY3, DAPI_03.vsi",
@@ -550,7 +549,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [1064, 1451]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-exp16/MG1655_GLY_OD_0.3_right_CY5, CY3.5 NAR, CY3, DAPI_04.vsi",
@@ -624,7 +622,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [633, 1462]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-exp16/MG1655_GLY_OD_0.3_right_CY5, CY3.5 NAR, CY3, DAPI_05.vsi",
@@ -1411,7 +1408,6 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": false,
 			"selected_patch": [573, 553]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-exp16/MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_03.vsi",
@@ -1945,7 +1941,7 @@
 			},
 			"detect_spots": true,
 			"segment": true,
-			"crop": [500, 900, 1800, 1800],
+			"crop": [500, 600, 1800, 1800],
 			"selected_patch": [1872, 1442]
 		}, {
 			"sourcefile": "/Volumes/Flodrive/Florence/smFISH/data/20240927-exp16/MG1655_MAN_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_12.vsi",
