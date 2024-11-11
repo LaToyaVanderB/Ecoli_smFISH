@@ -34,52 +34,65 @@ if __name__ == '__main__':
     for exp in config["experiments"]:
         if found is False:
             for img in exp["images"]:
-                if (only is None) or (img['basename'] == only):
-                    n = n + 1
-                    tic = time.time()
-                    logging.info(f'processing image: {img["basename"]}.{img["format"]} [{n}/{config['nr_images']}]')
-                    for ch in config["channels"]:
-                        mrna = ch['mrna']
-                        if mrna != "DAPI":
+                if ('detect_spots' not in img) or (img['detect_spots'] is True):
+                    if (only is None) or (img['stem'] == only):
+                        n = n + 1
+                        tic = time.time()
+                        logging.info(f'processing image: {img["basename"]}.{img["format"]} [{n}/{config['nr_images']}]')
 
-                            logging.info(f'..mrna: {mrna}')
+                        crop = False
+                        if 'crop' in img:
+                            crop = True
+                            ymin, xmin, ymax, xmax = img['crop']
+                            logging.info(f'cropping: top-left corner ({ymin}, {xmin}), bottom-right corner ({ymax}, {xmax}))')
 
-                            # dic_data = io.imread(img['dicfile'])
-                            mrna_data = io.imread(img[mrna]['rnafile'])
-                            # dapi_data = io.imread(img['DAPI']['rnafile'])
-                            # cell_mask_data = io.imread(img['cellmaskfile'])
-                            # nuclear_mask_data = io.imread(img['nuclearmaskfile'])
-                            spot_data = np.load(img[mrna]['spotsfile'])[:, 0:3]
+                        for ch in config["channels"]:
+                            mrna = ch['mrna']
+                            if mrna != "DAPI":
 
-                            # was already computed in 03-detect-spots, reuse
-                            # mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
-                            mrna_filtered = np.load(img[mrna]['filteredmrnafile'])
+                                logging.info(f'..mrna: {mrna}')
 
-                            spots, dense_regions, reference_spot = decompose_dense(
-                                mrna_filtered,
-                                spot_data,
-                                voxel_size=scale,
-                                spot_radius=spot_radius,
-                                alpha=0.5, # alpha impacts the number of spots per candidate region
-                                beta=2,    # beta impacts the number of candidate regions to decompose
-                                gamma=1    # gamma the filtering step to denoise the image
-                            )
+                                mrna_data = io.imread(img[mrna]['rnafile']) # CROP HERE
+                                if crop is True:
+                                    mrna_data = mrna_data[:, ymin:ymax, xmin:xmax]
 
-                            img[mrna]['decompspotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_decomposed_spots.npy')
-                            img[mrna]['ddregionsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_ddregions.npy')
-                            img[mrna]['refspotfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_rf_spots.tif')
-                            np.save(img[mrna]['decompspotsfile'], spots)
-                            np.save(img[mrna]['ddregionsfile'], dense_regions)
-                            io.imsave(img[mrna]['refspotfile'], reference_spot)
-                            logging.info(f"....decomposed spot data: {img[mrna]['decompspotsfile']}")
-                            logging.info(f"....dense regions data: {img[mrna]['ddregionsfile']}")
-                            logging.info(f"....reference spot: {img[mrna]['refspotfile']}")
+                                # Commented out because not needed here:
+                                # dic_data = io.imread(img['dicfile'])
+                                # dapi_data = io.imread(img['DAPI']['rnafile'])
+                                # cell_mask_data = io.imread(img['cellmaskfile'])
+                                # nuclear_mask_data = io.imread(img['nuclearmaskfile'])
 
-                    img['time']['04-decompose-spots'] = time.time() - tic
+                                spot_data = np.load(img[mrna]['spotsfile'])[:, 0:3]
 
-                    if only and (img['basename'] == only):
-                        found = True
-                        break
+                                # was already computed in 03-detect-spots, reuse
+                                # mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
+                                mrna_filtered = np.load(img[mrna]['filteredmrnafile'])
+
+                                spots, dense_regions, reference_spot = decompose_dense(
+                                    mrna_filtered,
+                                    spot_data,
+                                    voxel_size=scale,
+                                    spot_radius=spot_radius,
+                                    alpha=0.5, # alpha impacts the number of spots per candidate region
+                                    beta=2,    # beta impacts the number of candidate regions to decompose
+                                    gamma=1    # gamma the filtering step to denoise the image
+                                )
+
+                                img[mrna]['decompspotsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_decomposed_spots.npy')
+                                img[mrna]['ddregionsfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_ddregions.npy')
+                                img[mrna]['refspotfile'] = os.path.join(config['outputdir'], img['stem'], f'{mrna}_rf_spots.tif')
+                                np.save(img[mrna]['decompspotsfile'], spots)
+                                np.save(img[mrna]['ddregionsfile'], dense_regions)
+                                io.imsave(img[mrna]['refspotfile'], reference_spot)
+                                logging.info(f"....decomposed spot data: {img[mrna]['decompspotsfile']}")
+                                logging.info(f"....dense regions data: {img[mrna]['ddregionsfile']}")
+                                logging.info(f"....reference spot: {img[mrna]['refspotfile']}")
+
+                        img['time']['04-decompose-spots'] = time.time() - tic
+
+                        if only and (img['basename'] == only):
+                            found = True
+                            break
 
 
     logging.info(f'writing to config file: {configfile}')

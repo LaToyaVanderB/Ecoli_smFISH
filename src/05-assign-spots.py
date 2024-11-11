@@ -106,60 +106,78 @@ if __name__ == '__main__':
     n = 0
     for exp in config['experiments']:
         for img in exp['images']:
-            if (only is None) or (img['sourcefile'] == only):
+            if ('detect_spots' not in img) or (img['detect_spots'] is True):
+                if (only is None) or (img['stem'] == only):
 
-                n = n + 1
-                tic = time.time()
+                    n = n + 1
+                    tic = time.time()
 
-                logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
-                img['resultfile'] = os.path.join(config['outputdir'], img['stem'], 'results.csv')
-                img['cellfile'] = os.path.join(config['outputdir'], img['stem'], 'cells.csv')
-                alldfs = pd.DataFrame()
+                    logging.info(f'processing image: {img['basename']}.{img['format']} [{n}/{config['nr_images']}]')
 
-                for ch in config['channels']:
-                    mrna = ch['mrna']
-                    if mrna != "DAPI":
-                        logging.info(f'..channel: {mrna}')
+                    crop = False
+                    if 'crop' in img:
+                        crop = True
+                        ymin, xmin, ymax, xmax = img['crop']
+                        logging.info(f'cropping: top-left corner ({ymin}, {xmin}), bottom-right corner ({ymax}, {xmax}))')
 
-                        dic_data = io.imread(img['dicfile'])
-                        mrna_data = io.imread(img[mrna]['rnafile'])
-                        dapi_data = io.imread(img['DAPI']['rnafile'])
-                        cell_mask_data = io.imread(Path(img['cellmaskfile']).resolve())
-                        nuclear_mask_data = io.imread(Path(img['nuclearmaskfile']).resolve())
-                        spot_data = np.load(img[mrna]['decompspotsfile'])
-                        dense_data = np.load(img[mrna]['ddregionsfile'])
+                    img['resultfile'] = os.path.join(config['outputdir'], img['stem'], 'results.csv')
+                    img['cellfile'] = os.path.join(config['outputdir'], img['stem'], 'cells.csv')
+                    alldfs = pd.DataFrame()
 
-                        df = spot_assignment(cell_mask_data, nuclear_mask_data, spot_data, dense_data)
-                        df.rename(columns={'label': 'image_cell_id'}, inplace=True)
-                        cell_columns = ['image_cell_id', 'bbox-0', 'bbox-1', 'bbox-2', 'bbox-3', 'area', 'eccentricity', 'nuclei']
-                        df_cells = df[cell_columns]
-                        rna_columns = ['image_cell_id', 'spots', 'dense_regions', 'decomposed_RNAs', 'tx', 'nascent_RNAs', 'total_RNAs']
-                        df_rnas = df.loc[:, rna_columns]
-                        df_rnas['mrna'] = mrna
-                        df_rnas['strain'] = exp['strain']
-                        df_rnas['condition'] = exp['condition']
-                        df_rnas['seqnr'] = img['seqnr']
-                        df_rnas.to_csv(f'{img["resultfile"]}.{mrna}', index=False)
-                        df_rnas.drop(columns=['mrna', 'condition', 'strain', 'seqnr'], inplace=True)
-                        df_rnas.rename(columns={
-                            'spots': 'spots' + f'_{mrna}',
-                            'dense_regions': 'dense_regions' + f'_{mrna}',
-                            'decomposed_RNAs': 'decomposed_RNAs' + f'_{mrna}',
-                            'tx': 'tx' + f'_{mrna}',
-                            'nascent_RNAs': 'nascent_RNAs' + f'_{mrna}',
-                            'total_RNAs': 'total_RNAs' + f'_{mrna}',
-                        }, inplace=True)
-                        if alldfs.empty:
-                            df_cells.to_csv(img["cellfile"], index=False)
-                            alldfs = df_cells
-                        alldfs = alldfs.merge(df_rnas, on=['image_cell_id'], how='left')
+                    for ch in config['channels']:
+                        mrna = ch['mrna']
+                        if mrna != "DAPI":
+                            logging.info(f'..channel: {mrna}')
 
-            alldfs['strain'], alldfs['condition'], alldfs['seqnr'] = exp['strain'].replace('Ecoli', 'MG1655'), exp['condition'], img['seqnr']
+                            # all the image files need to be cropped:
+                            dic_data = io.imread(img['dicfile'])
+                            mrna_data = io.imread(img[mrna]['rnafile'])
+                            dapi_data = io.imread(img['DAPI']['rnafile'])
+                            cell_mask_data = io.imread(Path(img['cellmaskfile']).resolve())
+                            nuclear_mask_data = io.imread(Path(img['nuclearmaskfile']).resolve())
 
-            logging.info(f'saving data to {img['resultfile']}')
-            alldfs.to_csv(img['resultfile'], index=False)
+                            if crop is True:
+                                dic_data = dic_data[ymin:ymax, xmin:xmax]
+                                mrna_data = mrna_data[ymin:ymax, xmin:xmax]
+                                dapi_data = dapi_data[ymin:ymax, xmin:xmax]
+                                cell_mask_data = cell_mask_data[ymin:ymax, xmin:xmax]
+                                nuclear_mask_data = nuclear_mask_data[ymin:ymax, xmin:xmax]
 
-            img['time']['05-assign-spots'] = time.time() - tic
+                            # the spot files only contain cropped data:
+                            spot_data = np.load(img[mrna]['decompspotsfile'])
+                            dense_data = np.load(img[mrna]['ddregionsfile'])
+
+                            df = spot_assignment(cell_mask_data, nuclear_mask_data, spot_data, dense_data)
+                            df.rename(columns={'label': 'image_cell_id'}, inplace=True)
+                            cell_columns = ['image_cell_id', 'bbox-0', 'bbox-1', 'bbox-2', 'bbox-3', 'area', 'eccentricity', 'nuclei']
+                            df_cells = df[cell_columns]
+                            rna_columns = ['image_cell_id', 'spots', 'dense_regions', 'decomposed_RNAs', 'tx', 'nascent_RNAs', 'total_RNAs']
+                            df_rnas = df.loc[:, rna_columns]
+                            df_rnas['mrna'] = mrna
+                            df_rnas['strain'] = exp['strain']
+                            df_rnas['condition'] = exp['condition']
+                            df_rnas['seqnr'] = img['seqnr']
+                            df_rnas.to_csv(f'{img["resultfile"]}.{mrna}', index=False)
+                            df_rnas.drop(columns=['mrna', 'condition', 'strain', 'seqnr'], inplace=True)
+                            df_rnas.rename(columns={
+                                'spots': 'spots' + f'_{mrna}',
+                                'dense_regions': 'dense_regions' + f'_{mrna}',
+                                'decomposed_RNAs': 'decomposed_RNAs' + f'_{mrna}',
+                                'tx': 'tx' + f'_{mrna}',
+                                'nascent_RNAs': 'nascent_RNAs' + f'_{mrna}',
+                                'total_RNAs': 'total_RNAs' + f'_{mrna}',
+                            }, inplace=True)
+                            if alldfs.empty:
+                                df_cells.to_csv(img["cellfile"], index=False)
+                                alldfs = df_cells
+                            alldfs = alldfs.merge(df_rnas, on=['image_cell_id'], how='left')
+
+                    alldfs['strain'], alldfs['condition'], alldfs['seqnr'] = exp['strain'].replace('Ecoli', 'MG1655'), exp['condition'], img['seqnr']
+
+                    logging.info(f'saving data to {img['resultfile']}')
+                    alldfs.to_csv(img['resultfile'], index=False)
+
+                    img['time']['05-assign-spots'] = time.time() - tic
 
     logging.info(f'writing to config file: {configfile}')
     with open(configfile, "w") as f:
