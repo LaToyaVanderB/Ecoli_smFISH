@@ -68,7 +68,8 @@ if __name__ == '__main__':
                                 # mrna_filtered = remove_background_gaussian(mrna_data, sigma=sigma)
                                 mrna_filtered = np.load(img[mrna]['filteredmrnafile'])
 
-                                spots, dense_regions, reference_spot = decompose_dense(
+                                # we should probably only do spot decomposition on spots that are in cells
+                                 spots, dense_regions, reference_spot = decompose_dense(
                                     mrna_filtered,
                                     spot_data,
                                     voxel_size=scale,
