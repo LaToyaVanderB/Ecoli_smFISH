@@ -1,6 +1,6 @@
 import sys
 import logging
-from glob import glob
+from copy import copy
 from pathlib import Path
 from skimage import io
 import numpy as np
@@ -8,6 +8,7 @@ import json
 import napari
 import re
 import pandas as pd
+from skimage.segmentation import expand_labels
 
 # need to do this in napari console otherwise the import does not work
 # import sys; sys.path.insert(0, "")
@@ -34,13 +35,29 @@ layers_ordered = [
       'properties': { 'colormap': 'magenta', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
     { 'name': 'rpoD_spots', 'type': 'spots',
       'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 } },
+    { 'name': 'rpoD_decomposed_spots', 'type': 'spots',
+     'properties': {'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'x',
+                    'size': 2, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent',
+                    'opacity': 1}},
+    { 'name': 'rpoD_ddregions', 'type': 'spots',
+     'properties': {'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc',
+                    'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'cyan',
+                    'opacity': 0.5}},
 
     { 'name': 'rnlAB', 'type': 'image',
       'properties': { 'colormap': 'cyan', 'visible': False, 'blending': 'additive' } },
     { 'name': 'rnlAB_filtered_padded', 'type': 'rna_filtered',
       'properties': { 'colormap': 'cyan', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
     { 'name': 'rnlAB_spots', 'type': 'spots',
-      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 } },
+      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'magenta', 'face_color': 'transparent', 'opacity': 0.5 } },
+    { 'name': 'rnlAB_decomposed_spots', 'type': 'spots',
+      'properties': {'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'x',
+                    'size': 5, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent',
+                    'opacity': 1}},
+    { 'name': 'rnlAB_ddregions', 'type': 'spots',
+      'properties': {'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc',
+                    'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'cyan',
+                    'opacity': 0.5}},
 
     { 'name': 'hipBA', 'type': 'image',
       'properties': { 'colormap': 'yellow', 'visible': False, 'blending': 'additive' } },
@@ -48,40 +65,14 @@ layers_ordered = [
       'properties': { 'colormap': 'yellow', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
     { 'name': 'hipBA_spots', 'type': 'spots',
       'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 } },
-]
-
-layers_spots = [
-    { 'name': 'DIC_masks', 'type': 'labels',
-      'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DIC', 'type': 'image',
-      'properties': { 'colormap': 'grey', 'visible': False, 'blending': 'additive' } },
-    { 'name': 'DAPI_masks', 'type': 'labels',
-      'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
-    { 'name': 'DAPI', 'type': 'image',
-      'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
-    { 'name': 'DAPI_max_proj', 'type': 'image',
-      'properties': { 'colormap': 'blue', 'visible': False, 'blending': 'additive' } },
-
-    { 'name': 'rpoD', 'type': 'image',
-      'properties': { 'colormap': 'magenta', 'visible': False, 'blending': 'additive' } },
-    { 'name': 'rpoD_filtered_padded', 'type': 'rna_filtered',
-      'properties': { 'colormap': 'magenta', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
-    { 'name': 'rpoD_spots', 'type': 'spots',
-      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 } },
-
-    { 'name': 'rnlAB', 'type': 'image',
-      'properties': { 'colormap': 'cyan', 'visible': False, 'blending': 'additive' } },
-    { 'name': 'rnlAB_filtered_padded', 'type': 'rna_filtered',
-      'properties': { 'colormap': 'cyan', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
-    { 'name': 'rnlAB_spots', 'type': 'spots',
-      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 } },
-
-    { 'name': 'hipBA', 'type': 'image',
-      'properties': { 'colormap': 'yellow', 'visible': False, 'blending': 'additive' } },
-    { 'name': 'hipBA_filtered_padded', 'type': 'rna_filtered',
-      'properties': { 'colormap': 'yellow', 'blending': 'additive', 'visible': False, 'contrast_limits': [0, 6000] } },
-    { 'name': 'hipBA_spots', 'type': 'spots',
-      'properties': { 'blending': 'additive', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 } },
+    {'name': 'hipBA_decomposed_spots', 'type': 'spots',
+     'properties': {'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'x',
+                    'size': 2, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent',
+                    'opacity': 1}},
+    {'name': 'hipBA_ddregions', 'type': 'spots',
+     'properties': {'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc',
+                    'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'cyan',
+                    'opacity': 0.5}},
 ]
 
 layers_input = [
@@ -102,7 +93,7 @@ layers_light = [
     { 'name': 'DAPI_max_proj', 'type': 'image', 'properties': { 'colormap': 'blue', 'visible': True, 'blending': 'additive' } },
 ]
 
-layers_spotlight = [
+layers_spots = [
     { 'name': 'DIC_masks', 'type': 'labels',
       'properties': { 'visible': False, 'blending': 'additive', 'opacity': 0.2 } },
     { 'name': 'DIC', 'type': 'image',
@@ -142,7 +133,7 @@ mode_layers = {
     'light': layers_light,
     'cells': layers_cells,
     'input': layers_input,
-    'spots': layers_spots
+    'spots': layers_spots,
 }
 
 def import_layers(imagedir, mode=all, viewer=None):
@@ -180,7 +171,7 @@ def import_layers(imagedir, mode=all, viewer=None):
                 elif layer['type'] == 'rna_filtered':
                     rna_filtered = np.load(stems[layer['name']])
 
-                    if mode != 'spotlight':
+                    if mode != 'spots':
                         l = viewer.add_image(rna_filtered, **layer['properties'])
                         l.name = layer['name']
                         l.translate = [0, crop[0], crop[1]]
@@ -191,7 +182,7 @@ def import_layers(imagedir, mode=all, viewer=None):
 
                 elif layer['type'] == 'spots':
                     spots_all = np.load(stems[layer['name']].resolve())
-                    print(stems[layer['name']].resolve())
+                    # print(stems[layer['name']].resolve())
                     spots = spots_all[:, 0:3]
 
                     spot_features = pd.DataFrame()
@@ -204,15 +195,17 @@ def import_layers(imagedir, mode=all, viewer=None):
                         layer['properties']['border_color_cycle'] = ['cyan', 'red'] if spot_features.iloc[0]['in_cell'] == True else ['red', 'cyan']
                     layer['properties']['features'] = spot_features
 
-                    print(spots_all.shape, spot_features.shape)
+                    # print(spots_all.shape, spot_features.shape)
 
+                    l_name = layer['name']
                     match = spot_filename_pattern.search(str(stems[layer['name']].resolve()))
-                    d = match.groupdict()
-                    l_name = f'{layer["name"]} thr={float(d["threshold"]):.2f} [{d["ifx1"]}, {d["ifx2"]}]'
+                    if match is not None:
+                        d = match.groupdict()
+                        l_name = f'{layer["name"]} thr={float(d["threshold"]):.2f} [{d["ifx1"]}, {d["ifx2"]}]'
 
-                    if mode != 'spotlight':
+                    if mode != 'spots':
                         l = viewer.add_points(spots, **layer['properties'])
-                        print(l.data.shape)
+                        # print(l.data.shape)
                         l.name = l_name
                         l.translate = [0, crop[0], crop[1]]
 
@@ -234,6 +227,35 @@ def import_layers(imagedir, mode=all, viewer=None):
                 focus = img_json['rpoD']['z_max_focus']
             viewer.dims.set_point(0, focus)
 
+
+def expand_masks(distance, viewer):
+    mask_layer_data = copy(viewer.layers['DIC_masks'].data)
+    mask_layer_name = viewer.layers['DIC_masks'].name
+    expanded = expand_labels(mask_layer_data, distance)
+    expanded_mask_layer = viewer.add_labels(expanded, name=f'{mask_layer_name}_expanded_{distance}px')
+    expanded_mask_layer.contour = 1
+    # need to crop the masks here and translate them
+
+
+    for mrna in ['rpoD', 'rnlAB', 'hipBA']:
+        spots = [l for l in viewer.layers if re.match(f'{mrna}_spots.*max_proj', l.name)][0]
+        print(spots, spots.translate[0], spots.translate[1])
+        expanded_spots_data = copy(spots.data)
+        expanded_spots_properties = { 'blending': 'translucent_no_depth', 'visible': False, 'out_of_slice_display': True, 'symbol': 'disc', 'size': 10, 'border_width': 0.1, 'border_color': 'cyan', 'face_color': 'transparent', 'opacity': 0.5 }
+        expanded_spots_properties['features'] = copy(spots.features)
+        expanded_spots_properties['features']['label'] = [expanded_mask_layer.data[y+int(spots.translate[0]), x+int(spots.translate[1])] for (y, x) in expanded_spots_data]
+        expanded_spots_properties['features']['in_cell'] = expanded_spots_properties['features'].apply(lambda s: False if s['label'] == 0 else True, axis=1)
+        expanded_spots_properties['border_color'] = 'in_cell'
+        expanded_spots_properties['border_color_cycle'] = ['cyan', 'red'] if expanded_spots_properties['features'].iloc[0]['in_cell'] == True else ['red', 'cyan']
+        expanded_spots_properties['name'] = f'{mrna} spots after {distance}px expansion'
+        # print(f'data={expanded_spots_data}')
+        # print(f'expanded_spots_properties={expanded_spots_properties}')
+        # print(type(expanded_spots_properties['features']))
+
+        p = viewer.add_points(expanded_spots_data, **expanded_spots_properties)
+        p.translate = spots.translate
+
+        viewer.layers['DIC_masks'].visible = False
 
 if __name__ == '__main__':
     import_layers(imagedir=sys.argv[1], mode=sys.argv[2], viewer=napari.Viewer())

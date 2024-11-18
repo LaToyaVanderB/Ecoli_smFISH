@@ -16,27 +16,44 @@
 - [LATER] pytest tests
 - [LATER] when using symlinks, check that they work after a round trip to OneDrive
 - [LATER] change all filenames to relative paths
-- [LATER] split all pictures in 4
-- [LATER] image inspection notebook:
-  - create viewer
-  - open layers with view.py
-  - display intensity histograms
-  - any other useful statistic
+- [TODO] napari plugin with whole image workflow accessible:
+Start with OO rewrite.
+  1. open pic
+  2. crop
+  3. set focus
+  4. filter
+     1. toggle for filtering
+  5. segment
+     1. display number of cells and regionprops
+  6. postprocess masks
+     1. remove too small
+     2. remove large and round
+     3. edit manually
+     4. expand
+  7. detect spots
+     1. change threshold and compare
+     2. edit masks and compare
+     3. display histograms
+  8. decompose spots
+  9. assign spots
+     1. display histograms
+  10. make plots
 - [DONE] analysis: per condition/growth rate, plot:
   - number of cells
   - cell area
   - cell eccentricity
   - number of spots/Txs
   - number of spots/Txs per cell
-  - [DO] correlation between #spots/cell for the different mRNA pairs
+  - correlation between #spots/cell for the different mRNA pairs
+  - [TODO] spots per cell vs. area/eccentricity
 - [DONE] analysis: normalize all counts by number of cells
 - [DONE] process just one picture
 - [DONE] change size and color of spots 
 - [DONE] put all parameters in config
-- [WIP] save images on OneDrive and disk
+- [DONE] save images on OneDrive and disk
     - [DONE] move _ dirs_ from 20241029 to 20241029a (check creation day on Olympus PC)
-- [DO] save and process translated DIC tifs
-- [NEXT] tune pipeline:
+- [DONE] save and process translated DIC tifs
+- [DONE] tune pipeline:
   1. spot detection
      1. [DONE] Remove slices that are further than +- n slices from focus
      2. [DONE] Intensity histogram for selected spots: ideally, we expect a bimodal distribution (individual spots and Tx's)
@@ -52,22 +69,27 @@
         4. [DO] hipBA. Possibly needs better filtering
   2. spot decomposition
      1. [DONE] Tune params
+     2. [TODO] Limit spot decomposition to in-cell spots
      2. [DO] Intensity histogram for decomposed spots (reference spot): they should be similar (within the same channel)
   3. spot counting/assignment 
-     4. [DO] Exclude cells with no DAPI
-     5. [DO] Inspect out-of-cells spots: how many and their intensities
-     1. [LATER] Exclude cells on the border
-     2. [LATER] Exclude spots from noisy regions
+     1. [DONE] Exclude cells with no DAPI
+     2. [DONE] Inspect out-of-cells spots: how many and their intensities
+     3. [DONE] Exclude cells on the border
+     4. [WONTDO] Exclude spots from noisy regions
+     5. [DONE] Expand cell masks
   4. DIC segmentation
-     1. [DO] DIC cum DAPI segmentation using Omnipose
-        1. Use weird 4 channel format
-     2. remove cell masks with no DAPI
+     1. [DONE] DIC cum DAPI segmentation using Omnipose
+        1. [DONE] Use weird 4 channel format
+     2. [DONE] remove cell masks with no DAPI
+     3. [DONE] remove small masks and large masks that are not elongated
+     4. [DONE] expand cell masks
   5. [DONE] DAPI segmentation
-  6. [WONTDO] DAPI/DIC registration 
-     1. check out skimage.registration
-     2. split images in quadrants and align separately
+  6. [DONE] DAPI/DIC registration 
+     1. [DONE] check out skimage.registration
+     2. [WONTDO] split images in quadrants and align separately
+     3. [DONE] crop images to parts where alignment is acceptable
 - [BIO] Are cells with 1 or 2 TA expressed different? Aspect, area, eccentricity...?
-- [WONTDO] optimise Omnipose segmentations
+- [DONE] optimise Omnipose segmentations
   - [DO] select "segmentable" images
   - [DO] if enough cells, don't waste time on optimizing segmentation. Just select enough adequate cells based on area/eccentricity. 
     - "adequate" cells mean:

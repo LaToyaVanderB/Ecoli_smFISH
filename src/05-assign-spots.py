@@ -4,6 +4,7 @@ import json
 import time
 import logging
 from skimage import io
+from skimage.segmentation import clear_border
 import numpy as np
 import pandas as pd
 from skimage.measure import regionprops_table, regionprops
@@ -129,13 +130,13 @@ if __name__ == '__main__':
                         if mrna != "DAPI":
                             logging.info(f'..channel: {mrna}')
 
-                            # all the image files need to be cropped:
                             dic_data = io.imread(img['dicfile'])
                             mrna_data = io.imread(img[mrna]['rnafile'])
                             dapi_data = io.imread(img['DAPI']['rnafile'])
                             cell_mask_data = io.imread(Path(img['cellmaskfile']).resolve())
                             nuclear_mask_data = io.imread(Path(img['nuclearmaskfile']).resolve())
 
+                            # all the image files need to be cropped:
                             if crop is True:
                                 dic_data = dic_data[ymin:ymax, xmin:xmax]
                                 mrna_data = mrna_data[ymin:ymax, xmin:xmax]
@@ -144,8 +145,11 @@ if __name__ == '__main__':
                                 nuclear_mask_data = nuclear_mask_data[ymin:ymax, xmin:xmax]
 
                             # the spot files only contain cropped data:
-                            spot_data = np.load(img[mrna]['decompspotsfile'])
+                            spot_data = np.load(img[mrna]['spotsfile'])[:, 0:3]
                             dense_data = np.load(img[mrna]['ddregionsfile'])
+
+                            # we also need to ignore the cell masks that touch the border
+                            cell_mask_data = clear_border(cell_mask_data)
 
                             df = spot_assignment(cell_mask_data, nuclear_mask_data, spot_data, dense_data)
                             df.rename(columns={'label': 'image_cell_id'}, inplace=True)
