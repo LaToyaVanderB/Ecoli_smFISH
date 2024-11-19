@@ -10,12 +10,12 @@
 - [DONE] add timings to output config
 - [WONTDO] move (DIC, DAPI, all?) output files to their own channel folder (to accomodate Omnipose)
 - [WONTDO] histograms in napari or matplotlib; automatic contrast adapted to mRNA channels and DIC
-- [LATER] fix Git situation for real (git-lfs + Zenodo)
 - [LATER] parallelize (dask)
-- [LATER] fix envs mess
-- [LATER] pytest tests
 - [LATER] when using symlinks, check that they work after a round trip to OneDrive
-- [LATER] change all filenames to relative paths
+- [TODO] fix Git situation for real (git-lfs + Zenodo)
+- [TODO] fix envs mess
+- [TODO] change all filenames to relative paths
+- [TODO] pytest tests
 - [TODO] napari plugin with whole image workflow accessible:
 Start with OO rewrite.
   1. open pic
@@ -30,6 +30,7 @@ Start with OO rewrite.
      2. remove large and round
      3. edit manually
      4. expand
+     5. save 
   7. detect spots
      1. change threshold and compare
      2. edit masks and compare
