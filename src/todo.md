@@ -16,6 +16,8 @@
 - [TODO] fix envs mess
 - [TODO] change all filenames to relative paths
 - [TODO] pytest tests
+- [TODO] view.py
+  1. add cell area to spot feature 
 - [TODO] napari plugin with whole image workflow accessible:
 Start with OO rewrite.
   1. open pic
@@ -38,7 +40,8 @@ Start with OO rewrite.
   8. decompose spots
   9. assign spots
      1. display histograms
-  10. make plots
+  10. add comments 
+  11. make plots
 - [DONE] analysis: per condition/growth rate, plot:
   - number of cells
   - cell area
