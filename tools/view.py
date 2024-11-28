@@ -264,14 +264,14 @@ def import_layers(imagedir, mode='all', viewer=None):
 
     layers = mode_layers[mode] if mode in mode_layers else layers_ordered
 
-    # crop = False
-    # with open(Path(imagedir) / "img.json") as f:
-    #     img_json = json.load(f)
-    #     crop = [0, 0, 0, 0]
-    #     if 'crop' in img_json:
-    #         crop = img_json['crop']
-    #         crop[0] = 0.065 * crop[0]
-    #         crop[1] = 0.065 * crop[1]
+    crop = False
+    with open(Path(imagedir) / "img.json") as f:
+        img_json = json.load(f)
+        crop = [0, 0, 0, 0]
+        if 'crop' in img_json:
+            crop = img_json['crop']
+            # crop[0] = 0.065 * crop[0]
+            # crop[1] = 0.065 * crop[1]
 
     if viewer is not None:
         for l in viewer.layers:
@@ -314,12 +314,12 @@ def import_layers(imagedir, mode='all', viewer=None):
                     if mode != 'spots':
                         l = viewer.add_image(rna_filtered, **layer['properties'])
                         l.name = layer['name']
-                        # l.translate = [0, crop[0], crop[1]]
+                        l.translate = [0, crop[0], crop[1]]
 
                     # layer['properties']['scale'] = [0.065, 0.065]
                     l_mp = viewer.add_image(np.max(rna_filtered, axis=0), **layer['properties'])
                     l_mp.name = layer['name'] + '_max_proj'
-                    # l_mp.translate = [crop[0], crop[1]]
+                    l_mp.translate = [crop[0], crop[1]]
 
                 elif layer['type'] == 'spots':
                     spots_all = np.load(stems[layer['name']].resolve())
@@ -348,13 +348,13 @@ def import_layers(imagedir, mode='all', viewer=None):
                         l = viewer.add_points(spots, **layer['properties'])
                         # print(l.data.shape)
                         l.name = l_name
-                        # l.translate = [0, crop[0], crop[1]]
+                        l.translate = [0, crop[0], crop[1]]
 
                     # layer['properties']['scale'] = [0.065, 0.065]
                     l_mp = viewer.add_points(np.delete(spots, 0, 1), **layer['properties'])
                     l_mp.name = l_name + "_max_proj"
                     l_mp.border_width = 0.05
-                    # l_mp.translate = [crop[0], crop[1]]
+                    l_mp.translate = [crop[0], crop[1]]
 
 
 
