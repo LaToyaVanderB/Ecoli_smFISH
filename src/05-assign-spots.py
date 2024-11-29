@@ -57,10 +57,10 @@ def count_nuclei(mask, nuclear_mask, cells):
     return cells
 
 
-def spot_assignment(mask, nuclear_mask, spot_data, dense_data):
+def spot_assignment(mask, expanded_mask, nuclear_mask, spot_data, dense_data):
     cells = {}
 
-    for cell_id in np.unique(mask):
+    for cell_id in np.unique(expanded_mask):
         cells[cell_id] = {
             'nuclei': 0,
             'spots': 0,
@@ -72,8 +72,8 @@ def spot_assignment(mask, nuclear_mask, spot_data, dense_data):
 
     spot_data_combined = preprocess_spot_data(spot_data, dense_data)
 
-    cells = count_spots(mask, nuclear_mask, spot_data_combined, cells)
-    cells = count_nuclei(mask, nuclear_mask, cells)
+    cells = count_spots(expanded_mask, nuclear_mask, spot_data_combined, cells)
+    cells = count_nuclei(expanded_mask, nuclear_mask, cells)
 
     # remove spots on background
     del cells[0]
@@ -82,7 +82,9 @@ def spot_assignment(mask, nuclear_mask, spot_data, dense_data):
     df = pd.DataFrame(cells).T.reset_index().rename(columns={'index': 'label'})
     df['total_RNAs'] = df['spots'] + df['decomposed_RNAs'] - df['dense_regions']
 
-    props = pd.DataFrame(regionprops_table(mask, properties=['label', 'bbox', 'area', 'eccentricity']))
+    props = pd.DataFrame(regionprops_table(mask, properties=['label', 'bbox', 'area', 'eccentricity', 'axis_minor_length', 'axis_major_length', 'orientation', 'perimeter', 'solidity']))
+    props_expanded = pd.DataFrame(regionprops_table(expanded_mask, properties=['label', 'bbox', 'area', 'eccentricity', 'axis_minor_length', 'axis_major_length', 'orientation', 'perimeter', 'solidity']))
+    props = props.merge(props_expanded, on='label', how='right', suffixes=('', '_expanded'))
     df = props.merge(df, on='label')
 
     return df
@@ -133,7 +135,10 @@ if __name__ == '__main__':
                             dic_data = io.imread(img['dicfile'])
                             mrna_data = io.imread(img[mrna]['rnafile'])
                             dapi_data = io.imread(img['DAPI']['rnafile'])
-                            cell_mask_data = io.imread(Path(img['cellmaskfile']).resolve())
+                            # cell_mask_data = io.imread(Path(img['cellmaskfile']).resolve())
+                            cell_mask_data = io.imread(os.path.join(config['outputdir'], img['stem'], 'DIC_masks_selected_by_shape.tif'))
+                            expanded_cell_mask_data = io.imread(os.path.join(config['outputdir'], img['stem'], 'DIC_masks_expanded.tif'))
+
                             nuclear_mask_data = io.imread(Path(img['nuclearmaskfile']).resolve())
 
                             # all the image files need to be cropped:
@@ -142,6 +147,7 @@ if __name__ == '__main__':
                                 mrna_data = mrna_data[ymin:ymax, xmin:xmax]
                                 dapi_data = dapi_data[ymin:ymax, xmin:xmax]
                                 cell_mask_data = cell_mask_data[ymin:ymax, xmin:xmax]
+                                expanded_cell_mask_data = expanded_cell_mask_data[ymin:ymax, xmin:xmax]
                                 nuclear_mask_data = nuclear_mask_data[ymin:ymax, xmin:xmax]
 
                             # the spot files only contain cropped data:
@@ -150,10 +156,15 @@ if __name__ == '__main__':
 
                             # we also need to ignore the cell masks that touch the border
                             cell_mask_data = clear_border(cell_mask_data)
+                            expanded_cell_mask_data = clear_border(expanded_cell_mask_data)
 
-                            df = spot_assignment(cell_mask_data, nuclear_mask_data, spot_data, dense_data)
+
+                            df = spot_assignment(cell_mask_data, expanded_cell_mask_data, nuclear_mask_data, spot_data, dense_data)
                             df.rename(columns={'label': 'image_cell_id'}, inplace=True)
-                            cell_columns = ['image_cell_id', 'bbox-0', 'bbox-1', 'bbox-2', 'bbox-3', 'area', 'eccentricity', 'nuclei']
+                            cell_columns = ['image_cell_id',
+                                            'bbox-0', 'bbox-1', 'bbox-2', 'bbox-3', 'area', 'eccentricity', 'axis_minor_length', 'axis_major_length', 'orientation', 'perimeter', 'solidity',
+                                            'bbox-0_expanded', 'bbox-1_expanded', 'bbox-2_expanded', 'bbox-3_expanded', 'area_expanded', 'eccentricity_expanded', 'axis_minor_length_expanded', 'axis_major_length_expanded', 'orientation_expanded', 'perimeter_expanded', 'solidity_expanded',
+                                            'nuclei']
                             df_cells = df[cell_columns]
                             rna_columns = ['image_cell_id', 'spots', 'dense_regions', 'decomposed_RNAs', 'tx', 'nascent_RNAs', 'total_RNAs']
                             df_rnas = df.loc[:, rna_columns]
