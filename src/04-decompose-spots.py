@@ -69,7 +69,7 @@ if __name__ == '__main__':
                                 mrna_filtered = np.load(img[mrna]['filteredmrnafile'])
 
                                 # we should probably only do spot decomposition on spots that are in cells
-                                 spots, dense_regions, reference_spot = decompose_dense(
+                                spots, dense_regions, reference_spot = decompose_dense(
                                     mrna_filtered,
                                     spot_data,
                                     voxel_size=scale,
