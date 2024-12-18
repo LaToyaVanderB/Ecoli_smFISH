@@ -16,17 +16,16 @@ def my_image(my_config):
     return Image(my_config, vsi_file, cell_file)
 
 def test_image(my_image):
-    # assert my_image.metadata.vsi_file == "exp16/input/MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi"
-    # assert my_image.metadata.cell_file == "exp16/input/MG1655_GLU_OD_0.3_left_DIC_02.tif"
-    # assert my_image.metadata.savedir == "exp16/output_oo"
+    assert my_image.metadata.vsi_file == "MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi"
+    assert my_image.metadata.cell_file == "MG1655_GLU_OD_0.3_left_DIC_02.tif"
+    assert my_image.metadata.outputdir == "exp16/output_oo"
+    assert my_image.metadata.savepath == "exp16/output_oo/MG1655_GLU_OD_0.3_left_02"
 
     # load image (~ 01-configure)
     my_image.read_image()
     my_image.read_cells()
     my_image.align()
     my_image.create_grgb()
-
-    assert 'channels' in my_image.metadata.cfg
 
     # save image (write to dir)
     my_image.save_layers()

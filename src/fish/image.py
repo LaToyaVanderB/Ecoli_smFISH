@@ -50,10 +50,10 @@ class Image:
       logging.warning(f"could not find cell file {cfg.cell_file}")
 
     try:
-      cfg.outputdir = Path(cfg.cfg['outputdir'])
+      cfg.outputdir = cfg.cfg['outputdir']
       cfg.stem = Path(vsi_file).stem
       cfg.stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', cfg.stem)
-      cfg.savepath = cfg.outputdir / cfg.stem
+      cfg.savepath = str(Path(cfg.outputdir) / cfg.stem)
       Path(cfg.savepath).mkdir(parents=True, exist_ok=True)
       logging.info(f"created output dir {cfg.savepath}")
     except:
@@ -127,24 +127,24 @@ class Image:
     # fluorescent channels
     for ch in self.mrna.keys():
       data = self.mrna[ch]['aligned']
-      savepath = self.metadata.savepath / f'{ch}.tif'
+      savepath = Path(self.metadata.savepath) / f'{ch}.tif'
       OmeTiffWriter.save(data, savepath, dim_order="ZYX", channel_names=[ch])
       logging.info(f'..saving {ch} channel to {savepath}')
 
     # cell channel
     data = self.cells['aligned']
-    savepath = self.metadata.savepath / 'DIC.tif'
+    savepath = Path(self.metadata.savepath) / 'DIC.tif'
     io.imsave(savepath, data)
     logging.info(f'..saving DIC channel to {savepath}')
 
     # grgb file for segmentation
-    np.save(self.metadata.savepath / 'grgb.npy', self.grgb)
+    np.save(Path(self.metadata.savepath) / 'grgb.npy', self.grgb)
 
 
   def save_metadata(self):
     # serialize config
-    self.metadata.savepath = str(self.metadata.savepath)
-    self.metadata.outputdir = str(self.metadata.outputdir)
+    # self.metadata.savepath = str(self.metadata.savepath)
+    # self.metadata.outputdir = str(self.metadata.outputdir)
     del self.metadata.cfg
     del self.metadata.filter2mRNA
     del self.metadata.mRNA2filter
