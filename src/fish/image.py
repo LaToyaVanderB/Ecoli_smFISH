@@ -4,6 +4,7 @@ from bioio import BioImage
 from bioio.writers import OmeTiffWriter
 from skimage import io
 import numpy as np
+
 from tools.utils import translate_image
 import re
 import json
@@ -18,7 +19,7 @@ class Image:
   Class for a FISH image.
   """
 
-  def __init__(self, vsi_file, cell_file, savedir, cfg):
+  def __init__(self, cfg, vsi_file, cell_file):
     """
     Class for a FISH image.
 
@@ -35,28 +36,28 @@ class Image:
     """
 
     try:
-      with open(vsi_file, 'r') as file:
+      with open(Path(cfg.cfg['inputdir']) / vsi_file, 'r') as file:
         cfg.vsi_file = vsi_file
-        logging.info("vsi file exists")
+        logging.info(f"found vsi file {cfg.vsi_file}")
     except FileNotFoundError:
-      logging.warning("vsi file does not exist")
+      logging.warning(f"could not find vsi file {cfg.vsi_file}")
 
     try:
-      with open(cell_file, 'r') as file:
+      with open(Path(cfg.cfg['inputdir']) / cell_file, 'r') as file:
         cfg.cell_file = cell_file
-        logging.info("cell file exists")
+        logging.info(f"found cell file {cfg.cell_file}")
     except FileNotFoundError:
-      logging.warning("cell file does not exist")
+      logging.warning(f"could not find cell file {cfg.cell_file}")
 
     try:
-      cfg.savedir = savedir
-      stem = Path(cfg.vsi_file).stem
-      cfg.stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', stem)
-      cfg.savepath = Path(savedir) / cfg.stem
+      cfg.outputdir = Path(cfg.cfg['outputdir'])
+      cfg.stem = Path(vsi_file).stem
+      cfg.stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', cfg.stem)
+      cfg.savepath = cfg.outputdir / cfg.stem
       Path(cfg.savepath).mkdir(parents=True, exist_ok=True)
-      logging.info("save dir was created")
+      logging.info(f"created output dir {cfg.savepath}")
     except:
-      logging.warning("failed to create save dir")
+      logging.warning(f"failed to create output dir {cfg.savepath}")
 
     self.metadata = cfg
 
@@ -64,7 +65,7 @@ class Image:
   def read_image(self):
     img = {}
     logging.info(f'reading fluorescence image: {self.metadata.vsi_file}')
-    image = BioImage(self.metadata.vsi_file)
+    image = BioImage(Path(self.metadata.cfg['inputdir']) / self.metadata.vsi_file)
     logging.info(f'..found scenes: {image.scenes}')
     for s in image.scenes:
       if s == 'macro image':
@@ -89,7 +90,7 @@ class Image:
 
   def read_cells(self):
     logging.info(f'reading cell image: {self.metadata.cell_file}')
-    cells = io.imread(self.metadata.cell_file)
+    cells = io.imread(Path(self.metadata.cfg['inputdir']) / self.metadata.cell_file)
     self.cells = {}
     self.cells['data'] = cells
 
@@ -143,10 +144,11 @@ class Image:
   def save_metadata(self):
     # serialize config
     self.metadata.savepath = str(self.metadata.savepath)
+    self.metadata.outputdir = str(self.metadata.outputdir)
     del self.metadata.cfg
     del self.metadata.filter2mRNA
     del self.metadata.mRNA2filter
-    json.dump(vars(self.metadata), open(Path(self.metadata.savepath) / "metadata.json", "w"), indent=4)
+    json.dump(vars(self.metadata), open(Path(self.metadata.savepath) / "img.json", "w"), indent=4)
 
 
   def segment(self, **params):

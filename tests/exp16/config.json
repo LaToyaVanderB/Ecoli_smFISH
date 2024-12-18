@@ -1,6 +1,6 @@
 {
-  "inputdir": "/Volumes/Flodrive/Florence/smFISH/data/20240927-exp16",
-  "outputdir": "/Volumes/Flodrive/Florence/smFISH/analysis/20240927-exp16",
+  "inputdir": "exp16/input",
+  "outputdir": "exp16/output_oo",
   "scale": [200, 65, 65],
   "spot_radius": [880, 120, 120],
   "sigma": [0.75, 2.3, 2.3],
