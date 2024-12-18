@@ -1,0 +1,21 @@
+import logging
+import json
+
+class Config:
+  def __init__(self, cfg_file):
+    try:
+      with open(cfg_file, 'r') as file:
+        logging.info("cfg file exists")
+        cfg = json.load(file)
+        self.cfg = cfg
+        self.cfg_file = cfg_file
+        self.filter2mRNA = {c['filter']: c['mrna'] for c in cfg['channels']}
+        self.mRNA2filter = {c['mrna']: c['filter'] for c in cfg['channels']}
+
+    except FileNotFoundError:
+      logging.warning("cfg file does not exist")
+
+
+
+
+
