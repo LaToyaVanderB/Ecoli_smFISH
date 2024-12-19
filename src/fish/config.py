@@ -7,7 +7,9 @@ class Config:
       with open(cfg_file, 'r') as file:
         logging.info("cfg file exists")
         cfg = json.load(file)
-        self.cfg = cfg
+        for key, value in cfg.items():
+          setattr(self, key, value)
+        # self.cfg = cfg
         self.cfg_file = cfg_file
         self.filter2mRNA = {c['filter']: c['mrna'] for c in cfg['channels']}
         self.mRNA2filter = {c['mrna']: c['filter'] for c in cfg['channels']}
