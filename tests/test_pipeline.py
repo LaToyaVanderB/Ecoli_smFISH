@@ -11,12 +11,31 @@ def my_config():
     cfg_file = "exp16/config.json"
     return Config(cfg_file)
 
-
 @pytest.fixture
 def my_image(my_config):
-    vsi_file = "MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi"
-    cell_file = "MG1655_GLU_OD_0.3_left_DIC_02.tif"
-    return Image(my_config, vsi_file, cell_file)
+    my_params = {
+        'vsi_file': "MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi",
+        'cell_file': "MG1655_GLU_OD_0.3_left_DIC_02.tif"
+    }
+    return Image.from_dict(my_params, my_config)
+
+@pytest.fixture
+def my_image_from_json(my_config):
+    img_json = "exp16/output_oo/MG1655_GLU_OD_0.3_left_02/img.json"
+    return Image.from_json(img_json, my_config)
+
+
+def test_from_json(my_image_from_json):
+    assert isinstance(my_image_from_json, Image) == True
+    assert isinstance(my_image_from_json.cfg, Config) == True
+    pass
+
+
+def test_from_params(my_image):
+    assert isinstance(my_image, Image) == True
+    assert isinstance(my_image.cfg, Config) == True
+    pass
+
 
 def test_image(my_image):
     # assert my_image.metadata.vsi_file == "MG1655_GLU_OD_0.3_left_CY5, CY3.5 NAR, CY3, DAPI_02.vsi"

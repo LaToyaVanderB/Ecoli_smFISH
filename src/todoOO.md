@@ -3,7 +3,9 @@
 - view
 - loop on all images in an experiment
 - plot results: make results Excel sheet
-- 
+- make test cases
+  - without crop
+  - with crop
 - napari plugin 
 - jsonpickle handler for pandas
 - increase IDE memory?

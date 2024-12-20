@@ -35,15 +35,59 @@ class Image:
     Class for a FISH image.
     """
 
-    def __init__(self, cfg, vsi_file, cell_file):
+    # def __init__(self, cfg, vsi_file, cell_file):
+    #     """
+    #     Class for a FISH image.
+    #
+    #     Parameters
+    #     ----------
+    #     vsi_file : the VSI file with the fluorescent channels.
+    #     cell_file : the file with the cell outline data, e.g. a 2D DIC picture.
+    #     savedir : location to save the image.
+    #     config : the configuration object.
+    #
+    #     Returns
+    #     -------
+    #     a FISH image object.
+    #     """
+    #
+    #     self.cfg = cfg
+    #
+    #     try:
+    #         with open(Path(cfg.inputdir) / vsi_file, 'r') as file:
+    #             self.vsi_file = vsi_file
+    #             logging.info(f"found vsi file {vsi_file}")
+    #     except FileNotFoundError:
+    #         logging.warning(f"could not find vsi file {vsi_file}")
+    #
+    #     try:
+    #         with open(Path(cfg.inputdir) / cell_file, 'r') as file:
+    #             self.cell_file = cell_file
+    #             logging.info(f"found cell file {cell_file}")
+    #     except FileNotFoundError:
+    #         logging.warning(f"could not find cell file {cell_file}")
+    #
+    #     try:
+    #         stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', Path(vsi_file).stem)
+    #         self.stem = stem
+    #         savepath = str(Path(cfg.outputdir) / stem)
+    #         Path(savepath).mkdir(parents=True, exist_ok=True)
+    #         self.savepath = savepath
+    #         logging.info(f"created output dir {savepath}")
+    #     except:
+    #         logging.warning(f"failed to create output dir {savepath}")
+    #
+    #     self.time = {}
+
+    def __init__(self, cfg, img):
         """
         Class for a FISH image.
 
         Parameters
         ----------
-        vsi_file : the VSI file with the fluorescent channels.
-        cell_file : the file with the cell outline data, e.g. a 2D DIC picture.
-        savedir : location to save the image.
+        img : a dict containing at least two keys
+            vsi_file : the VSI file with the fluorescent channels.
+            cell_file : the file with the cell outline data, e.g. a 2D DIC picture.
         config : the configuration object.
 
         Returns
@@ -51,33 +95,51 @@ class Image:
         a FISH image object.
         """
 
-        self.cfg = cfg
+        setattr(self, "cfg", cfg)
+        for key, value in img.items():
+            setattr(self, key, value)
+        setattr(self, "time", {})
 
         try:
-            with open(Path(cfg.inputdir) / vsi_file, 'r') as file:
-                self.vsi_file = vsi_file
-                logging.info(f"found vsi file {vsi_file}")
+            if (Path(cfg.inputdir) / img['vsi_file']).is_file() == True:
+                logging.info(f"found vsi file {img['vsi_file']}")
         except FileNotFoundError:
-            logging.warning(f"could not find vsi file {vsi_file}")
+            logging.warning(f"could not find vsi file {img['vsi_file']}")
 
         try:
-            with open(Path(cfg.inputdir) / cell_file, 'r') as file:
-                self.cell_file = cell_file
-                logging.info(f"found cell file {cell_file}")
+            if (Path(cfg.inputdir) / img['cell_file']).is_file() == True:
+                logging.info(f"found cell file {img['cell_file']}")
         except FileNotFoundError:
-            logging.warning(f"could not find cell file {cell_file}")
+            logging.warning(f"could not find cell file {img['cell_file']}")
 
-        try:
-            stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', Path(vsi_file).stem)
-            self.stem = stem
-            savepath = str(Path(cfg.outputdir) / stem)
-            Path(savepath).mkdir(parents=True, exist_ok=True)
-            self.savepath = savepath
-            logging.info(f"created output dir {savepath}")
-        except:
-            logging.warning(f"failed to create output dir {savepath}")
+        if 'savepath' not in img:
+            try:
+                stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', Path(img['vsi_file']).stem)
+                self.stem = stem
+                savepath = str(Path(cfg.outputdir) / stem)
+                Path(savepath).mkdir(parents=True, exist_ok=True)
+                self.savepath = savepath
+                logging.info(f"created output dir {savepath}")
+            except:
+                logging.warning(f"failed to create output dir {savepath}")
+        else:
+            try:
+                if Path(img['savepath']).is_dir() == True:
+                    logging.info(f"found output dir {img['savepath']}")
+            except FileNotFoundError:
+                logging.warning(f"could not find output dir {img['savepath']}")
 
-        self.time = {}
+
+    @classmethod
+    def from_json(cls, filename, cfg):
+        img = json.load(open(filename))
+        return cls(cfg, img)
+
+
+    @classmethod
+    def from_dict(cls, params, cfg):
+        pass
+        return cls(cfg, params)
 
 
     def read_image(self):
