@@ -5,9 +5,9 @@ import bioio_bioformats
 from bioio.writers import OmeTiffWriter
 from skimage import io
 import numpy as np
-import pandas as pd
 
-from tools.utils import translate_image, remove_cell_masks_with_no_dapi, filter_cells_by_area, filter_cells_by_shape
+from tools.utils import translate_image, remove_cell_masks_with_no_dapi, filter_cells_by_area, filter_cells_by_shape, get_regionprops, expand_masks
+from tools.utils import find_in_focus_indices, find_high_density_patch
 import re
 import json, jsonpickle
 
@@ -15,8 +15,11 @@ from omnipose.gpu import use_gpu
 from cellpose_omni import io, transforms
 from cellpose_omni import models
 
-from skimage.measure import regionprops_table
-from skimage.segmentation import expand_labels
+from bigfish.detection import detect_spots
+from bigfish.stack import remove_background_gaussian
+from bigfish.stack import compute_focus
+from scipy.signal import savgol_filter
+
 
 # This checks to see if you have set up your GPU properly.
 # CPU performance is a lot slower, but not a problem if you
@@ -110,8 +113,12 @@ class Image:
         self.cells['data'] = cells
 
 
-    def crop(self, y1, x1, y2, x2):
-        self.cropped = ''
+    def crop(self):
+        if hasattr(self, 'crop_by'):
+            ymin, xmin, ymax, xmax = self.crop_by
+            self.cells['aligned'] = self.cells['aligned'][ymin:ymax, xmin:xmax]
+            for ch in self.mrna.keys():
+                self.mrna[ch]['aligned'] = self.mrna[ch]['aligned'][ymin:ymax, xmin:xmax]
 
 
     def align(self):
@@ -155,6 +162,27 @@ class Image:
         # grgb file for segmentation
         np.save(Path(self.savepath) / 'grgb.npy', self.grgb)
 
+        # cell masks
+        if hasattr(self, "cell_masks_by_shape"):
+            data = self.cell_masks_by_shape
+            savepath = Path(self.savepath) / 'DIC_masks.tif'
+            io.imwrite(savepath, data)
+            logging.info(f'..saving cell masks to {savepath}/DIC_masks.tif')
+
+        # expanded cell masks
+        if hasattr(self, "cell_masks_expanded"):
+            data = self.cells_masks_expanded
+            savepath = Path(self.savepath) / 'DIC_masks_expanded.tif'
+            io.imwrite(savepath, data)
+            logging.info(f'..saving expanded cell masks to {savepath}/DIC_expanded.tif')
+
+        # DAPI masks
+        if hasattr(self, "dapi_masks"):
+            data = self.dapi_masks
+            savepath = Path(self.savepath) / 'DAPI_masks.tif'
+            io.imwrite(savepath, data)
+            logging.info(f'..saving DAPI masks to f"{savepath}/DAPI_masks.tif"')
+
 
     def save_metadata(self):
         logging.info(f'saving metadata to: {self.savepath}/img.json')
@@ -183,17 +211,12 @@ class Image:
             return jsonpickle.decode(f.read())
 
 
+    # def segment(self, **params):
+    #     self.segment_cells()
+    #     self.segment_dapi()
 
-    def segment(self, **params):
-        self.cell_masks = ''
-        self.dapi_masks = ''
-        self.params = params
-        self.regionprops = ''
 
-        self.segment_cells()
-        self.segment_dapi()
-
-    # redo for list of images ot avoid loading the models for each image
+    # redo for list of images to avoid loading the models for each image
     def segment_cells(self):
         logging.info(f'segmenting DIC image')
 
@@ -302,27 +325,97 @@ class Image:
         self.cell_masks_with_dapi = remove_cell_masks_with_no_dapi(self.cell_masks, self.dapi_masks)[0]
 
         logging.info(f'..discarding masks of size < 200')
-        self.regionprops = pd.DataFrame(regionprops_table(self.cell_masks, properties=['label', 'bbox', 'area', 'eccentricity', 'centroid', 'axis_major_length', 'axis_minor_length', 'orientation']))
+        self.regionprops = get_regionprops(self.cell_masks)
         self.cell_masks_by_area = filter_cells_by_area(self.cell_masks_with_dapi, self.regionprops, min_cell_area=200)[0]
 
         logging.info(f'..discarding large, round masks (min size 1000, min excentricity 0.8')
         self.cell_masks_by_shape = filter_cells_by_shape(self.cell_masks_by_area, self.regionprops,
                                                          min_clump_area=1000, max_clump_eccentricity=0.8)[0]
 
-    def expand_masks(self, nr_of_pixels):
-        logging.info(f'expanding masks by {nr_of_pixels} pixels')
-        self.cell_masks_expanded = expand_labels(masks, distance=distance)
+        logging.info(f'..computing expanded masks (by {self.cfg.expand_masks_by})')
+        self.cell_masks_expanded = expand_masks(self.cell_masks_by_shape, nr_of_pixels=3)
+
 
     def find_focus(self):
-        self.focus = ''
+        logging.info(f'finding focus')
+        selected_patch = find_high_density_patch(self.cell_masks_by_shape, patch_size=self.cfg.patch_size)
+
+        for ch in self.mrna.keys():
+                mrna_data = self.mrna.get(ch)['aligned']
+                img_patch = mrna_data[:,
+                            selected_patch[0]:selected_patch[0] + self.cfg.patch_size[0],
+                            selected_patch[1]:selected_patch[1] + self.cfg.patch_size[1]
+                            ]
+                focus = compute_focus(img_patch)
+                projected_focus = np.max(focus, axis=(1, 2))
+                projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
+                ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
+
+                if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
+                    logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
+                ifx_1 = int(max(ifx_1, 0))
+                ifx_2 = int(min(ifx_2, mrna_data.shape[0]))
+
+                self.mrna.get(ch)['z_max_focus'] = int(np.argmax(projected_focus_smoothed))
+                self.mrna.get(ch)['ifx_1'] = ifx_1
+                self.mrna.get(ch)['ifx_2'] = ifx_2
+                logging.info(f'..channel {ch}: [{ifx_1}, {ifx_2}], max focus slice {self.mrna.get(ch)["z_max_focus"]}')
 
 
-    def filter(self, sigma):
-        self.filtered = ''
+    def filter(self):
+        logging.info(f'filtering: remove_background_gaussian')
+        for ch in self.mrna.keys():
+            self.filter_channel(ch)
+
+    def filter_channel(self, ch):
+        data = self.mrna.get(ch)
+        data['filtered'] = remove_background_gaussian(data['aligned'], sigma=self.cfg.sigma)
+        logging.info(f'..channel {ch}')
 
 
     def detect_spots(self):
-        self.spots = ''
+        logging.info(f'detecting spots')
+        for ch in self.mrna.keys():
+            if ch != 'DAPI':
+                self.detect_spots_channel(ch)
+
+    def detect_spots_channel(self, ch):
+        mrna_data = self.mrna.get(ch)['aligned']
+        mrna_filtered = self.mrna.get(ch)['filtered']
+        ifx_1, ifx_2  = self.mrna.get(ch)['ifx_1'], self.mrna.get(ch)['ifx_2']
+        mrna_filtered_selected = mrna_filtered[ifx_1:ifx_2, ...]
+        spots, threshold = detect_spots(
+            mrna_filtered_selected,
+            threshold=self.cfg.channels[ch]['threshold'],
+            voxel_size=self.cfg.scale,
+            spot_radius=self.cfg.spot_radius,
+            return_threshold=True
+        )
+
+        # always elegant:
+        filtered_padded_intensities = np.concatenate((np.zeros([ifx_1, mrna_data.shape[1], mrna_data.shape[2]]).astype(
+            'uint16'), mrna_filtered_selected, np.zeros(
+            [mrna_data.shape[0] - ifx_2, mrna_data.shape[1], mrna_data.shape[2]]).astype('uint16')), axis=0)
+        # img[mrna]['filteredpaddedmrnafile'] = os.path.join(config['outputdir'], img['stem'],
+        #                                                    f'{mrna}_filtered_padded.npy')
+        # np.save(img[mrna]['filteredpaddedmrnafile'], filtered_padded_intensities)
+        # logging.info(f'....saving filtered padded mRNA image to file {img[mrna]['filteredpaddedmrnafile']}')
+        #
+        # restore z-level
+        spots[:, 0] = spots[:, 0] + ifx_1
+        #
+        # adjustable out-of focus filtering
+        #  we remove the bottom two slices because their detected spots look like noise:
+        spots = spots[spots[:, 0] > ifx_1 + 2]
+        spot_intensities = np.resize(np.array([mrna_data[s[0], s[1], s[2]] for s in spots]), (len(spots), 1))
+        filtered_spot_intensities = np.resize(np.array([filtered_padded_intensities[s[0], s[1], s[2]] for s in spots]),
+                                              (len(spots), 1))
+        labels = [self.cell_masks_by_shape[y, x] for (y, x) in spots[:, 1:3]]
+        spots_with_intensities = np.concatenate(
+            (spots, spot_intensities, filtered_spot_intensities, np.array(labels).reshape((len(labels), 1))), axis=1)
+        np.save(Path(self.savepath) / f'{ch}_spots.npy', spots_with_intensities)
+        self.mrna.get(ch)['spots'] = spots_with_intensities
+        logging.info(f'..channel {ch}: found {len(spots)} spots, threshold={threshold}')
 
 
     def decompose_spots(self):

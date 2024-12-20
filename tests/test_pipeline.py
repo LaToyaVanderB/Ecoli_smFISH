@@ -31,6 +31,9 @@ def test_image(my_image):
     my_image.align()
     my_image.create_grgb()
 
+    # crop image
+    my_image.crop()
+
     # save image (write to dir)
     my_image.save_layers()
     my_image.time['01-configure'] = time.time() - tic
@@ -53,19 +56,24 @@ def test_image(my_image):
     my_image.time['02-segment-pp'] = time.time() - tic
     my_image.save_metadata()
 
-    # save image (json pickle)
-    tic = time.time()
-    my_image.save("02")
-    my_image.time['02-save'] = time.time() - tic
-    my_image.save_metadata()
+    # # save image (json pickle)
+    # tic = time.time()
+    # my_image.save("02")
+    # my_image.time['02-save'] = time.time() - tic
+    # my_image.save_metadata()
 
-
-    pass
+    # cropping: better process the whole picture and then crop
+    # (i.e. select cells from good area)
+    # duh...
 
     # detect spots (~ 03-detect-spots)
+    tic = time.time()
     my_image.find_focus()
     my_image.filter()
     my_image.detect_spots()
+    my_image.time['03-detect-spots'] = time.time() - tic
+    my_image.save_metadata()
+    pass
 
     # decompose spots (~ 04-decompose-spots)
     my_image.decompose_spots()

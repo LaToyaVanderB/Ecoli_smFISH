@@ -1,5 +1,11 @@
 import numpy as np
 from copy import copy
+from skimage.segmentation import expand_labels
+from skimage.measure import regionprops_table
+import pandas as pd
+from typing import Tuple
+
+
 
 # with eternal thanks to the interwebs:
 def translate_image(img, tx, ty):
@@ -51,3 +57,70 @@ def filter_cells_by_shape(masks, props, min_clump_area=1000, max_clump_eccentric
     masks_discarded[np.isin(masks, list(selected))] = 0
 
     return masks_selected, masks_discarded, len(np.unique(masks_selected)), len(np.unique(masks_discarded)), len(np.unique(masks))
+
+
+def expand_masks(masks, nr_of_pixels):
+    return expand_labels(masks, distance=nr_of_pixels)
+
+
+def get_regionprops(masks):
+    properties = ['label', 'bbox', 'area', 'eccentricity', 'centroid', 'axis_major_length', 'axis_minor_length',
+                  'orientation']
+    return pd.DataFrame(regionprops_table(masks, properties=properties))
+
+
+def find_high_density_patch(mask: np.ndarray, patch_size: Tuple = (200, 200), attempts: int = 20):
+    """
+
+    randomly samples patches on the mask image and returns the coordinates of the top-left corner
+    of the densest patch
+
+    :param mask: segmentation image expected to have dimension (h * w)
+    :param patch_size: height and width of the patch
+    :param attempts: how many patches to try
+
+    :return: coordinates of top left corner of densest patch found
+    :rtype: Tuple[int, int]
+
+    """
+    h, w = mask.shape
+    h_patch, w_patch = patch_size
+
+    cell_pixels = 0
+    selected_patch = (None, None)  # top left corner
+    for attempt in range(attempts):
+
+        row_sample = np.random.randint(0, h - h_patch)
+        col_sample = np.random.randint(0, w - w_patch)
+
+        sample_patch = mask[row_sample:row_sample + h_patch, col_sample:col_sample + w_patch]
+        if np.sum(sample_patch > 0) > cell_pixels:
+            cell_pixels = np.sum(sample_patch > 0)
+            selected_patch = (row_sample, col_sample)
+
+    return selected_patch
+
+
+def find_in_focus_indices(focus: np.ndarray, adjustment_bottom: int = 5, adjustment_top: int = 10):
+    """
+
+    find the in-focus indices of calculated focus scores
+
+    :param focus: series of values representing max intensity along z-axis
+    :param adjustment_bottom: controls by how much the resulting range should be padded (bottom)
+    :param adjustment_top: controls by how much the resulting range should be padded (top)
+
+    :return: low and high z-level between which the spots are in focus
+    :rtype: Tuple[int,int]
+    """
+
+    # find the inflection points of the smoothed curve
+    ifx_1 = min([np.diff(focus).argmax(), np.diff(focus).argmin()])
+    ifx_2 = max([np.diff(focus).argmax(), np.diff(focus).argmin()])
+
+    # add a little cushion to one side.
+    ifx_1 -= adjustment_bottom
+    ifx_2 += adjustment_top
+
+    return ifx_1, ifx_2
+

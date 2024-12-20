@@ -1,0 +1,12 @@
+- decompose_spots
+- assign_spots
+- view
+- loop on all images in an experiment
+- plot results: make results Excel sheet
+- 
+- napari plugin 
+- jsonpickle handler for pandas
+- increase IDE memory?
+- got into BigFish detect_spots
+  - filtering?
+  - get spots with threshold and actual BigFish intensities

@@ -8,4 +8,4 @@ def my_config():
     return my_config
 
 def test_config(my_config):
-    assert len(my_config.cfg['channels']) == 4
+    assert len(my_config.channels) == 4
