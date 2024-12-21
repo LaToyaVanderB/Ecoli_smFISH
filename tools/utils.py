@@ -5,6 +5,7 @@ from skimage.measure import regionprops_table
 import pandas as pd
 from typing import Tuple
 
+from skimage.measure import regionprops
 
 
 # with eternal thanks to the interwebs:
@@ -124,3 +125,78 @@ def find_in_focus_indices(focus: np.ndarray, adjustment_bottom: int = 5, adjustm
 
     return ifx_1, ifx_2
 
+
+def preprocess_spot_data(spot_data, dense_data):
+    # spot_data has the form:
+    # z, y, x
+
+    # dense data has the form
+    # z, y, x, mRNA counts, -- other information --
+
+    # let's introduce mRNA counts of 1 for the spots:
+    spot_data_padded = np.pad(spot_data, ((0,0),(0,1)), mode='constant', constant_values=1)
+
+    # discard other information and merge
+    spot_data_combined = np.concatenate([spot_data_padded, dense_data[:,:4]], axis=0)
+    return spot_data_combined
+
+
+def count_spots(mask, nuclear_mask, spot_data, cells):
+    for z, y, x, number in spot_data:
+        cell_id = mask[y, x]
+        nucleus = nuclear_mask[y, x]
+
+        if number == 1:
+            cells[cell_id]['spots'] += number
+        else:
+            cells[cell_id]['dense_regions'] += 1
+            cells[cell_id]['decomposed_RNAs'] += number
+
+            # if the spot sits in the nucleus,
+            # also increase nascent RNAs and transcription sites
+            if nucleus > 0:
+                cells[cell_id]['tx'] += 1
+                cells[cell_id]['nascent_RNAs'] += number
+    return cells
+
+
+def count_nuclei(mask, nuclear_mask, cells):
+    # count nuclei per cell - hyphae may have multiple ones!
+    for nucleus in regionprops(nuclear_mask):
+        y, x = nucleus.centroid
+        cell_id = mask[int(y), int(x)]
+        cells[cell_id]['nuclei'] += 1
+    return cells
+
+
+def spot_assignment(mask, expanded_mask, nuclear_mask, spot_data, dense_data):
+    cells = {}
+
+    for cell_id in np.unique(expanded_mask):
+        cells[cell_id] = {
+            'nuclei': 0,
+            'spots': 0,
+            'dense_regions': 0,
+            'decomposed_RNAs': 0,
+            'tx': 0,
+            'nascent_RNAs': 0,
+        }
+
+    spot_data_combined = preprocess_spot_data(spot_data, dense_data)
+
+    cells = count_spots(expanded_mask, nuclear_mask, spot_data_combined, cells)
+    cells = count_nuclei(expanded_mask, nuclear_mask, cells)
+
+    # remove spots on background
+    del cells[0]
+
+    # convert to dataframe, collect object information and merge
+    df = pd.DataFrame(cells).T.reset_index().rename(columns={'index': 'label'})
+    df['total_RNAs'] = df['spots'] + df['decomposed_RNAs'] - df['dense_regions']
+
+    props = pd.DataFrame(regionprops_table(mask, properties=['label', 'bbox', 'area', 'eccentricity', 'axis_minor_length', 'axis_major_length', 'orientation', 'perimeter', 'solidity']))
+    props_expanded = pd.DataFrame(regionprops_table(expanded_mask, properties=['label', 'bbox', 'area', 'eccentricity', 'axis_minor_length', 'axis_major_length', 'orientation', 'perimeter', 'solidity']))
+    props = props.merge(props_expanded, on='label', how='right', suffixes=('', '_expanded'))
+    df = props.merge(df, on='label')
+
+    return df

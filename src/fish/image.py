@@ -5,9 +5,7 @@ import bioio_bioformats
 from bioio.writers import OmeTiffWriter
 from skimage import io
 import numpy as np
-
-from tools.utils import translate_image, remove_cell_masks_with_no_dapi, filter_cells_by_area, filter_cells_by_shape, get_regionprops, expand_masks
-from tools.utils import find_in_focus_indices, find_high_density_patch
+import pandas as pd
 import re
 import json, jsonpickle
 
@@ -15,10 +13,15 @@ from omnipose.gpu import use_gpu
 from cellpose_omni import io, transforms
 from cellpose_omni import models
 
-from bigfish.detection import detect_spots
+from bigfish.detection import detect_spots, decompose_dense
 from bigfish.stack import remove_background_gaussian
 from bigfish.stack import compute_focus
 from scipy.signal import savgol_filter
+
+from tools.utils import translate_image, remove_cell_masks_with_no_dapi, filter_cells_by_area, filter_cells_by_shape, get_regionprops, expand_masks
+from tools.utils import find_in_focus_indices, find_high_density_patch
+from tools.utils import spot_assignment
+
 
 
 # This checks to see if you have set up your GPU properly.
@@ -26,58 +29,13 @@ from scipy.signal import savgol_filter
 # are only processing a few images.
 use_GPU = use_gpu()
 
+jsonpickle.handlers.register('pandas')
+
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='%m/%d/%Y %I:%M:%S%p',
                     level=logging.INFO)
 
 
 class Image:
-    """
-    Class for a FISH image.
-    """
-
-    # def __init__(self, cfg, vsi_file, cell_file):
-    #     """
-    #     Class for a FISH image.
-    #
-    #     Parameters
-    #     ----------
-    #     vsi_file : the VSI file with the fluorescent channels.
-    #     cell_file : the file with the cell outline data, e.g. a 2D DIC picture.
-    #     savedir : location to save the image.
-    #     config : the configuration object.
-    #
-    #     Returns
-    #     -------
-    #     a FISH image object.
-    #     """
-    #
-    #     self.cfg = cfg
-    #
-    #     try:
-    #         with open(Path(cfg.inputdir) / vsi_file, 'r') as file:
-    #             self.vsi_file = vsi_file
-    #             logging.info(f"found vsi file {vsi_file}")
-    #     except FileNotFoundError:
-    #         logging.warning(f"could not find vsi file {vsi_file}")
-    #
-    #     try:
-    #         with open(Path(cfg.inputdir) / cell_file, 'r') as file:
-    #             self.cell_file = cell_file
-    #             logging.info(f"found cell file {cell_file}")
-    #     except FileNotFoundError:
-    #         logging.warning(f"could not find cell file {cell_file}")
-    #
-    #     try:
-    #         stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', Path(vsi_file).stem)
-    #         self.stem = stem
-    #         savepath = str(Path(cfg.outputdir) / stem)
-    #         Path(savepath).mkdir(parents=True, exist_ok=True)
-    #         self.savepath = savepath
-    #         logging.info(f"created output dir {savepath}")
-    #     except:
-    #         logging.warning(f"failed to create output dir {savepath}")
-    #
-    #     self.time = {}
 
     def __init__(self, cfg, img):
         """
@@ -99,6 +57,7 @@ class Image:
         for key, value in img.items():
             setattr(self, key, value)
         setattr(self, "time", {})
+        setattr(self, "results", {})
 
         try:
             if (Path(cfg.inputdir) / img['vsi_file']).is_file() == True:
@@ -144,6 +103,7 @@ class Image:
 
     def read_image(self):
         img = {}
+
         logging.info(f'reading fluorescence image: {self.vsi_file}')
         image = BioImage(Path(self.cfg.inputdir) / self.vsi_file, reader=bioio_bioformats.Reader)
         logging.info(f'..found scenes: {image.scenes}')
@@ -163,10 +123,11 @@ class Image:
                         logging.info(f"......reading in channel: C={ch[0]} filter={filter} mrna={mrna}")
                         img[mrna]['data'] = image.get_image_data("ZYX", C=ch[0])
                         self.mrna = img
+                        if mrna != 'DAPI':
+                            self.results[mrna] = {}
 
                     else:
                         logging.warning(f"......ignoring unknown channel {filter}")
-
 
     def read_cells(self):
         logging.info(f'reading cell image: {self.cell_file}')
@@ -254,16 +215,28 @@ class Image:
             'stem',
             'savepath',
             'segmentation',
+            'results',
             'time'
         ]
         metadata = { i: getattr(self, i) for i in keys if hasattr(self, i)}
 
+        # # mrna data
+        # metadata['channels'] = {}
+        # for ch in self.mrna.keys():
+        #     if 'spots' in self.mrna[ch]:
+        #         metadata['channels'][ch] = {
+        #             'z_max_focus': self.mrna[ch]['z_max_focus'],
+        #             'ifx_1': self.mrna[ch]['ifx_1'],
+        #             'ifx_2': self.mrna[ch]['ifx_2'],
+        #             'nr_spots': len(self.mrna[ch]['spots'])
+        #         }
+
         with open(Path(self.savepath) / "img.json", "w") as f:
             json.dump(metadata, f, default=vars, indent=4)
 
-
     def save(self, suffix):
         logging.info(f'saving image to: {self.savepath}/img.{suffix}.pkl')
+
         with open(Path(self.savepath) / f'img.{suffix}.pkl', "w") as f:
             f.write(jsonpickle.encode(self))
 
@@ -271,11 +244,6 @@ class Image:
     def unpickle(pickle_file):
         with open(pickle_file, "r+") as f:
             return jsonpickle.decode(f.read())
-
-
-    # def segment(self, **params):
-    #     self.segment_cells()
-    #     self.segment_dapi()
 
 
     # redo for list of images to avoid loading the models for each image
@@ -400,34 +368,44 @@ class Image:
 
     def find_focus(self):
         logging.info(f'finding focus')
-        selected_patch = find_high_density_patch(self.cell_masks_by_shape, patch_size=self.cfg.patch_size)
+        self.selected_patch = find_high_density_patch(self.cell_masks_by_shape, patch_size=self.cfg.patch_size)
 
         for ch in self.mrna.keys():
-                mrna_data = self.mrna.get(ch)['aligned']
-                img_patch = mrna_data[:,
-                            selected_patch[0]:selected_patch[0] + self.cfg.patch_size[0],
-                            selected_patch[1]:selected_patch[1] + self.cfg.patch_size[1]
-                            ]
-                focus = compute_focus(img_patch)
-                projected_focus = np.max(focus, axis=(1, 2))
-                projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
-                ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
+            if ch != 'DAPI':
+                self.find_focus_channel(ch)
 
-                if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
-                    logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
-                ifx_1 = int(max(ifx_1, 0))
-                ifx_2 = int(min(ifx_2, mrna_data.shape[0]))
 
-                self.mrna.get(ch)['z_max_focus'] = int(np.argmax(projected_focus_smoothed))
-                self.mrna.get(ch)['ifx_1'] = ifx_1
-                self.mrna.get(ch)['ifx_2'] = ifx_2
-                logging.info(f'..channel {ch}: [{ifx_1}, {ifx_2}], max focus slice {self.mrna.get(ch)["z_max_focus"]}')
+    def find_focus_channel(self, ch):
+        mrna_data = self.mrna.get(ch)['aligned']
+        self.results[ch] = {}
+        img_patch = mrna_data[:,
+                    self.selected_patch[0]:self.selected_patch[0] + self.cfg.patch_size[0],
+                    self.selected_patch[1]:self.selected_patch[1] + self.cfg.patch_size[1]
+                    ]
+        focus = compute_focus(img_patch)
+        projected_focus = np.max(focus, axis=(1, 2))
+        projected_focus_smoothed = savgol_filter(projected_focus, 16, 2, 0)
+        ifx_1, ifx_2 = find_in_focus_indices(projected_focus_smoothed)
+
+        if ifx_1 < 0 or ifx_2 > mrna_data.shape[0]:
+            logging.warning(f'....focus detection: max focus is too close to highest or lowest slice')
+        ifx_1 = int(max(ifx_1, 0))
+        ifx_2 = int(min(ifx_2, mrna_data.shape[0]))
+
+        self.results[ch] = {
+            'z_max_focus': int(np.argmax(projected_focus_smoothed)),
+            'ifx_1': ifx_1,
+            'ifx_2': ifx_2
+        }
+        logging.info(f'..channel {ch}: [{ifx_1}, {ifx_2}], max focus slice {self.results[ch]["z_max_focus"]}')
 
 
     def filter(self):
         logging.info(f'filtering: remove_background_gaussian')
         for ch in self.mrna.keys():
-            self.filter_channel(ch)
+            if ch != 'DAPI':
+                self.filter_channel(ch)
+
 
     def filter_channel(self, ch):
         data = self.mrna.get(ch)
@@ -441,10 +419,11 @@ class Image:
             if ch != 'DAPI':
                 self.detect_spots_channel(ch)
 
+
     def detect_spots_channel(self, ch):
         mrna_data = self.mrna.get(ch)['aligned']
         mrna_filtered = self.mrna.get(ch)['filtered']
-        ifx_1, ifx_2  = self.mrna.get(ch)['ifx_1'], self.mrna.get(ch)['ifx_2']
+        ifx_1, ifx_2 = self.results[ch]['ifx_1'], self.results[ch]['ifx_2']
         mrna_filtered_selected = mrna_filtered[ifx_1:ifx_2, ...]
         spots, threshold = detect_spots(
             mrna_filtered_selected,
@@ -477,23 +456,80 @@ class Image:
             (spots, spot_intensities, filtered_spot_intensities, np.array(labels).reshape((len(labels), 1))), axis=1)
         np.save(Path(self.savepath) / f'{ch}_spots.npy', spots_with_intensities)
         self.mrna.get(ch)['spots'] = spots_with_intensities
+        self.results[ch]['nr_spots'] = len(spots)
         logging.info(f'..channel {ch}: found {len(spots)} spots, threshold={threshold}')
 
 
     def decompose_spots(self):
-        self.decomposed_spots = ''
+        logging.info(f'decomposing spots')
+        for ch in self.mrna.keys():
+            if ch != 'DAPI':
+                self.decompose_spots_channel(ch)
 
 
-    def count_spots(self):
+    def decompose_spots_channel(self, ch):
+        logging.info(f'..channel {ch}')
+        mrna_data = self.mrna.get(ch)['aligned']
+        mrna_filtered = self.mrna.get(ch)['filtered']
+        ifx_1, ifx_2 = self.results[ch]['ifx_1'], self.results[ch]['ifx_2']
+        mrna_filtered_selected = mrna_filtered[ifx_1:ifx_2, ...]
+        spots = self.mrna.get(ch)['spots'][:, 0:3]
+
+        # we should probably only do spot decomposition on spots that are in cells
+        decomp_spots, dense_regions, reference_spot = decompose_dense(
+            mrna_filtered,
+            spots,
+            voxel_size=self.cfg.scale,
+            spot_radius=self.cfg.spot_radius,
+            alpha=0.5,  # alpha impacts the number of spots per candidate region
+            beta=2,  # beta impacts the number of candidate regions to decompose
+            gamma=1  # gamma the filtering step to denoise the image
+        )
+
+        self.mrna.get(ch)['decomposed_spots'] = decomp_spots
+        self.mrna.get(ch)['dense_regions'] = dense_regions
+        self.mrna.get(ch)['reference_spot'] = reference_spot
+
+        logging.info(f'..channel {ch}: found {len(dense_regions)} dense regions, {len(decomp_spots)} decomposed spots (from {len(spots)}')
+
+
+
+    def assign_spots(self):
         self.counts = ''
         self.histograms = ''
+        logging.info(f'assign spots')
+        for ch in self.mrna.keys():
+            if ch != 'DAPI':
+                self.assign_spots_channel(ch)
+
+
+    def assign_spots_channel(self, ch):
+        logging.info(f'..channel {ch}')
+        cell_mask_data = self.cell_masks_by_shape
+        expanded_cell_mask_data = self.cell_masks_expanded
+        nuclear_mask_data = self.dapi_masks
+        spot_data = self.mrna.get(ch)['spots'][:, 0:3]
+        dense_data = self.mrna.get(ch)['dense_regions']
+
+        df = spot_assignment(cell_mask_data, expanded_cell_mask_data, nuclear_mask_data, spot_data, dense_data)
+
+        df.rename(columns={'label': 'image_cell_id'}, inplace=True)
+        cell_columns = ['image_cell_id',
+                        'bbox-0', 'bbox-1', 'bbox-2', 'bbox-3', 'area', 'eccentricity', 'axis_minor_length',
+                        'axis_major_length', 'orientation', 'perimeter', 'solidity',
+                        'bbox-0_expanded', 'bbox-1_expanded', 'bbox-2_expanded', 'bbox-3_expanded', 'area_expanded',
+                        'eccentricity_expanded', 'axis_minor_length_expanded', 'axis_major_length_expanded',
+                        'orientation_expanded', 'perimeter_expanded', 'solidity_expanded',
+                        'nuclei']
+        df_cells = df[cell_columns]
+        rna_columns = ['image_cell_id', 'spots', 'dense_regions', 'decomposed_RNAs', 'tx', 'nascent_RNAs', 'total_RNAs']
+        df_rnas = df.loc[:, rna_columns]
+        # df_rnas['mrna'] = ch
+        df_rnas.to_csv(Path(self.cfg.outputdir) / self.stem / f'{ch}.csv', index=False)
 
 
     def view(self, mode):
         self.viewer = ''
-
-
-
 
 
     def delete(self):

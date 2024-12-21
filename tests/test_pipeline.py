@@ -75,11 +75,6 @@ def test_image(my_image):
     my_image.time['02-segment-pp'] = time.time() - tic
     my_image.save_metadata()
 
-    # # save image (json pickle)
-    # tic = time.time()
-    # my_image.save("02")
-    # my_image.time['02-save'] = time.time() - tic
-    # my_image.save_metadata()
 
     # cropping: better process the whole picture and then crop
     # (i.e. select cells from good area)
@@ -92,17 +87,27 @@ def test_image(my_image):
     my_image.detect_spots()
     my_image.time['03-detect-spots'] = time.time() - tic
     my_image.save_metadata()
-    pass
+
 
     # decompose spots (~ 04-decompose-spots)
+    tic = time.time()
     my_image.decompose_spots()
+    my_image.time['04-detect-spots'] = time.time() - tic
+    my_image.save_metadata()
+
+    # save image (json pickle)
+    tic = time.time()
+    my_image.save("04")
+    my_image.time['04-save'] = time.time() - tic
+    my_image.save_metadata()
 
     # assign spots (05-assign-spots)
     my_image.assign_spots()
+    pass
 
 
 
-def test_experiment(my_experiment, my_config):
     # iterate on all images in an experiment
 
+def test_experiment(my_experiment, my_config):
     assert True
