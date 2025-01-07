@@ -5,7 +5,6 @@ import bioio_bioformats
 from bioio.writers import OmeTiffWriter
 from skimage import io
 import numpy as np
-import pandas as pd
 import re
 import json, jsonpickle
 
@@ -37,75 +36,72 @@ logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s ', datefmt='
 
 class Image:
 
-    def __init__(self, cfg, img):
+    def __init__(self, exp, img):
         """
         Class for a FISH image.
 
         Parameters
         ----------
-        img : a dict containing at least two keys
-            vsi_file : the VSI file with the fluorescent channels.
-            cell_file : the file with the cell outline data, e.g. a 2D DIC picture.
-        config : the configuration object.
+        - exp : an Experiment object that contains:
+            - channel configuration
+            - input and output directories
+            - spot detection parameters
+
+        - img : a dict containing at least two keys
+            - vsi_file : the VSI file with the fluorescent channels
+            - cell_file : the file with the cell outline data, e.g. a 2D DIC picture
+
+            Optional keys:
+                - segmentation: segmentation parameters
+                - crop_by: cropping coordinates
+                - translate_by: cell file translation vector
+
 
         Returns
         -------
         a FISH image object.
         """
 
-        setattr(self, "cfg", cfg)
+        setattr(self, "experiment", exp)
         for key, value in img.items():
             setattr(self, key, value)
         setattr(self, "time", {})
         setattr(self, "results", {})
 
-        try:
-            if (Path(cfg.inputdir) / img['vsi_file']).is_file() == True:
-                logging.info(f"found vsi file {img['vsi_file']}")
-        except FileNotFoundError:
-            logging.warning(f"could not find vsi file {img['vsi_file']}")
-
-        try:
-            if (Path(cfg.inputdir) / img['cell_file']).is_file() == True:
-                logging.info(f"found cell file {img['cell_file']}")
-        except FileNotFoundError:
-            logging.warning(f"could not find cell file {img['cell_file']}")
 
         if 'savepath' not in img:
             try:
                 stem = re.sub(r'_CY[A-Z0-9\s,._]+DAPI', '', Path(img['vsi_file']).stem)
                 self.stem = stem
-                savepath = str(Path(cfg.outputdir) / stem)
-                Path(savepath).mkdir(parents=True, exist_ok=True)
-                self.savepath = savepath
-                logging.info(f"created output dir {savepath}")
+                self.savepath = str(Path(exp.outputdir) / stem)
+                Path(self.savepath).mkdir(parents=True, exist_ok=True)
+                logging.info(f"created output dir {self.savepath}")
             except:
-                logging.warning(f"failed to create output dir {savepath}")
+                logging.warning(f"failed to create output dir {Path(exp.outputdir) / stem}")
         else:
             try:
-                if Path(img['savepath']).is_dir() == True:
+                if Path(img['savepath']).is_dir():
                     logging.info(f"found output dir {img['savepath']}")
             except FileNotFoundError:
                 logging.warning(f"could not find output dir {img['savepath']}")
 
 
     @classmethod
-    def from_json(cls, filename, cfg):
+    def from_json(cls, filename, exp):
         img = json.load(open(filename))
-        return cls(cfg, img)
+        return cls(exp, img)
 
 
     @classmethod
-    def from_dict(cls, params, cfg):
-        pass
-        return cls(cfg, params)
+    def from_dict(cls, params, exp):
+        return cls(exp, params)
 
 
     def read_image(self):
         img = {}
 
         logging.info(f'reading fluorescence image: {self.vsi_file}')
-        image = BioImage(Path(self.cfg.inputdir) / self.vsi_file, reader=bioio_bioformats.Reader)
+        image = BioImage(Path(self.experiment.inputdir) / self.vsi_file, reader=bioio_bioformats.Reader)
         logging.info(f'..found scenes: {image.scenes}')
         for s in image.scenes:
             if s == 'macro image':
@@ -116,9 +112,9 @@ class Image:
                 logging.info(f"....found channels {image.channel_names}")
 
                 for ch in enumerate(s.replace(r'001 ', '').split(", ")):
-                    if ch[1] in self.cfg.filter2mRNA.keys():
+                    if ch[1] in self.experiment.filter2mRNA.keys():
                         filter = ch[1]
-                        mrna = self.cfg.filter2mRNA[ch[1]]
+                        mrna = self.experiment.filter2mRNA[ch[1]]
                         img[mrna] = {}
                         logging.info(f"......reading in channel: C={ch[0]} filter={filter} mrna={mrna}")
                         img[mrna]['data'] = image.get_image_data("ZYX", C=ch[0])
@@ -129,9 +125,11 @@ class Image:
                     else:
                         logging.warning(f"......ignoring unknown channel {filter}")
 
+
+
     def read_cells(self):
         logging.info(f'reading cell image: {self.cell_file}')
-        cells = io.imread(Path(self.cfg.inputdir) / self.cell_file)
+        cells = io.imread(Path(self.experiment.inputdir) / self.cell_file)
         self.cells = {}
         self.cells['data'] = cells
 
@@ -145,9 +143,9 @@ class Image:
 
 
     def align(self):
-        logging.info(f"aligning DIC image by: {self.cfg.translate_dic_by}")
-        dy = self.cfg.translate_dic_by[0]
-        dx = self.cfg.translate_dic_by[1]
+        logging.info(f"aligning DIC image by: {self.experiment.translate_dic_by}")
+        dy = self.experiment.translate_dic_by[0]
+        dx = self.experiment.translate_dic_by[1]
 
         # translate and crop DIC
         img_translated = translate_image(self.cells['data'], dy, dx)
@@ -219,17 +217,6 @@ class Image:
             'time'
         ]
         metadata = { i: getattr(self, i) for i in keys if hasattr(self, i)}
-
-        # # mrna data
-        # metadata['channels'] = {}
-        # for ch in self.mrna.keys():
-        #     if 'spots' in self.mrna[ch]:
-        #         metadata['channels'][ch] = {
-        #             'z_max_focus': self.mrna[ch]['z_max_focus'],
-        #             'ifx_1': self.mrna[ch]['ifx_1'],
-        #             'ifx_2': self.mrna[ch]['ifx_2'],
-        #             'nr_spots': len(self.mrna[ch]['spots'])
-        #         }
 
         with open(Path(self.savepath) / "img.json", "w") as f:
             json.dump(metadata, f, default=vars, indent=4)
@@ -362,13 +349,13 @@ class Image:
         self.cell_masks_by_shape = filter_cells_by_shape(self.cell_masks_by_area, self.regionprops,
                                                          min_clump_area=1000, max_clump_eccentricity=0.8)[0]
 
-        logging.info(f'..computing expanded masks (by {self.cfg.expand_masks_by})')
+        logging.info(f'..computing expanded masks (by {self.experiment.expand_masks_by})')
         self.cell_masks_expanded = expand_masks(self.cell_masks_by_shape, nr_of_pixels=3)
 
 
     def find_focus(self):
         logging.info(f'finding focus')
-        self.selected_patch = find_high_density_patch(self.cell_masks_by_shape, patch_size=self.cfg.patch_size)
+        self.selected_patch = find_high_density_patch(self.cell_masks_by_shape, patch_size=self.experiment.patch_size)
 
         for ch in self.mrna.keys():
             if ch != 'DAPI':
@@ -379,8 +366,8 @@ class Image:
         mrna_data = self.mrna.get(ch)['aligned']
         self.results[ch] = {}
         img_patch = mrna_data[:,
-                    self.selected_patch[0]:self.selected_patch[0] + self.cfg.patch_size[0],
-                    self.selected_patch[1]:self.selected_patch[1] + self.cfg.patch_size[1]
+                    self.selected_patch[0]:self.selected_patch[0] + self.experiment.patch_size[0],
+                    self.selected_patch[1]:self.selected_patch[1] + self.experiment.patch_size[1]
                     ]
         focus = compute_focus(img_patch)
         projected_focus = np.max(focus, axis=(1, 2))
@@ -409,7 +396,7 @@ class Image:
 
     def filter_channel(self, ch):
         data = self.mrna.get(ch)
-        data['filtered'] = remove_background_gaussian(data['aligned'], sigma=self.cfg.sigma)
+        data['filtered'] = remove_background_gaussian(data['aligned'], sigma=self.experiment.sigma)
         logging.info(f'..channel {ch}')
 
 
@@ -427,9 +414,9 @@ class Image:
         mrna_filtered_selected = mrna_filtered[ifx_1:ifx_2, ...]
         spots, threshold = detect_spots(
             mrna_filtered_selected,
-            threshold=self.cfg.channels[ch]['threshold'],
-            voxel_size=self.cfg.scale,
-            spot_radius=self.cfg.spot_radius,
+            threshold=self.experiment.channels[ch]['threshold'],
+            voxel_size=self.experiment.scale,
+            spot_radius=self.experiment.spot_radius,
             return_threshold=True
         )
 
@@ -468,7 +455,6 @@ class Image:
 
 
     def decompose_spots_channel(self, ch):
-        logging.info(f'..channel {ch}')
         mrna_data = self.mrna.get(ch)['aligned']
         mrna_filtered = self.mrna.get(ch)['filtered']
         ifx_1, ifx_2 = self.results[ch]['ifx_1'], self.results[ch]['ifx_2']
@@ -479,8 +465,8 @@ class Image:
         decomp_spots, dense_regions, reference_spot = decompose_dense(
             mrna_filtered,
             spots,
-            voxel_size=self.cfg.scale,
-            spot_radius=self.cfg.spot_radius,
+            voxel_size=self.experiment.scale,
+            spot_radius=self.experiment.spot_radius,
             alpha=0.5,  # alpha impacts the number of spots per candidate region
             beta=2,  # beta impacts the number of candidate regions to decompose
             gamma=1  # gamma the filtering step to denoise the image
@@ -504,7 +490,6 @@ class Image:
 
 
     def assign_spots_channel(self, ch):
-        logging.info(f'..channel {ch}')
         cell_mask_data = self.cell_masks_by_shape
         expanded_cell_mask_data = self.cell_masks_expanded
         nuclear_mask_data = self.dapi_masks
@@ -525,7 +510,8 @@ class Image:
         rna_columns = ['image_cell_id', 'spots', 'dense_regions', 'decomposed_RNAs', 'tx', 'nascent_RNAs', 'total_RNAs']
         df_rnas = df.loc[:, rna_columns]
         # df_rnas['mrna'] = ch
-        df_rnas.to_csv(Path(self.cfg.outputdir) / self.stem / f'{ch}.csv', index=False)
+        df_rnas.to_csv(Path(self.savepath) / f'{ch}.csv', index=False)
+        logging.info(f'..channel {ch}: saving results to {self.savepath}/{ch}.csv')
 
 
     def view(self, mode):
