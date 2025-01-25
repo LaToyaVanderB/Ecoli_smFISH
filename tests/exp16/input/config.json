@@ -1,0 +1,52 @@
+{
+  "inputdir": "/Users/adele/PycharmProjects/Ecoli_smFISH/tests/exp16/input",
+  "outputdir": "/Users/adele/PycharmProjects/Ecoli_smFISH/tests/exp16/output",
+  "scale": [200, 65, 65],
+  "spot_radius": [880, 120, 120],
+  "sigma": [0.75, 2.3, 2.3],
+  "patch_size": [200, 200],
+  "translate_dic_by": [-10, 10],
+  "experiments": [
+    {
+      "strain": "MG1655",
+      "condition": "LB"
+    },
+    {
+      "strain": "MG1655",
+      "condition": "GLU"
+    },
+    {
+      "strain": "MG1655",
+      "condition": "GLY"
+    },
+    {
+      "strain": "MG1655",
+      "condition": "GAL"
+    },
+    {
+      "strain": "MG1655",
+      "condition": "MAN"
+    }
+  ],
+  "channels": [
+    {
+      "filter": "CY5",
+      "mrna": "hipBA",
+      "threshold": "None"
+    },
+    {
+      "filter": "CY3.5 NAR",
+      "mrna": "rnlAB",
+      "threshold": "30"
+    },
+    {
+      "filter": "CY3",
+      "mrna": "rpoD",
+      "threshold": "100"
+    },
+    {
+      "filter": "DAPI",
+      "mrna": "DAPI"
+    }
+  ]
+}

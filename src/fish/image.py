@@ -9,7 +9,7 @@ import re
 import json, jsonpickle
 
 from omnipose.gpu import use_gpu
-from cellpose_omni import io, transforms
+# from cellpose_omni import io, transforms
 from cellpose_omni import models
 
 from bigfish.detection import detect_spots, decompose_dense
@@ -22,11 +22,6 @@ from tools.utils import find_in_focus_indices, find_high_density_patch
 from tools.utils import spot_assignment
 
 
-
-# This checks to see if you have set up your GPU properly.
-# CPU performance is a lot slower, but not a problem if you
-# are only processing a few images.
-use_GPU = use_gpu()
 
 jsonpickle.handlers.register('pandas')
 
@@ -177,7 +172,8 @@ class Image:
         # cell channel
         data = self.cells['aligned']
         savepath = Path(self.savepath) / 'DIC.tif'
-        io.imwrite(savepath, data)
+        # io.imwrite(savepath, data)
+        io.imsave(savepath, data)
         logging.info(f'..saving DIC channel to {savepath}')
 
         # grgb file for segmentation
@@ -187,21 +183,24 @@ class Image:
         if hasattr(self, "cell_masks_by_shape"):
             data = self.cell_masks_by_shape
             savepath = Path(self.savepath) / 'DIC_masks.tif'
-            io.imwrite(savepath, data)
+            # io.imwrite(savepath, data)
+            io.save(savepath, data)
             logging.info(f'..saving cell masks to {savepath}/DIC_masks.tif')
 
         # expanded cell masks
         if hasattr(self, "cell_masks_expanded"):
             data = self.cells_masks_expanded
             savepath = Path(self.savepath) / 'DIC_masks_expanded.tif'
-            io.imwrite(savepath, data)
+            # io.imwrite(savepath, data)
+            io.imsave(savepath, data)
             logging.info(f'..saving expanded cell masks to {savepath}/DIC_expanded.tif')
 
         # DAPI masks
         if hasattr(self, "dapi_masks"):
             data = self.dapi_masks
             savepath = Path(self.savepath) / 'DAPI_masks.tif'
-            io.imwrite(savepath, data)
+            # io.imwrite(savepath, data)
+            io.imsave(savepath, data)
             logging.info(f'..saving DAPI masks to f"{savepath}/DAPI_masks.tif"')
 
 
@@ -236,6 +235,11 @@ class Image:
     # redo for list of images to avoid loading the models for each image
     def segment_cells(self):
         logging.info(f'segmenting DIC image')
+
+        # This checks to see if you have set up your GPU properly.
+        # CPU performance is a lot slower, but not a problem if you
+        # are only processing a few images.
+        use_GPU = use_gpu()
 
         # pass parameters to model
         params = {
@@ -289,7 +293,8 @@ class Image:
         self.cell_masks = mask
         self.segmentation['cells'] = params
         maskfile_latest = Path(self.savepath) / f'DIC_masks.model={model_type}_chan={str(params["channels"]).replace(" ", "")}_diameter={params["diameter"]}_minsize={params["min_size"]}_mask={params["mask_threshold"]}_flow={params["flow_threshold"]}.tif'
-        io.imwrite(maskfile_latest, mask)
+        # io.imwrite(maskfile_latest, mask)
+        io.imsave(maskfile_latest, mask)
         cellmaskfile = Path(self.savepath) / 'DIC_masks'
         cellmaskfile.unlink(missing_ok=True)
         cellmaskfile.symlink_to(maskfile_latest.parts[-1])
@@ -298,6 +303,11 @@ class Image:
 
     def segment_dapi(self):
         logging.info(f'segmenting DAPI image')
+
+        # This checks to see if you have set up your GPU properly.
+        # CPU performance is a lot slower, but not a problem if you
+        # are only processing a few images.
+        use_GPU = use_gpu()
 
         # model for nuclei
         model_type = "nuclei"
@@ -328,7 +338,8 @@ class Image:
         self.segmentation['dapi'] = params
 
         maskfile_latest = Path(self.savepath) / f'DAPI_masks_model={model_type}_chan={str(params["channels"]).replace(" ", "")}_diameter={params["diameter"]}_minsize={params["min_size"]}_mask={params["mask_threshold"]}_flow={params["flow_threshold"]}.tif'
-        io.imwrite(maskfile_latest, mask)
+        # io.imwrite(maskfile_latest, mask)
+        io.imsave(maskfile_latest, mask)
         cellmaskfile = Path(self.savepath) / 'DAPI_masks'
         cellmaskfile.unlink(missing_ok=True)
         cellmaskfile.symlink_to(maskfile_latest.parts[-1])
